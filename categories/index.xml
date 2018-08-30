@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Just my thoughts</title>
+    <link>https://migue.github.com/categories/</link>
+    <description>Recent content in Categories on Just my thoughts</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    
+	<atom:link href="https://migue.github.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Papers We Love</title>
+      <link>https://migue.github.com/categories/papers-we-love/</link>
+      <pubDate>Tue, 02 Dec 2014 22:17:41 +0100</pubDate>
+      
+      <guid>https://migue.github.com/categories/papers-we-love/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Personal</title>
+      <link>https://migue.github.com/categories/personal/</link>
+      <pubDate>Sun, 26 Jan 2014 10:36:10 +0100</pubDate>
+      
+      <guid>https://migue.github.com/categories/personal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://migue.github.com/categories/programming/</link>
+      <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
+      
+      <guid>https://migue.github.com/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
