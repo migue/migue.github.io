@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Just my thoughts on Just my thoughts</title>
-    <link>https://migue.github.com/</link>
+    <link>https://migue.github.io/</link>
     <description>Recent content in Just my thoughts on Just my thoughts</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,11 +11,35 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Papers We Love Madrid: capítulo final</title>
+      <link>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</link>
+      <pubDate>Sat, 05 Jan 2019 10:31:01 +0100</pubDate>
+      
+      <guid>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</guid>
+      <description>&lt;p&gt;Parece imposible que hayan pasado cuatro años desde que iniciásemos la andadura del &lt;a href=&#34;https://migue.github.io/post/papers-we-love-madrid-tomando-forma/&#34; target=&#34;_blank&#34;&gt;Papers We Love Madrid&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Han sido cuatro años con altibajos en los que nunca hemos llegado a tener la periodicidad y actividades que teníamos en la cabeza cuando se arrancó el grupo. Cuatro años en los que hemos &amp;ldquo;sufrido&amp;rdquo; mucho más de lo esperado en encontrar a gente que se animase a dar una charla, en los que hemos intentando generar los contenidos más diversos posibles aunque no siempre lo hayamos conseguido. Cuatro años en los que hemos sufrido, al igual que en otros muchos grupos, la falta de asistencia de las personas que inicialmente estaban inscritas.&lt;/p&gt;
+
+&lt;p&gt;El objetivo inicial era acercar los mundos académicos y empresariales y demostrar que ambos pueden beneficiarse el uno del otro. Lamentablemente, hemos fracasado.&lt;/p&gt;
+
+&lt;p&gt;Pero no todo son aspectos negativos; también nos hemos divertido mucho por el camino. Hemos tenido la suerte de contar con expertos internacionales en sus respectivas áreas: Carlos Baquero, Álvaro Videla o Christopher Meiklejohn entre otros muchos, hemos hablado de muchísimos temas interesantes: machine learning, sistemas distribuidos, protocolos, &amp;hellip; y hemos tenido la suerte de contar con miembros del grupo que son unos auténticos cracks, aunque nunca se hayan animado a dar una charla :)&lt;/p&gt;
+
+&lt;p&gt;En el aspecto más personal, me gustaría dar las gracias a mi compañero de batallas &lt;a href=&#34;https://twitter.com/flopezluis&#34; target=&#34;_blank&#34;&gt;Félix&lt;/a&gt; sin el cual todo esto que hemos hecho, aunque sea poco, no hubiera sido posible.&lt;/p&gt;
+
+&lt;p&gt;Con todo esto, y como la mayor parte ya habréis deducido a partir del título del post, muy a nuestro pesar, damos por cerrada nuestra actividad como organizadores del Papers We Love Madrid. Todos los recursos que hemos generado a lo largo de este periplo están disponibles en el canal oficial de &lt;a href=&#34;https://www.youtube.com/channel/UCoj4eQh_dZR37lL78ymC6XA&#34; target=&#34;_blank&#34;&gt;Papers We Love&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;¡Muchas gracias a todos por vuestro apoyo y colaboración!&lt;/p&gt;
+
+&lt;p&gt;¡Hasta pronto!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Papers We Love</title>
-      <link>https://migue.github.com/project/papers-we-love/</link>
+      <link>https://migue.github.io/project/papers-we-love/</link>
       <pubDate>Wed, 10 Jan 2018 23:12:36 +0100</pubDate>
       
-      <guid>https://migue.github.com/project/papers-we-love/</guid>
+      <guid>https://migue.github.io/project/papers-we-love/</guid>
       <description>&lt;p&gt;Madrid&amp;rsquo;s chapter of &lt;a href=&#34;http://www.meetup.com/papers-we-love&#34; target=&#34;_blank&#34;&gt;Papers We Love&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;What was the last paper within the realm of computing you read? What did it inspire you to build or tinker with? Come share the ideas in an awesome academic/research publication with fellow engineers, programmers, and paper-readers. Lead a session and show off code that you wrote that implements these ideas or just give us the lowdown about the paper. Otherwise, just come, listen, learn, and discuss. We&amp;rsquo;ll be using papers-we-love&amp;rsquo;s curated &lt;a href=&#34;https://github.com/papers-we-love/papers-we-love&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt; .&lt;/p&gt;
@@ -26,10 +50,10 @@
     
     <item>
       <title>Papers We Love Madrid: Tomando Forma</title>
-      <link>https://migue.github.com/post/papers-we-love-madrid-tomando-forma/</link>
+      <link>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</link>
       <pubDate>Tue, 02 Dec 2014 22:17:41 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/papers-we-love-madrid-tomando-forma/</guid>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</guid>
       <description>
 
 &lt;p&gt;Como seguramente alguno de vosotros recordais, hace unas semanas planteé por &lt;a href=&#34;http://migue.github.io/2014/11/12/papers-we-love-madrid-edition/&#34; target=&#34;_blank&#34;&gt;aquí&lt;/a&gt; la posibilidad de organizar un Papers We Love en Madrid. Unas cuantas personas mostraron su interés tanto en participar como en colaborar lo que me hizo seguir adelante con la iniciativa propuesta.&lt;/p&gt;
@@ -58,10 +82,10 @@
     
     <item>
       <title>Papers We Love Madrid Edition</title>
-      <link>https://migue.github.com/post/papers-we-love-madrid-edition/</link>
+      <link>https://migue.github.io/post/papers-we-love-madrid-edition/</link>
       <pubDate>Wed, 12 Nov 2014 22:15:41 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/papers-we-love-madrid-edition/</guid>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-edition/</guid>
       <description>
 
 &lt;p&gt;Hace unos días, a raíz de un tweet sobre &lt;a href=&#34;http://julialang.org/&#34; target=&#34;_blank&#34;&gt;Julia&lt;/a&gt;, salió a la luz un tema al que hace tiempo le llevo dando bastantes vueltas: &lt;a href=&#34;http://papers-we-love.github.io/&#34; target=&#34;_blank&#34;&gt;Papers we Love&lt;/a&gt;.&lt;/p&gt;
@@ -94,10 +118,10 @@
     
     <item>
       <title>Java Compiler String Addition</title>
-      <link>https://migue.github.com/post/java-compiler-string-addition/</link>
+      <link>https://migue.github.io/post/java-compiler-string-addition/</link>
       <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/java-compiler-string-addition/</guid>
+      <guid>https://migue.github.io/post/java-compiler-string-addition/</guid>
       <description>
 
 &lt;p&gt;Lately I have seen quite a few misconceptions regarding how string concatenation is handled in the Java world so I would like to write this short blog entry with a couple of stupid examples in order to show the basics of how it is done.&lt;/p&gt;
@@ -191,10 +215,10 @@
     
     <item>
       <title>Saying No</title>
-      <link>https://migue.github.com/post/saying-no/</link>
+      <link>https://migue.github.io/post/saying-no/</link>
       <pubDate>Sun, 26 Jan 2014 10:36:10 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/saying-no/</guid>
+      <guid>https://migue.github.io/post/saying-no/</guid>
       <description>&lt;p&gt;About two weeks ago I got a surprisingly email in my inbox. An old friend of mine is about to launch a new startup and he asked me to become the CTO of their new company. My first reaction was: Wow!&lt;/p&gt;
 
 &lt;p&gt;Since this first email we have talked each other (a colleague of him was involved too) quite a few times. They have a good idea, an already working prototype of the product they want to create and enough money to be alive for a while if things don&amp;rsquo;t go as expected. I have thinking a lot about the pros and cons of joining them on their new adventure and I have finally made a decision: I am not joining them.&lt;/p&gt;
