@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Just my thoughts</title>
-    <link>https://migue.github.io/project/</link>
+    <link>https://migue.github.com/project/</link>
     <description>Recent content in Projects on Just my thoughts</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Wed, 10 Jan 2018 23:12:36 +0100</lastBuildDate>
     
-	<atom:link href="https://migue.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://migue.github.com/project/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Papers We Love</title>
-      <link>https://migue.github.io/project/papers-we-love/</link>
+      <link>https://migue.github.com/project/papers-we-love/</link>
       <pubDate>Wed, 10 Jan 2018 23:12:36 +0100</pubDate>
       
-      <guid>https://migue.github.io/project/papers-we-love/</guid>
+      <guid>https://migue.github.com/project/papers-we-love/</guid>
       <description>Madrid&amp;rsquo;s chapter of Papers We Love
 What was the last paper within the realm of computing you read? What did it inspire you to build or tinker with? Come share the ideas in an awesome academic/research publication with fellow engineers, programmers, and paper-readers. Lead a session and show off code that you wrote that implements these ideas or just give us the lowdown about the paper. Otherwise, just come, listen, learn, and discuss.</description>
     </item>

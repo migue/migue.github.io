@@ -5,16 +5,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</loc>
-      <lastmod>2019-01-05T10:31:01+01:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/project/papers-we-love/</loc>
+      <loc>https://migue.github.com/project/papers-we-love/</loc>
       <lastmod>2018-01-10T23:12:36+01:00</lastmod>
     </url>
     
@@ -23,7 +14,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/publication/</loc>
+      <loc>https://migue.github.com/publication/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -32,7 +23,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/talk/</loc>
+      <loc>https://migue.github.com/talk/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -41,7 +32,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/post/</loc>
+      <loc>https://migue.github.com/post/</loc>
       <lastmod>2017-01-01T00:00:00+01:00</lastmod>
     </url>
     
@@ -50,7 +41,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</loc>
+      <loc>https://migue.github.com/post/papers-we-love-madrid-tomando-forma/</loc>
       <lastmod>2014-12-02T22:17:41+01:00</lastmod>
     </url>
     
@@ -59,7 +50,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/post/papers-we-love-madrid-edition/</loc>
+      <loc>https://migue.github.com/post/papers-we-love-madrid-edition/</loc>
       <lastmod>2014-11-12T22:15:41+01:00</lastmod>
     </url>
     
@@ -68,7 +59,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/post/java-compiler-string-addition/</loc>
+      <loc>https://migue.github.com/post/java-compiler-string-addition/</loc>
       <lastmod>2014-04-21T22:29:06+01:00</lastmod>
     </url>
     
@@ -77,7 +68,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/post/saying-no/</loc>
+      <loc>https://migue.github.com/post/saying-no/</loc>
       <lastmod>2014-01-26T10:36:10+01:00</lastmod>
     </url>
     
@@ -86,7 +77,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/tags/</loc>
+      <loc>https://migue.github.com/tags/</loc>
       <lastmod>2014-01-26T10:36:10+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -96,7 +87,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/categories/</loc>
+      <loc>https://migue.github.com/categories/</loc>
       <priority>0</priority>
     </url>
     
@@ -105,7 +96,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/</loc>
+      <loc>https://migue.github.com/</loc>
       <lastmod>2016-04-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -115,8 +106,8 @@
     
     <url>
     
-      <loc>https://migue.github.io/categories/papers-we-love/</loc>
-      <lastmod>2019-01-05T10:31:01+01:00</lastmod>
+      <loc>https://migue.github.com/categories/papers-we-love/</loc>
+      <lastmod>2014-12-02T22:17:41+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -125,7 +116,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/project/</loc>
+      <loc>https://migue.github.com/project/</loc>
       <lastmod>2018-01-10T23:12:36+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -135,7 +126,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/publication_types/</loc>
+      <loc>https://migue.github.com/publication_types/</loc>
       <priority>0</priority>
     </url>
     
@@ -144,7 +135,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/tags/</loc>
+      <loc>https://migue.github.com/tags/</loc>
       <lastmod>2014-01-26T10:36:10+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -154,7 +145,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/tags/compilers/</loc>
+      <loc>https://migue.github.com/tags/compilers/</loc>
       <lastmod>2014-04-21T22:29:06+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -164,7 +155,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/tags/jobs/</loc>
+      <loc>https://migue.github.com/tags/jobs/</loc>
       <lastmod>2014-01-26T10:36:10+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -174,7 +165,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/tags/jvm/</loc>
+      <loc>https://migue.github.com/tags/jvm/</loc>
       <lastmod>2014-04-21T22:29:06+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -184,8 +175,8 @@
     
     <url>
     
-      <loc>https://migue.github.io/tags/news/</loc>
-      <lastmod>2019-01-05T10:31:01+01:00</lastmod>
+      <loc>https://migue.github.com/tags/news/</loc>
+      <lastmod>2014-12-02T22:17:41+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -194,7 +185,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/tags/papers-we-love/</loc>
+      <loc>https://migue.github.com/tags/papers-we-love/</loc>
       <lastmod>2018-01-10T23:12:36+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -204,7 +195,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/categories/personal/</loc>
+      <loc>https://migue.github.com/categories/personal/</loc>
       <lastmod>2014-01-26T10:36:10+01:00</lastmod>
       <priority>0</priority>
     </url>
@@ -214,7 +205,7 @@
     
     <url>
     
-      <loc>https://migue.github.io/categories/programming/</loc>
+      <loc>https://migue.github.com/categories/programming/</loc>
       <lastmod>2014-04-21T22:29:06+01:00</lastmod>
       <priority>0</priority>
     </url>
