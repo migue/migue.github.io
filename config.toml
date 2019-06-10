@@ -60,9 +60,15 @@ defaultContentLanguageInSubdir = false
   gravatar = true  # Get your avatar from Gravatar.com? (true/false)
   avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "miguelinlas3@gmail.com"
+<<<<<<< HEAD
   #address = "Calle de Suecia, 32, 6B, 28022, Madrid"
   # office_hours = "Monday 10:00 to 13:00 or email for appointment"
   #phone = "+34 666 99 87 68"
+=======
+  # address = ""
+  # office_hours = "Monday 10:00 to 13:00 or email for appointment"
+  # phone = ""
+>>>>>>> Update bio
   skype = "miguelinlas3"
   telegram = ""
 

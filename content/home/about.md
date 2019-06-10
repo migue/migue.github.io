@@ -39,4 +39,4 @@ weight = 5
 
 I am a proud dad and husband, software architect, speaker, and writer. Passionate reader, chef aficionado, former surf player and current cyclist and runner.
 
-Nowadays I am trying to help [Instana](https://www.instana.com) to build the next generation of APM tools and, unsuccessfully pursuing, to move my Phd research forward.
+I am unsuccessfully pursuing to move my Phd research forward.
