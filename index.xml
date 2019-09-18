@@ -6,8 +6,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 10 Jan 2018 23:12:36 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 05 Jan 2019 10:31:01 +0100</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Papers We Love Madrid: capítulo final</title>
+      <link>https://migue.github.com/post/papers-we-love-madrid-final-chapter/</link>
+      <pubDate>Sat, 05 Jan 2019 10:31:01 +0100</pubDate>
+      
+      <guid>https://migue.github.com/post/papers-we-love-madrid-final-chapter/</guid>
+      <description>&lt;p&gt;Parece imposible que hayan pasado cuatro años desde que iniciásemos la andadura del &lt;a href=&#34;https://migue.github.com/post/papers-we-love-madrid-tomando-forma/&#34; target=&#34;_blank&#34;&gt;Papers We Love Madrid&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Han sido cuatro años con altibajos en los que nunca hemos llegado a tener la periodicidad y actividades que teníamos en la cabeza cuando se arrancó el grupo. Cuatro años en los que hemos &amp;ldquo;sufrido&amp;rdquo; mucho más de lo esperado en encontrar a gente que se animase a dar una charla, en los que hemos intentando generar los contenidos más diversos posibles aunque no siempre lo hayamos conseguido. Cuatro años en los que hemos sufrido, al igual que en otros muchos grupos, la falta de asistencia de las personas que inicialmente estaban inscritas.&lt;/p&gt;
+
+&lt;p&gt;El objetivo inicial era acercar los mundos académicos y empresariales y demostrar que ambos pueden beneficiarse el uno del otro. Lamentablemente, hemos fracasado.&lt;/p&gt;
+
+&lt;p&gt;Pero no todo son aspectos negativos; también nos hemos divertido mucho por el camino. Hemos tenido la suerte de contar con expertos internacionales en sus respectivas áreas: Carlos Baquero, Álvaro Videla o Christopher Meiklejohn entre otros muchos, hemos hablado de muchísimos temas interesantes: machine learning, sistemas distribuidos, protocolos, &amp;hellip; y hemos tenido la suerte de contar con miembros del grupo que son unos auténticos cracks, aunque nunca se hayan animado a dar una charla :)&lt;/p&gt;
+
+&lt;p&gt;En el aspecto más personal, me gustaría dar las gracias a mi compañero de batallas &lt;a href=&#34;https://twitter.com/flopezluis&#34; target=&#34;_blank&#34;&gt;Félix&lt;/a&gt; sin el cual todo esto que hemos hecho, aunque sea poco, no hubiera sido posible.&lt;/p&gt;
+
+&lt;p&gt;Con todo esto, y como la mayor parte ya habréis deducido a partir del título del post, muy a nuestro pesar, damos por cerrada nuestra actividad como organizadores del Papers We Love Madrid. Todos los recursos que hemos generado a lo largo de este periplo están disponibles en el canal oficial de &lt;a href=&#34;https://www.youtube.com/channel/UCoj4eQh_dZR37lL78ymC6XA&#34; target=&#34;_blank&#34;&gt;Papers We Love&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;¡Muchas gracias a todos por vuestro apoyo y colaboración!&lt;/p&gt;
+
+&lt;p&gt;¡Hasta pronto!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Papers We Love</title>
