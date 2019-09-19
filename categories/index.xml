@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sat, 05 Jan 2019 10:31:01 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
     
 	<atom:link href="https://migue.github.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Personal</title>
+      <link>https://migue.github.com/categories/personal/</link>
+      <pubDate>Mon, 09 Sep 2019 22:31:01 +0100</pubDate>
+      
+      <guid>https://migue.github.com/categories/personal/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Papers We Love</title>
@@ -27,15 +36,6 @@
       <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
       
       <guid>https://migue.github.com/categories/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>personal</title>
-      <link>https://migue.github.com/categories/personal/</link>
-      <pubDate>Sun, 26 Jan 2014 10:36:10 +0100</pubDate>
-      
-      <guid>https://migue.github.com/categories/personal/</guid>
       <description></description>
     </item>
     

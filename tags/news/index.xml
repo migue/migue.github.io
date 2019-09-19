@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sat, 05 Jan 2019 10:31:01 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
     
 	<atom:link href="https://migue.github.com/tags/news/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Suerte</title>
+      <link>https://migue.github.com/post/suerte/</link>
+      <pubDate>Mon, 09 Sep 2019 22:31:01 +0100</pubDate>
+      
+      <guid>https://migue.github.com/post/suerte/</guid>
+      <description>Siempre me he considerado una persona con suerte; con mucha suerte.
+He tenido la suerte de tener unos padres que siempre se han preocupado de que tanto mi hermana como yo tuviéramos acceso a las oportunidades que ellos no pudieron tener, aunque eso implicara pasarse toda su vida trabajando como auténticos cabrones.
+Suerte por haber tenido amigos que han estado siempre a mi lado durante los buenos momentos y también durante los malos.</description>
+    </item>
     
     <item>
       <title>Papers We Love Madrid: capítulo final</title>
