@@ -1,43 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Papers We Love on Just my thoughts</title>
-    <link>https://migue.github.com/categories/papers-we-love/</link>
+    <link>https://migue.github.io/categories/papers-we-love/</link>
     <description>Recent content in Papers We Love on Just my thoughts</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sat, 05 Jan 2019 10:31:01 +0100</lastBuildDate>
     
-	<atom:link href="https://migue.github.com/categories/papers-we-love/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://migue.github.io/categories/papers-we-love/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Papers We Love Madrid: capítulo final</title>
-      <link>https://migue.github.com/post/papers-we-love-madrid-final-chapter/</link>
+      <link>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</link>
       <pubDate>Sat, 05 Jan 2019 10:31:01 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/papers-we-love-madrid-final-chapter/</guid>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</guid>
       <description>Parece imposible que hayan pasado cuatro años desde que iniciásemos la andadura del Papers We Love Madrid.
 Han sido cuatro años con altibajos en los que nunca hemos llegado a tener la periodicidad y actividades que teníamos en la cabeza cuando se arrancó el grupo. Cuatro años en los que hemos &amp;ldquo;sufrido&amp;rdquo; mucho más de lo esperado en encontrar a gente que se animase a dar una charla, en los que hemos intentando generar los contenidos más diversos posibles aunque no siempre lo hayamos conseguido.</description>
     </item>
     
     <item>
       <title>Papers We Love Madrid: Tomando Forma</title>
-      <link>https://migue.github.com/post/papers-we-love-madrid-tomando-forma/</link>
+      <link>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</link>
       <pubDate>Tue, 02 Dec 2014 22:17:41 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/papers-we-love-madrid-tomando-forma/</guid>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</guid>
       <description>Como seguramente alguno de vosotros recordais, hace unas semanas planteé por aquí la posibilidad de organizar un Papers We Love en Madrid. Unas cuantas personas mostraron su interés tanto en participar como en colaborar lo que me hizo seguir adelante con la iniciativa propuesta.
 Meetup Gracias a la inestimable participación del gran Féliz López hemos conseguido, bueno, realmente él ha conseguido que Álvaro Videla sea el ponente que de el pistoletazo de salida al nuevo grupo.</description>
     </item>
     
     <item>
       <title>Papers We Love Madrid Edition</title>
-      <link>https://migue.github.com/post/papers-we-love-madrid-edition/</link>
+      <link>https://migue.github.io/post/papers-we-love-madrid-edition/</link>
       <pubDate>Wed, 12 Nov 2014 22:15:41 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/papers-we-love-madrid-edition/</guid>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-edition/</guid>
       <description>Hace unos días, a raíz de un tweet sobre Julia, salió a la luz un tema al que hace tiempo le llevo dando bastantes vueltas: Papers we Love.
 La comunidad Para todos aquellos que nunca han oído hablar de esta iniciativa, no es más que un repositorio de papers académicos en torno al cual se ha creado una comunidad que realizar charlas periódicas donde presentar y discutir sobre los mismos.</description>
     </item>

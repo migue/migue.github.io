@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme" content="hugo-academic">
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.63.2" />
   <meta name="author" content="Miguel Ángel Pastor Olivar">
   <meta name="description" content="Software Architect">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://migue.github.com/post/java-compiler-string-addition/">
+  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/post/java-compiler-string-addition/">
 
   
   
@@ -60,15 +60,15 @@
   
 
   
-  <link rel="alternate" href="https://migue.github.com/index.xml" type="application/rss+xml" title="Just my thoughts">
-  <link rel="feed" href="https://migue.github.com/index.xml" type="application/rss+xml" title="Just my thoughts">
+  <link rel="alternate" href="https://migue.github.io/index.xml" type="application/rss+xml" title="Just my thoughts">
+  <link rel="feed" href="https://migue.github.io/index.xml" type="application/rss+xml" title="Just my thoughts">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://migue.github.com/post/java-compiler-string-addition/">
+  <link rel="canonical" href="https://migue.github.io/post/java-compiler-string-addition/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -76,7 +76,7 @@
   <meta property="twitter:creator" content="@miguelinlas3">
   
   <meta property="og:site_name" content="Just my thoughts">
-  <meta property="og:url" content="https://migue.github.com/post/java-compiler-string-addition/">
+  <meta property="og:url" content="https://migue.github.io/post/java-compiler-string-addition/">
   <meta property="og:title" content="Java Compiler String Addition | Just my thoughts">
   <meta property="og:description" content="">
   <meta property="og:locale" content="en-us">
@@ -248,35 +248,35 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Java%20Compiler%20String%20Addition&amp;url=https%3a%2f%2fmigue.github.com%2fpost%2fjava-compiler-string-addition%2f"
+         href="https://twitter.com/intent/tweet?text=Java%20Compiler%20String%20Addition&amp;url=https%3a%2f%2fmigue.github.io%2fpost%2fjava-compiler-string-addition%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fmigue.github.com%2fpost%2fjava-compiler-string-addition%2f"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fmigue.github.io%2fpost%2fjava-compiler-string-addition%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmigue.github.com%2fpost%2fjava-compiler-string-addition%2f&amp;title=Java%20Compiler%20String%20Addition"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmigue.github.io%2fpost%2fjava-compiler-string-addition%2f&amp;title=Java%20Compiler%20String%20Addition"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fmigue.github.com%2fpost%2fjava-compiler-string-addition%2f&amp;title=Java%20Compiler%20String%20Addition"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fmigue.github.io%2fpost%2fjava-compiler-string-addition%2f&amp;title=Java%20Compiler%20String%20Addition"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Java%20Compiler%20String%20Addition&amp;body=https%3a%2f%2fmigue.github.com%2fpost%2fjava-compiler-string-addition%2f">
+         href="mailto:?subject=Java%20Compiler%20String%20Addition&amp;body=https%3a%2f%2fmigue.github.io%2fpost%2fjava-compiler-string-addition%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -290,28 +290,20 @@
 
 
       <div class="article-style" itemprop="articleBody">
-        
-
-<p>Lately I have seen quite a few misconceptions regarding how string concatenation is handled in the Java world so I would like to write this short blog entry with a couple of stupid examples in order to show the basics of how it is done.</p>
-
+        <p>Lately I have seen quite a few misconceptions regarding how string concatenation is handled in the Java world so I would like to write this short blog entry with a couple of stupid examples in order to show the basics of how it is done.</p>
 <p><strong>Note:</strong> I am focusing here in the bytecode generated by the Java compiler, regardless any optimization the runtime could apply.</p>
-
 <h3 id="concatenating-constant-strings">Concatenating constant strings</h3>
-
 <p>Imagine we are writing a new class where we have defined three final string fields and we want to add a new method which just returns the sum of the three:</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StringConcatenation</span> <span style="color:#f92672">{</span>
 
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> String A <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">,</span> B<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;B&#34;</span><span style="color:#f92672">,</span> C<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;C&#34;</span><span style="color:#f92672">;</span>
 
-        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">concatFinalStrings</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">concatFinalStrings</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
                 <span style="color:#66d9ef">return</span> A <span style="color:#f92672">+</span> B <span style="color:#f92672">+</span> C<span style="color:#f92672">;</span>
         <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span></code></pre></div>
-
 <p>Taking a look to the bytecode generated by the Java compiler we can see the following (I have included only the relevant parts of the command java -v for the sake of clarity):</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bytecode" data-lang="bytecode">Constant pool:
+<pre><code class="language-bytecode" data-lang="bytecode">Constant pool:
    ...
    #9 = String             #49            //  ABC
    ...
@@ -324,37 +316,30 @@
          0: ldc           #9                  // String ABC
          2: areturn
       LineNumberTable
-}</code></pre></div>
-
+}</code></pre>
 <p>The previous snippet shows how the Java compiler will generate for us a new constant (position 9 of the constants pool) containing the concatentation of the three strings, and the implementation of the method is just an <strong>ldc</strong> instruction. As far as I remember, the JLS specifies that compile time constants should end up in an internted string</p>
-
 <p>For the reader: remove the final modifier at the fields declaration and analyze the generated bytecode. Do you see any difference?</p>
-
 <h3 id="concatenating-non-constant-strings">Concatenating non constant strings</h3>
-
 <p>The example shown at the previous section could be very unrealistic for many of you so let&rsquo;s see if we can get something more interesting in place. Now we are planning to add a new method which just invokes three other methods and links together the results , like this:</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StringConcatenation</span> <span style="color:#f92672">{</span>
 
-        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">concatVariableStrings</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">return</span> getA<span style="color:#f92672">()</span> <span style="color:#f92672">+</span> getB<span style="color:#f92672">()</span> <span style="color:#f92672">+</span> getC<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">concatVariableStrings</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> getA<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> getB<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> getC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
         <span style="color:#f92672">}</span>
 
-        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getA</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
-        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getB</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;B&#34;</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
-        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getC</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;C&#34;</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getB</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;B&#34;</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getC</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;C&#34;</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span></code></pre></div>
-
 <p>Taking a closer look at the generated bytecode (again just included the most important sections):</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bytecode" data-lang="bytecode">  public java.lang.String concatVariableStrings();
+<pre><code class="language-bytecode" data-lang="bytecode">  public java.lang.String concatVariableStrings();
     descriptor: ()Ljava/lang/String;
     flags: ACC_PUBLIC
     Code:
       stack=2, locals=1, args_size=1
          0: new           #8                  // class java/lang/StringBuilder
          3: dup
-         4: invokespecial #9                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+         4: invokespecial #9                  // Method java/lang/StringBuilder."<init>":()V
          7: aload_0
          8: invokevirtual #12                 // Method getA:()Ljava/lang/String;
         11: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
@@ -367,16 +352,11 @@
         28: invokevirtual #11                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
         31: areturn
       LineNumberTable:
-        line 12: 0</code></pre></div>
-
+        line 12: 0</code></pre>
 <p>we can see the Java compiler is creating a <strong>StringBuilder</strong> under the hood, so no temporary String objects are allocated in order to compose the final string which needs to be returned from the method. If you need to improve the performance, you should write the builder by your own, setting the initial size in the constructor.</p>
-
 <p>Maybe this is not new for you (as it should be), but, lately, I have received quite a few questions regarding this behaviour.</p>
-
 <p><strong>Environment</strong>: I have used <strong>javac</strong> and <strong>javap 1.8.0_05</strong> in OSx to compile the examples.</p>
-
 <h3 id="for-the-curious">For the curious</h3>
-
 <p>If you &ldquo;port&rdquo; the previous examples to Scala and take a look to the generated bytecode (of the second example), you will see that the Scala compiler will use the same approach shown before; generating a <strong>StringBuilder (scala.collection.mutable.StringBuilder)</strong> under the covers.</p>
 
       </div>
@@ -413,7 +393,7 @@
   <div class="container">
     <p class="powered-by">
 
-      &copy; 2018 &middot; 
+      © 2018 &middot; 
 
       Powered by the
       <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Personal on Just my thoughts</title>
-    <link>https://migue.github.com/categories/personal/</link>
-    <description>Recent content in Personal on Just my thoughts</description>
+    <title>personal on Just my thoughts</title>
+    <link>https://migue.github.io/categories/personal/</link>
+    <description>Recent content in personal on Just my thoughts</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
     
-	<atom:link href="https://migue.github.com/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://migue.github.io/categories/personal/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Suerte</title>
-      <link>https://migue.github.com/post/suerte/</link>
+      <link>https://migue.github.io/post/suerte/</link>
       <pubDate>Mon, 09 Sep 2019 22:31:01 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/suerte/</guid>
+      <guid>https://migue.github.io/post/suerte/</guid>
       <description>Siempre me he considerado una persona con suerte; con mucha suerte.
 He tenido la suerte de tener unos padres que siempre se han preocupado de que tanto mi hermana como yo tuviéramos acceso a las oportunidades que ellos no pudieron tener, aunque eso implicara pasarse toda su vida trabajando como auténticos cabrones.
 Suerte por haber tenido amigos que han estado siempre a mi lado durante los buenos momentos y también durante los malos.</description>
@@ -25,10 +25,10 @@ Suerte por haber tenido amigos que han estado siempre a mi lado durante los buen
     
     <item>
       <title>Saying No</title>
-      <link>https://migue.github.com/post/saying-no/</link>
+      <link>https://migue.github.io/post/saying-no/</link>
       <pubDate>Sun, 26 Jan 2014 10:36:10 +0100</pubDate>
       
-      <guid>https://migue.github.com/post/saying-no/</guid>
+      <guid>https://migue.github.io/post/saying-no/</guid>
       <description>About two weeks ago I got a surprisingly email in my inbox. An old friend of mine is about to launch a new startup and he asked me to become the CTO of their new company. My first reaction was: Wow!
 Since this first email we have talked each other (a colleague of him was involved too) quite a few times. They have a good idea, an already working prototype of the product they want to create and enough money to be alive for a while if things don&amp;rsquo;t go as expected.</description>
     </item>
