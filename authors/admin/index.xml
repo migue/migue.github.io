@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publications | Just my thouhgts</title>
-    <link>https://migue.github.io/publication/</link>
-      <atom:link href="https://migue.github.io/publication/index.xml" rel="self" type="application/rss+xml" />
-    <description>Publications</description>
+    <title>Just my thouhgts</title>
+    <link>https://migue.github.io/authors/admin/</link>
+      <atom:link href="https://migue.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
+    <description>Just my thouhgts</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>Publications</title>
-      <link>https://migue.github.io/publication/</link>
+      <title>Just my thouhgts</title>
+      <link>https://migue.github.io/authors/admin/</link>
     </image>
     
   </channel>

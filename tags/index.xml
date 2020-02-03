@@ -1,32 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Just my thoughts</title>
+    <title>Tags | Just my thouhgts</title>
     <link>https://migue.github.io/tags/</link>
-    <description>Recent content in Tags on Just my thoughts</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
-    
-	<atom:link href="https://migue.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="https://migue.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tags</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Tags</title>
+      <link>https://migue.github.io/tags/</link>
+    </image>
     
     <item>
       <title>news</title>
       <link>https://migue.github.io/tags/news/</link>
       <pubDate>Mon, 09 Sep 2019 22:31:01 +0100</pubDate>
-      
       <guid>https://migue.github.io/tags/news/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>papers-we-love</title>
-      <link>https://migue.github.io/tags/papers-we-love/</link>
-      <pubDate>Wed, 10 Jan 2018 23:12:36 +0100</pubDate>
-      
-      <guid>https://migue.github.io/tags/papers-we-love/</guid>
       <description></description>
     </item>
     
@@ -34,7 +24,6 @@
       <title>compilers</title>
       <link>https://migue.github.io/tags/compilers/</link>
       <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
-      
       <guid>https://migue.github.io/tags/compilers/</guid>
       <description></description>
     </item>
@@ -43,7 +32,6 @@
       <title>jvm</title>
       <link>https://migue.github.io/tags/jvm/</link>
       <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
-      
       <guid>https://migue.github.io/tags/jvm/</guid>
       <description></description>
     </item>
@@ -52,7 +40,6 @@
       <title>jobs</title>
       <link>https://migue.github.io/tags/jobs/</link>
       <pubDate>Sun, 26 Jan 2014 10:36:10 +0100</pubDate>
-      
       <guid>https://migue.github.io/tags/jobs/</guid>
       <description></description>
     </item>

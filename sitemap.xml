@@ -1,209 +1,110 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/categories/</loc>
-      <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/categories/</loc>
+    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/</loc>
-      <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/</loc>
+    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/tags/news/</loc>
-      <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/tags/news/</loc>
+    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/categories/personal/</loc>
-      <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/categories/personal/</loc>
+    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/post/suerte/</loc>
-      <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/post/suerte/</loc>
+    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/tags/</loc>
-      <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/tags/</loc>
+    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/categories/papers-we-love/</loc>
-      <lastmod>2019-01-05T10:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/categories/papers-we-love/</loc>
+    <lastmod>2019-01-05T10:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</loc>
-      <lastmod>2019-01-05T10:31:01+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</loc>
+    <lastmod>2019-01-05T10:31:01+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/project/papers-we-love/</loc>
-      <lastmod>2018-01-10T23:12:36+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/post/</loc>
+    <lastmod>2017-01-01T00:00:00+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/tags/papers-we-love/</loc>
-      <lastmod>2018-01-10T23:12:36+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</loc>
+    <lastmod>2014-12-02T22:17:41+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/project/</loc>
-      <lastmod>2018-01-10T23:12:36+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/post/papers-we-love-madrid-edition/</loc>
+    <lastmod>2014-11-12T22:15:41+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/publication/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/tags/compilers/</loc>
+    <lastmod>2014-04-21T22:29:06+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/talk/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/post/java-compiler-string-addition/</loc>
+    <lastmod>2014-04-21T22:29:06+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/post/</loc>
-      <lastmod>2017-01-01T00:00:00+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/tags/jvm/</loc>
+    <lastmod>2014-04-21T22:29:06+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</loc>
-      <lastmod>2014-12-02T22:17:41+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/categories/programming/</loc>
+    <lastmod>2014-04-21T22:29:06+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/post/papers-we-love-madrid-edition/</loc>
-      <lastmod>2014-11-12T22:15:41+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/tags/jobs/</loc>
+    <lastmod>2014-01-26T10:36:10+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/tags/compilers/</loc>
-      <lastmod>2014-04-21T22:29:06+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/post/saying-no/</loc>
+    <lastmod>2014-01-26T10:36:10+01:00</lastmod>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/post/java-compiler-string-addition/</loc>
-      <lastmod>2014-04-21T22:29:06+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/authors/admin/</loc>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/tags/jvm/</loc>
-      <lastmod>2014-04-21T22:29:06+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/authors/</loc>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/categories/programming/</loc>
-      <lastmod>2014-04-21T22:29:06+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/publication_types/</loc>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/tags/jobs/</loc>
-      <lastmod>2014-01-26T10:36:10+01:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/publication/</loc>
+  </url>
   
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/post/saying-no/</loc>
-      <lastmod>2014-01-26T10:36:10+01:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://migue.github.io/publication_types/</loc>
-    </url>
-    
+  <url>
+    <loc>https://migue.github.io/talk/</loc>
+  </url>
   
 </urlset>

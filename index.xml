@@ -1,48 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Just my thoughts on Just my thoughts</title>
+    <title>Just my thouhgts</title>
     <link>https://migue.github.io/</link>
-    <description>Recent content in Just my thoughts on Just my thoughts</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
-    <atom:link href="/" rel="self" type="application/rss+xml" />
+      <atom:link href="https://migue.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <description>Just my thouhgts</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Just my thouhgts</title>
+      <link>https://migue.github.io/</link>
+    </image>
     
     <item>
-      <title>Projects</title>
-      <link>https://migue.github.io/project/</link>
-      <pubDate>Wed, 10 Jan 2018 23:12:36 +0100</pubDate>
-      
-      <guid>https://migue.github.io/project/</guid>
-      <description></description>
+      <title>Suerte</title>
+      <link>https://migue.github.io/post/suerte/</link>
+      <pubDate>Mon, 09 Sep 2019 22:31:01 +0100</pubDate>
+      <guid>https://migue.github.io/post/suerte/</guid>
+      <description>&lt;p&gt;Siempre me he considerado una persona con suerte; con mucha suerte.&lt;/p&gt;
+&lt;p&gt;He tenido la suerte de tener unos padres que siempre se han preocupado de que tanto mi hermana como yo tuviéramos acceso a las oportunidades que ellos no pudieron tener, aunque eso implicara pasarse toda su vida trabajando como auténticos cabrones.&lt;/p&gt;
+&lt;p&gt;Suerte por haber tenido amigos que han estado siempre a mi lado durante los buenos momentos y también durante los malos.&lt;/p&gt;
+&lt;p&gt;Suerte por haber conocido a gente excepcional, a los que puedo llamar amigos, que me ha ayudado a navegar por el mundo profesional en el que me muevo y siempre ha tenido a bien aconsejarme y/o apoyarme en aquellos momentos en os que lo he necesitado.&lt;/p&gt;
+&lt;p&gt;Suerte por haber conocido a la que hoy es mi mujer y con la que he formado una familia de la que me encuentro extremadamente orgulloso.&lt;/p&gt;
+&lt;p&gt;¿Y por qué todo esto os estaréis preguntando? Soy consciente de que hay mucha gente a la que la suerte de la que hablaba anteriormente no le ha sonreido y me gustaría devolver un poco de la misma e intentar que el mundo en el que vivimos sea un poquito menos malo.&lt;/p&gt;
+&lt;p&gt;Con el objetivo de aportar nuestro pequeño granito de arena, a principios de este año mi mujer y yo decidimos embarcarnos en el proceso necesario para formar parte del programa de Acogida Familiar de la Comunidad de Madrid (&lt;a href=&#34;http://www.comunidad.madrid/servicios/asuntos-sociales/acogimiento-familiar-menores)&#34;&gt;http://www.comunidad.madrid/servicios/asuntos-sociales/acogimiento-familiar-menores)&lt;/a&gt;. El enlace anterior explica muy bien, y con todo nivel de detalle, en qué consiste el proceso y cuáles son los objetivos del mismo. Para el que no le apetezca leérselo, de manera resumida, se trata de un programa donde las familias se ofrecen a acoger a niños de manera temporal (existen diferentes modalidades) mientras sus padres no pueden hacerse cargo de ellos.&lt;/p&gt;
+&lt;p&gt;Durante los últimos meses donde hemos tenido que realizar cursos y mantener entrevistas con diferentes psicólogos y trabajadores sociales. En muchos momentos ha sido un proceso &amp;ldquo;complicado&amp;rdquo;, desde una persepectiva emocional, no por la dureza de las entrevistas si no por las historias que rodean a muchos de los niños que se encuentran bajo el amparo y custodia de la Comunidad de Madrid.&lt;/p&gt;
+&lt;p&gt;Pues bien, el pasado viernes tuvimos la que se supone será la última entrevisa del proceso. Ahora mismo estamos pendientes de que las diferentes trabajoras sociales y psicólogas con las que nos hemos estado entrevistando emitan los informes correspondientes para que el pleno de la comisión del programa decida si podemos formar parte del mismo. Nos han adelantado que los informes son favorables y que vamos a ser aceptados en el programa (salvo catástrofe), aunque necesitamos el &amp;ldquo;sello&amp;rdquo; del pleno para ser parte oficial del mismo.&lt;/p&gt;
+&lt;p&gt;A partir de que dicha notificación sea efectiva pasaríamos a ser parte oficial del programa, y, en &amp;ldquo;cualquier momento&amp;rdquo;, podrían avisarnos de que existe un niño/a que encaja en el ofrecimiento que nosotros hemos hecho como familia.&lt;/p&gt;
+&lt;p&gt;Me resulta difícil expresar cómo me siento. Por una parte estoy muy contento de que nos hayan &amp;ldquo;aceptado&amp;rdquo; en el programa y de que podamos ayudar a gente que realmente lo necesita de una manera mucho más proactiva. Sin embargo, al mismo tiempo también me encuentro un poco &amp;ldquo;asustado&amp;rdquo; pensando en si seremos capaces de adaptarnos a esta nueva situación.&lt;/p&gt;
+&lt;p&gt;Veremos que nos depara el futuro.&lt;/p&gt;
+</description>
     </item>
     
     <item>
-      <title>Publications</title>
-      <link>https://migue.github.io/publication/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://migue.github.io/publication/</guid>
-      <description></description>
+      <title>Papers We Love Madrid: capítulo final</title>
+      <link>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</link>
+      <pubDate>Sat, 05 Jan 2019 10:31:01 +0100</pubDate>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</guid>
+      <description>&lt;p&gt;Parece imposible que hayan pasado cuatro años desde que iniciásemos la andadura del 
+&lt;a href=&#34;https://migue.github.io/post/papers-we-love-madrid-tomando-forma/&#34;&gt;Papers We Love Madrid&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;Han sido cuatro años con altibajos en los que nunca hemos llegado a tener la periodicidad y actividades que teníamos en la cabeza cuando se arrancó el grupo. Cuatro años en los que hemos &amp;ldquo;sufrido&amp;rdquo; mucho más de lo esperado en encontrar a gente que se animase a dar una charla, en los que hemos intentando generar los contenidos más diversos posibles aunque no siempre lo hayamos conseguido. Cuatro años en los que hemos sufrido, al igual que en otros muchos grupos, la falta de asistencia de las personas que inicialmente estaban inscritas.&lt;/p&gt;
+&lt;p&gt;El objetivo inicial era acercar los mundos académicos y empresariales y demostrar que ambos pueden beneficiarse el uno del otro. Lamentablemente, hemos fracasado.&lt;/p&gt;
+&lt;p&gt;Pero no todo son aspectos negativos; también nos hemos divertido mucho por el camino. Hemos tenido la suerte de contar con expertos internacionales en sus respectivas áreas: Carlos Baquero, Álvaro Videla o Christopher Meiklejohn entre otros muchos, hemos hablado de muchísimos temas interesantes: machine learning, sistemas distribuidos, protocolos, &amp;hellip; y hemos tenido la suerte de contar con miembros del grupo que son unos auténticos cracks, aunque nunca se hayan animado a dar una charla :)&lt;/p&gt;
+&lt;p&gt;En el aspecto más personal, me gustaría dar las gracias a mi compañero de batallas 
+&lt;a href=&#34;https://twitter.com/flopezluis&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Félix&lt;/a&gt;
+ sin el cual todo esto que hemos hecho, aunque sea poco, no hubiera sido posible.&lt;/p&gt;
+&lt;p&gt;Con todo esto, y como la mayor parte ya habréis deducido a partir del título del post, muy a nuestro pesar, damos por cerrada nuestra actividad como organizadores del Papers We Love Madrid. Todos los recursos que hemos generado a lo largo de este periplo están disponibles en el canal oficial de 
+&lt;a href=&#34;https://www.youtube.com/channel/UCoj4eQh_dZR37lL78ymC6XA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Papers We Love&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;¡Muchas gracias a todos por vuestro apoyo y colaboración!&lt;/p&gt;
+&lt;p&gt;¡Hasta pronto!&lt;/p&gt;
+</description>
     </item>
     
     <item>
-      <title>Recent &amp; Upcoming Talks</title>
-      <link>https://migue.github.io/talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://migue.github.io/talk/</guid>
-      <description></description>
+      <title>Papers We Love Madrid: Tomando Forma</title>
+      <link>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</link>
+      <pubDate>Tue, 02 Dec 2014 22:17:41 +0100</pubDate>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</guid>
+      <description>&lt;p&gt;Como seguramente alguno de vosotros recordais, hace unas semanas planteé por 
+&lt;a href=&#34;http://migue.github.io/2014/11/12/papers-we-love-madrid-edition/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;
+ la posibilidad de organizar un Papers We Love en Madrid. Unas cuantas personas mostraron su interés tanto en participar como en colaborar lo que me hizo seguir adelante con la iniciativa propuesta.&lt;/p&gt;
+&lt;h2 id=&#34;meetup&#34;&gt;Meetup&lt;/h2&gt;
+&lt;p&gt;Gracias a la inestimable participación del gran 
+&lt;a href=&#34;https://twitter.com/flopezluis&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Féliz López&lt;/a&gt;
+ hemos conseguido, bueno, realmente él ha conseguido que 
+&lt;a href=&#34;https://twitter.com/old_sound&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Álvaro Videla&lt;/a&gt;
+ sea el ponente que de el pistoletazo de salida al nuevo grupo.&lt;/p&gt;
+&lt;p&gt;Parece que Álvaro tiene previsto pasarse por aquí en Febrero, con lo que &amp;ldquo;retrasaríamos&amp;rdquo; hasta ese momento la primera reunión del grupo. En cuanto al paper, todavía no he hablado con Álvaro, pero en cuanto me lo concrete, lo actualizaré tanto aquí como en la futura página de Meetup del grupo (véase más abajo)&lt;/p&gt;
+&lt;h2 id=&#34;ubicación&#34;&gt;Ubicación&lt;/h2&gt;
+&lt;p&gt;Todavía no tenemos una ubicación definitiva aunque varias personas se han ofrecido a través de Twitter a conseguir espacios donde podamos celebrar la primera reunión. Por simplicidad de las gestiones, había hablado con mi jefe sobre la posibilidad de disponer de las oficinas de 
+&lt;a href=&#34;https://liferay.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Liferay España&lt;/a&gt;
+ y la respuesta ha sido positiva. Del mismo modo, Félix me ha comentado que la nueva oficina de 
+&lt;a href=&#34;http://shuttlecloud.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ShuttleCloud&lt;/a&gt;
+ también es una opción viable. Por último, 
+&lt;a href=&#34;https://twitter.com/fcofdezc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Francisco Fernández&lt;/a&gt;
+ me comentaba que podría conseguir las oficinas de 
+&lt;a href=&#34;https://tuenti.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tuenti&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;Personalmente creo el abanico de opciones para esta primera charla es lo suficientemente amplio (y céntrico :D ). Cuando la ubicación sea definitiva, lo haré saber.&lt;/p&gt;
+&lt;h2 id=&#34;grupo-de-meetup&#34;&gt;Grupo de Meetup&lt;/h2&gt;
+&lt;p&gt;Dado que parece que todo esto va tomando forma, iré creando el grupo de Meetup además de revisar el resto de &amp;ldquo;requisitos&amp;rdquo; que establece la comunidad de Papers We Love&lt;/p&gt;
+&lt;p&gt;¡Muchas gracias por vuestra atención!&lt;/p&gt;
+&lt;p&gt;Migue&lt;/p&gt;
+</description>
     </item>
     
     <item>
-      <title>Posts</title>
-      <link>https://migue.github.io/post/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0100</pubDate>
-      
-      <guid>https://migue.github.io/post/</guid>
-      <description></description>
+      <title>Papers We Love Madrid Edition</title>
+      <link>https://migue.github.io/post/papers-we-love-madrid-edition/</link>
+      <pubDate>Wed, 12 Nov 2014 22:15:41 +0100</pubDate>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-edition/</guid>
+      <description>&lt;p&gt;Hace unos días, a raíz de un tweet sobre 
+&lt;a href=&#34;http://julialang.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Julia&lt;/a&gt;
+, salió a la luz un tema al que hace tiempo le llevo dando bastantes vueltas: 
+&lt;a href=&#34;http://papers-we-love.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Papers we Love&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id=&#34;la-comunidad&#34;&gt;La comunidad&lt;/h2&gt;
+&lt;p&gt;Para todos aquellos que nunca han oído hablar de esta iniciativa, no es más que un repositorio de papers académicos en torno al cual se ha creado una comunidad que realizar charlas periódicas donde presentar y discutir sobre los mismos.&lt;/p&gt;
+&lt;h2 id=&#34;las-normas&#34;&gt;Las normas&lt;/h2&gt;
+&lt;p&gt;No tiene mucho sentido que replique aquí todas las normas: 
+&lt;a href=&#34;https://github.com/papers-we-love/papers-we-love/wiki/Creating-a-PWL-chapter&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;
+ están detalladas.&lt;/p&gt;
+&lt;p&gt;Los requisitos básicos son disponer de un grupo de 
+&lt;a href=&#34;http://www.meetup.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Meetup&lt;/a&gt;
+ y realizar reuniones razonablemente periódicas (para que ellos te mantengan en la lista de grupos activos).&lt;/p&gt;
+&lt;h2 id=&#34;la-propuesta&#34;&gt;La propuesta&lt;/h2&gt;
+&lt;p&gt;Seguro que muchos de vosotros os estaréis preguntando: ¿Por qué? ¿No existen suficientes grupos de usuarios en Madrid?&lt;/p&gt;
+&lt;p&gt;Siempre he pensado que el mundo de la investigación y el mundo empresarial deberían estar mucho más cerca el uno del otro, y me gustaría que este grupo permitiera a los integrantes ver cómo ambos mundos pueden beneficiarse mutuamente.&lt;/p&gt;
+&lt;p&gt;Me gustaría destacar que la temática de este grupo &lt;strong&gt;no&lt;/strong&gt; está focalizada en una tecnología, plataforma o lenguaje de programación concretos sino que gira en torno a papers que los integrantes del grupo consideren interesantes (y, por su puesto, de la visión que el speaker le quiera dar :) ). Si os dais una vuelta por los meetups de otras ciudades veréis que las temáticas son de lo más dispares.&lt;/p&gt;
+&lt;p&gt;Evidentemente esto no es más que una idea/propuesta, para ver si habría gente interesada en que se pudiera formar el grupo.&lt;/p&gt;
+&lt;p&gt;¡Muchas gracias por vuestra atención!&lt;/p&gt;
+&lt;p&gt;Migue&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Java Compiler String Addition</title>
+      <link>https://migue.github.io/post/java-compiler-string-addition/</link>
+      <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
+      <guid>https://migue.github.io/post/java-compiler-string-addition/</guid>
+      <description>&lt;p&gt;Lately I have seen quite a few misconceptions regarding how string concatenation is handled in the Java world so I would like to write this short blog entry with a couple of stupid examples in order to show the basics of how it is done.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; I am focusing here in the bytecode generated by the Java compiler, regardless any optimization the runtime could apply.&lt;/p&gt;
+&lt;h3 id=&#34;concatenating-constant-strings&#34;&gt;Concatenating constant strings&lt;/h3&gt;
+&lt;p&gt;Imagine we are writing a new class where we have defined three final string fields and we want to add a new method which just returns the sum of the three:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;StringConcatenation&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; String A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; B&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; C&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;concatFinalStrings&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; A &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; B &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; C&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Taking a look to the bytecode generated by the Java compiler we can see the following (I have included only the relevant parts of the command java -v for the sake of clarity):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bytecode&#34; data-lang=&#34;bytecode&#34;&gt;Constant pool:
+   ...
+   #9 = String             #49            //  ABC
+   ...
+
+  public java.lang.String concatFinalStrings();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: ldc           #9                  // String ABC
+         2: areturn
+      LineNumberTable
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The previous snippet shows how the Java compiler will generate for us a new constant (position 9 of the constants pool) containing the concatentation of the three strings, and the implementation of the method is just an &lt;strong&gt;ldc&lt;/strong&gt; instruction. As far as I remember, the JLS specifies that compile time constants should end up in an internted string&lt;/p&gt;
+&lt;p&gt;For the reader: remove the final modifier at the fields declaration and analyze the generated bytecode. Do you see any difference?&lt;/p&gt;
+&lt;h3 id=&#34;concatenating-non-constant-strings&#34;&gt;Concatenating non constant strings&lt;/h3&gt;
+&lt;p&gt;The example shown at the previous section could be very unrealistic for many of you so let&amp;rsquo;s see if we can get something more interesting in place. Now we are planning to add a new method which just invokes three other methods and links together the results , like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;StringConcatenation&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;concatVariableStrings&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; getA&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; getB&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; getC&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getA&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getB&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getC&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Taking a closer look at the generated bytecode (again just included the most important sections):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bytecode&#34; data-lang=&#34;bytecode&#34;&gt;  public java.lang.String concatVariableStrings();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: new           #8                  // class java/lang/StringBuilder
+         3: dup
+         4: invokespecial #9                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+         7: aload_0
+         8: invokevirtual #12                 // Method getA:()Ljava/lang/String;
+        11: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        14: aload_0
+        15: invokevirtual #13                 // Method getB:()Ljava/lang/String;
+        18: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        21: aload_0
+        22: invokevirtual #14                 // Method getC:()Ljava/lang/String;
+        25: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        28: invokevirtual #11                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        31: areturn
+      LineNumberTable:
+        line 12: 0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;we can see the Java compiler is creating a &lt;strong&gt;StringBuilder&lt;/strong&gt; under the hood, so no temporary String objects are allocated in order to compose the final string which needs to be returned from the method. If you need to improve the performance, you should write the builder by your own, setting the initial size in the constructor.&lt;/p&gt;
+&lt;p&gt;Maybe this is not new for you (as it should be), but, lately, I have received quite a few questions regarding this behaviour.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Environment&lt;/strong&gt;: I have used &lt;strong&gt;javac&lt;/strong&gt; and &lt;strong&gt;javap 1.8.0_05&lt;/strong&gt; in OSx to compile the examples.&lt;/p&gt;
+&lt;h3 id=&#34;for-the-curious&#34;&gt;For the curious&lt;/h3&gt;
+&lt;p&gt;If you &amp;ldquo;port&amp;rdquo; the previous examples to Scala and take a look to the generated bytecode (of the second example), you will see that the Scala compiler will use the same approach shown before; generating a &lt;strong&gt;StringBuilder (scala.collection.mutable.StringBuilder)&lt;/strong&gt; under the covers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Saying No</title>
+      <link>https://migue.github.io/post/saying-no/</link>
+      <pubDate>Sun, 26 Jan 2014 10:36:10 +0100</pubDate>
+      <guid>https://migue.github.io/post/saying-no/</guid>
+      <description>&lt;p&gt;About two weeks ago I got a surprisingly email in my inbox. An old friend of mine is about to launch a new startup and he asked me to become the CTO of their new company. My first reaction was: Wow!&lt;/p&gt;
+&lt;p&gt;Since this first email we have talked each other (a colleague of him was involved too) quite a few times. They have a good idea, an already working prototype of the product they want to create and enough money to be alive for a while if things don&amp;rsquo;t go as expected. I have thinking a lot about the pros and cons of joining them on their new adventure and I have finally made a decision: I am not joining them.&lt;/p&gt;
+&lt;p&gt;As I have already written at the beginning of the post, their new project has a bunch of attractive things: from a pure technology perspective their product will require some of the newest technologies in order to solve their problem; I would say it is a &amp;ldquo;fun&amp;rdquo; problem from a techical perspective. From a business perspective they already have quite a few good ideas, I am just curious on how they finally will set the main target audience of the product. So, I guess, your next question will be, why aren&amp;rsquo;t you joining them? I have a really short and concise answer: my family.&lt;/p&gt;
+&lt;p&gt;Creating a new startup is a really hard and time consuming task, even with the above-described attenuating. Tons of effort are required to get everything in the right place: finding new clients, traveling, developing the product, hiring people, compose a new team and so on. All of this stuff is really interesting, and, don&amp;rsquo;t take me wrong , I am a pretty hard worker and love my job (all of those who already know me could corroborate that), but, right now, my top priority is to spend as much time as possible with my wife and my son (we are planning to increase the family in the near future (hopefully :)), and I think all this stuff isn&amp;rsquo;t too much compatible with becoming a CTO of a new startup at this moment. Of course, all of this is just my personal opinions based on my own experiences (and my friends&amp;rsquo;).&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t know if I am making the right decision, but I am being consistent with my priorities. I have been completely transparent with them, and I think they have understood my final choice; it has been a considered decision.&lt;/p&gt;
+&lt;p&gt;Besides my personal reasons, to be honest, I am not sure if I would be able to successfully achieve all the things a CTO is supposed to undertake. I am just a mere technical guy who tries to learn as much as possible of all the people around him, and that, every single day, realize that he has no real idea of how computers work :).&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not entirely convinced I have expressed myself correctly because of the language (this is one of the main reasons I switched the blog&amp;rsquo;s language, just to force me and try to improve my skills) but I wanted to write it down and share with all of you. I like to hear about this kind of stories: the reasons why people start a new company, decline a good job offer or cross the whole world looking for new challenges.&lt;/p&gt;
+&lt;p&gt;I am sure my friends are going to succeed on their new adventure. I would wish them luck, but I&amp;rsquo;m completely sure they don&amp;rsquo;t need it.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
