@@ -3,7 +3,7 @@
 
 # The URL of your website.
 # End your URL with a `/` trailing slash, e.g. `https://example.com/`.
-baseurl = "https://migue.github.com/"
+baseurl = "https://migue.github.io/"
 
 # Title of your site
 title = "Just my thoughts"
@@ -227,7 +227,7 @@ defaultContentLanguageInSubdir = false
   [[params.social]]
     icon = "github"
     icon_pack = "fa"
-    link = "//github.com/miguelinlas3"
+    link = "//github.com/migue"
 
 
 # Navigation Links
