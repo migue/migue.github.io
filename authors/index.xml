@@ -5,7 +5,7 @@
     <link>https://migue.github.io/authors/</link>
       <atom:link href="https://migue.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 03 Feb 2020 15:14:30 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Authors</title>
@@ -15,7 +15,7 @@
     <item>
       <title></title>
       <link>https://migue.github.io/authors/admin/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
       <guid>https://migue.github.io/authors/admin/</guid>
       <description>&lt;p&gt;I am a proud dad and husband, software architect, speaker, and writer. Passionate reader, chef aficionado, former surf player and current cyclist and runner.&lt;/p&gt;
 &lt;p&gt;I am unsuccessfully pursuing to move my Phd research forward.&lt;/p&gt;

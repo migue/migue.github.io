@@ -5,12 +5,28 @@
     <link>https://migue.github.io/categories/</link>
       <atom:link href="https://migue.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 09 Sep 2019 22:31:01 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 03 Feb 2020 15:14:30 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Categories</title>
       <link>https://migue.github.io/categories/</link>
     </image>
+    
+    <item>
+      <title>Computer Science</title>
+      <link>https://migue.github.io/categories/computer-science/</link>
+      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
+      <guid>https://migue.github.io/categories/computer-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://migue.github.io/categories/programming/</link>
+      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
+      <guid>https://migue.github.io/categories/programming/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>personal</title>
@@ -25,14 +41,6 @@
       <link>https://migue.github.io/categories/papers-we-love/</link>
       <pubDate>Sat, 05 Jan 2019 10:31:01 +0100</pubDate>
       <guid>https://migue.github.io/categories/papers-we-love/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>https://migue.github.io/categories/programming/</link>
-      <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
-      <guid>https://migue.github.io/categories/programming/</guid>
       <description></description>
     </item>
     

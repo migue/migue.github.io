@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Just my thouhgts</title>
-    <link>https://migue.github.io/authors/admin/</link>
-      <atom:link href="https://migue.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
-    <description>Just my thouhgts</description>
+    <title>Computer Science | Just my thouhgts</title>
+    <link>https://migue.github.io/categories/computer-science/</link>
+      <atom:link href="https://migue.github.io/categories/computer-science/index.xml" rel="self" type="application/rss+xml" />
+    <description>Computer Science</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 03 Feb 2020 15:14:30 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>Just my thouhgts</title>
-      <link>https://migue.github.io/authors/admin/</link>
+      <title>Computer Science</title>
+      <link>https://migue.github.io/categories/computer-science/</link>
     </image>
     
     <item>
