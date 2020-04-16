@@ -5,7 +5,7 @@
     <link>https://migue.github.io/categories/</link>
       <atom:link href="https://migue.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 03 Feb 2020 15:14:30 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 14 Apr 2020 15:14:30 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Categories</title>
@@ -15,15 +15,15 @@
     <item>
       <title>Computer Science</title>
       <link>https://migue.github.io/categories/computer-science/</link>
-      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
+      <pubDate>Tue, 14 Apr 2020 15:14:30 +0100</pubDate>
       <guid>https://migue.github.io/categories/computer-science/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>programming</title>
+      <title>Programming</title>
       <link>https://migue.github.io/categories/programming/</link>
-      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
+      <pubDate>Tue, 14 Apr 2020 15:14:30 +0100</pubDate>
       <guid>https://migue.github.io/categories/programming/</guid>
       <description></description>
     </item>

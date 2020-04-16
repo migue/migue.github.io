@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Miguel Ángel Pastor Olivar">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Writing on the blog about some of the technical stuff I usually enjoy and/or work with is something that’s always in my plans but I never find the right time do it. Due to all this quarantine related stuff, both my sleeping habits and the kid’s are being somehow affected and, well, here I am, staring at a blank page trying to start writing about databases. And, well, since I don’t longer work for an international company I thought it would be a good idea to somehow practice my poor English skills.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/post/quick-tour-influx-storage/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-30238603-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-30238603-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://migue.github.io/post/quick-tour-influx-storage/">
+
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@miguelinlas3">
+  <meta property="twitter:creator" content="@miguelinlas3">
+  
+  <meta property="og:site_name" content="Just my thouhgts">
+  <meta property="og:url" content="https://migue.github.io/post/quick-tour-influx-storage/">
+  <meta property="og:title" content="InfluxDB storage subsystem: an introduction | Just my thouhgts">
+  <meta property="og:description" content="Writing on the blog about some of the technical stuff I usually enjoy and/or work with is something that’s always in my plans but I never find the right time do it. Due to all this quarantine related stuff, both my sleeping habits and the kid’s are being somehow affected and, well, here I am, staring at a blank page trying to start writing about databases. And, well, since I don’t longer work for an international company I thought it would be a good idea to somehow practice my poor English skills."><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
+  <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-04-14T15:14:30&#43;01:00">
+    
+    <meta property="article:modified_time" content="2020-04-14T15:14:30&#43;01:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://migue.github.io/post/quick-tour-influx-storage/"
+  },
+  "headline": "InfluxDB storage subsystem: an introduction",
+  
+  "datePublished": "2020-04-14T15:14:30+01:00",
+  "dateModified": "2020-04-14T15:14:30+01:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Miguel Ángel Pastor Olivar"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Just my thouhgts",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img/https://migue.github.io/"
+    }
+  },
+  "description": "Writing on the blog about some of the technical stuff I usually enjoy and/or work with is something that’s always in my plans but I never find the right time do it. Due to all this quarantine related stuff, both my sleeping habits and the kid’s are being somehow affected and, well, here I am, staring at a blank page trying to start writing about databases. And, well, since I don’t longer work for an international company I thought it would be a good idea to somehow practice my poor English skills."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>InfluxDB storage subsystem: an introduction | Just my thouhgts</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Just my thouhgts</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Just my thouhgts</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>InfluxDB storage subsystem: an introduction</h1>
+
+  
+  <p class="page-subtitle">A short series around the InfluxDB storage subsystem and its most important components</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  
+  <span><a href="/authors/admin/">Miguel Ángel Pastor Olivar</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 14, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/computer-science/">Computer Science</a>, <a href="/categories/programming/">Programming</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Writing on the blog about some of the technical stuff I usually enjoy and/or work with is something that’s always in my plans but I never find the right time do it. Due to all this quarantine related stuff, both my sleeping habits and the kid’s are being somehow affected and, well, here I am, staring at a blank page trying to start writing about databases. And, well, since I don’t longer work for an international company I thought it would be a good idea to somehow practice my poor English skills.</p>
+<p>This time my plan is to write about InfluxDB, a columnar oriented time-series database written in Go, and provide a quick tour of some of the most important characteristics of their storage engine.</p>
+<p>I have been dealing with InfluxDB for a while and I have gone way deeper than I would like to quite a few times but <strong>I am by no means an expert</strong>, so, please, if I say something that’s not completely accurate, forgive me, and please, correct me.</p>
+<p>I’ve dealt with both the OpenSource and the Enterprise versions but everything here is going to be based on the former (to the best of my knowledge the storage engine is the same in both alternatives). The details included later in the post are based on the 1.8.x and 1.7.x branches (I know the 2.0 introduces quite a lot changes but I won’t talk about them here).</p>
+<h1 id="before-getting-started">Before getting started</h1>
+<p>Influx has gone through different storage engines through its short lifetime: LevelDB, BoltDB (not sure if there’s anymore) and, and this is just an educated guess, any of them completely satisfied the requirements that the InfluxDB folks were looking for: large batch deletes, hot backups, high throughput or a good compression performance among many others. So, in order to solve the previous points (it’s not an exhaustive list), they decided to go on their own and write a new storage engine (it&rsquo;s a brave bet).</p>
+<p>Everything I am going to write about here is focused on this storage engine and I have no experience with the Influx versions where the underlying storage engine was LevelDB or BoltDB.</p>
+<h1 id="influxdb-concepts">InfluxDB concepts</h1>
+<p>Before we go into the details of the storage engine let me introduce a few concepts I think all of us should know about.</p>
+<p>Everything starts with a database concept, similar to a traditional RDBMS, which acts as the container of many of the capabilities that Influx provides: user management, retention policies, continuous queries, … Everything related to a database is represented under a folder in the filesystem.</p>
+<p>A <strong>retention policy</strong> describes how long the data is kept around and how many copies of this data are stored in the cluster (for the OpenSource version the replication setting has no effect).</p>
+<p><strong>Measurements</strong> are the “data structure” used to model how the data is stored in Influx and the fields associated with it.</p>
+<p><strong>Fields</strong> represent the actual data value. These are required and, something really important, they are not indexed.</p>
+<p><strong>Tags</strong> represents metadata associated with the aforementioned fields. They are optional, but they are very useful because they are indexed and allow you to perform group by and/or filter operations (you can filter on fields as well, but since they are not indexed, this is not a performant operation).</p>
+<p><strong>Series</strong> are a logical grouping of data defined by a measurement, a set of tags and a field. To me, this is one of the most important concepts that need to be clear while working with InfluxDB, because many of the different concepts revolve around it.</p>
+<p><strong>Shards</strong>  contains the actual encoded and compressed data. They are represented by a TSM file on disk (more on this later). Every shard contains a specific set of series so all the points falling on a given series will be stored in the same shard.</p>
+<p>In order to get your data points inserted into the database, Influx defines a text-based protocol named <strong>line protocol</strong>.</p>
+<p>An example of how a single data point looks like in the <strong>line protocol</strong> and how it maps to the concepts described before is shown in the picture below:</p>
+<p><img src="/img/influx-line-protocol.png" alt="Influx Line Protocol"></p>
+<h1 id="influxdb-storage-engine">InfluxDB storage engine</h1>
+<p>At the beginning of the post, I described some of the features that, per my understanding, the Influx folks were looking for when building their storage engine and how all these requirements led them to their current storage solution.</p>
+<p>Their storage solution is similar to an LSM Tree and, from a high-level perspective, it is composed by:</p>
+<ul>
+<li>A write-ahead log</li>
+<li>A collection of <strong>TSM</strong> (read-only) files where the actual time series data is stored (similar to the SSTables)</li>
+<li>TSI files that serve as the inverted index used to quickly access the information. Prior to this version of the index, the data was held into an in-memory data structure, making it difficult to support high-cardinality scenarios (millions of series).</li>
+</ul>
+<p>Before we move forward, a short note about how I plan to organize the contents. The original idea was to put everything I wanted to write down into a single post but it would be probably a little bit dense so I have decided to split it into 3 different parts:</p>
+<ul>
+<li>The current one with the introduction to Influx, the overview of the storage engine and a quick tour around the WAL component and its cache counterpart.</li>
+<li>The second one will cover the details about the TSM.</li>
+<li>The third one will cover details about the TSI.</li>
+</ul>
+<p>For this post, let’s try to go a little bit deeper into the write ahead log (WAL) and its cache counterpart.</p>
+<h2 id="write-ahead-log-wal">Write ahead log (WAL)</h2>
+<p>The WAL is a write-optimized data structure that allows the writes to be durable and its main goal is to allow the writes to be appended as fast as possible so it is not easily queryable.</p>
+<p>When a new write comes into the system the new points are:</p>
+<ul>
+<li>Stored at an in-memory cache (more about this in the next section).</li>
+<li>Serialized, compressed using Snappy and written to the WAL.</li>
+</ul>
+<p>If we take a look at the 
+<a href="https://github.com/influxdata/influxdb/blob/1.8/tsdb/engine/tsm1/engine.go#L1367" target="_blank" rel="noopener">source code</a>
+ we can see where this actually happens:</p>
+<pre><code class="language-go">// WritePoints writes metadata and point data into the engine.
+// It returns an error if new points are added to an existing key.
+func (e *Engine) WritePoints(points []models.Point) error {
+    ….
+    // first try to write to the cache
+    if err := e.Cache.WriteMulti(values); err != nil {
+        return err
+    }
+ 
+    if e.WALEnabled {
+        if _, err := e.WAL.WriteMulti(values); err != nil {
+            return err
+        }
+    }
+    return seriesErr
+}
+</code></pre>
+<p>Note that we could disable the WAL and, in this case, writes will only exist in the cache and could be lost if a cache snapshot has not happened.</p>
+<p>The format used to describe every one of the entries appended to the WAL follows a type-length-value encoding scheme with a single byte representing the type of the entry being stored (write, delete or a range delete), a 4 byte uint32 representing the length of the compressed block, followed by the actual compressed data block.</p>
+<p><img src="/img/wal-entry-encoding.png" alt="Wal entry encoding"></p>
+<p>Looking again at the 
+<a href="https://github.com/influxdata/influxdb/blob/1.8/tsdb/engine/tsm1/wal.go#L1062" target="_blank" rel="noopener">source code</a>
+ here we can see how the actual writing is performed:</p>
+<pre><code class="language-go">// Write writes entryType and the buffer containing compressed entry data.
+func (w *WALSegmentWriter) Write(entryType WalEntryType, compressed []byte) error {
+    var buf [5]byte
+    buf[0] = byte(entryType)
+    binary.BigEndian.PutUint32(buf[1:5], uint32(len(compressed)))
+ 
+    if _, err := w.bw.Write(buf[:]); err != nil {
+        return err
+    }
+ 
+    if _, err := w.bw.Write(compressed); err != nil {
+        return err
+    }
+ 
+    w.size += len(buf) + len(compressed)
+ 
+    return nil
+}
+</code></pre>
+<h2 id="cache">Cache</h2>
+<p>The cache component is an in-memory data structure that holds a copy of all the points persisted in the WAL. As we’ve already mentioned in the previous section, when a new write comes into the system the new points are stored in this cache.</p>
+<p>The aforementioned points are indexed by the key which is formed by the measurement name, the tag set and the unique field key. If we go back to our previous example where we had a single write coming into the system:</p>
+<pre><code>infrastructure_metrics,server=server-1,container=container-1 cpu_usage=82
+</code></pre>
+<p>The key would be represented by something like this:</p>
+<p><img src="/img/wal-cache-key.png" alt="WAL Cache Key"></p>
+<p>The points stored in the cache are not compressed and an upper bound can be set so we can prevent unexpected out of memory situations (if the upper bound limit is exceeded new writes coming into the system will be rejected) and prevent the database service to be unexpectedly restarted.</p>
+<p>When the number of elements in the cache reaches a certain lower bound (it’s configurable as well) a snapshot of the cache is triggered to a TSM file and the corresponding WAL segment files are removed.</p>
+<p>If we take a quick look to the 
+<a href="https://github.com/influxdata/influxdb/blob/1.8/tsdb/engine/tsm1/engine.go#L1968" target="_blank" rel="noopener">source code</a>
+ we can see the behavior described in the previous paragraph:</p>
+<pre><code class="language-go">// compactCache continually checks if the WAL cache should be written to disk.
+func (e *Engine) compactCache() {
+    t := time.NewTicker(time.Second)
+    defer t.Stop()
+    for {
+        e.mu.RLock()
+        quit := e.snapDone
+        e.mu.RUnlock()
+ 
+        select {
+        case &lt;-quit:
+            return
+ 
+        case &lt;-t.C:
+            e.Cache.UpdateAge()
+            if e.ShouldCompactCache(time.Now()) {
+                start := time.Now()
+                e.traceLogger.Info(&quot;Compacting cache&quot;, zap.String(&quot;path&quot;, e.path))
+                err := e.WriteSnapshot()
+                if err != nil &amp;&amp; err != errCompactionsDisabled {
+                    e.logger.Info(&quot;Error writing snapshot&quot;, zap.Error(err))
+                    atomic.AddInt64(&amp;e.stats.CacheCompactionErrors, 1)
+                } else {
+                    atomic.AddInt64(&amp;e.stats.CacheCompactions, 1)
+                }
+                atomic.AddInt64(&amp;e.stats.CacheCompactionDuration, time.Since(start).Nanoseconds())
+            }
+        }
+    }
+}
+</code></pre>
+<p>When a new read operation is received, the storage engine will merge data from the TSM files with the data stored in the cache (so you can read data that hasn’t been snapshotted into the TSM files yet). At query processing time, a copy of the data is done so any new write coming into the system won’t affect the results of any running query.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>This post has been a short intro to InfluxDB and a brief overview of its storage subsystem. In addition to the previous intros, we’ve covered a few details of the WAL + Cache storage subsystem elements. As I have already mentioned, my idea is to publish two more posts: one of them covering a few details of the TSM part and the other one going through the inner workings of the TSI component.</p>
+<p>Of course, I am aware this is just an introduction, and the devil is in the details, but I do hope this provides you some insights into a few database design concepts and how a concrete database applies them.</p>
+<p>Thanks for reading.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/databases/">databases</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://migue.github.io/post/quick-tour-influx-storage/&amp;text=InfluxDB%20storage%20subsystem:%20an%20introduction" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://migue.github.io/post/quick-tour-influx-storage/&amp;t=InfluxDB%20storage%20subsystem:%20an%20introduction" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=InfluxDB%20storage%20subsystem:%20an%20introduction&amp;body=https://migue.github.io/post/quick-tour-influx-storage/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://migue.github.io/post/quick-tour-influx-storage/&amp;title=InfluxDB%20storage%20subsystem:%20an%20introduction" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=InfluxDB%20storage%20subsystem:%20an%20introduction%20https://migue.github.io/post/quick-tour-influx-storage/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://migue.github.io/post/quick-tour-influx-storage/&amp;title=InfluxDB%20storage%20subsystem:%20an%20introduction" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu3c4fe88a87c761e46dedca30a25b0fc2_333740_270x270_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://migue.github.io/">Miguel Ángel Pastor Olivar</a></h5>
+      <h6 class="card-subtitle">Software Architect</h6>
+      <p class="card-text">I am a proud dad and husband, software architect, speaker, and writer. Passionate reader, chef aficionado, former surf player and current cyclist and runner. I am unsuccessfully pursuing to move my Phd research forward.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:miguelinlas3@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/miguelinlas3" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/migue" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.0630fec5958cb075a5a38f042b3ddde6.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

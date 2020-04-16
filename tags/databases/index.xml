@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Just my thouhgts</title>
-    <link>https://migue.github.io/authors/admin/</link>
-      <atom:link href="https://migue.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
-    <description>Just my thouhgts</description>
+    <title>databases | Just my thouhgts</title>
+    <link>https://migue.github.io/tags/databases/</link>
+      <atom:link href="https://migue.github.io/tags/databases/index.xml" rel="self" type="application/rss+xml" />
+    <description>databases</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 14 Apr 2020 15:14:30 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>Just my thouhgts</title>
-      <link>https://migue.github.io/authors/admin/</link>
+      <title>databases</title>
+      <link>https://migue.github.io/tags/databases/</link>
     </image>
     
     <item>
@@ -151,108 +151,6 @@ func (e *Engine) compactCache() {
 &lt;p&gt;This post has been a short intro to InfluxDB and a brief overview of its storage subsystem. In addition to the previous intros, we’ve covered a few details of the WAL + Cache storage subsystem elements. As I have already mentioned, my idea is to publish two more posts: one of them covering a few details of the TSM part and the other one going through the inner workings of the TSI component.&lt;/p&gt;
 &lt;p&gt;Of course, I am aware this is just an introduction, and the devil is in the details, but I do hope this provides you some insights into a few database design concepts and how a concrete database applies them.&lt;/p&gt;
 &lt;p&gt;Thanks for reading.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Books and Talks</title>
-      <link>https://migue.github.io/post/books-and-talks/</link>
-      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
-      <guid>https://migue.github.io/post/books-and-talks/</guid>
-      <description>&lt;p&gt;I would like to share with you a bunch of the tech talks I have recently watched or some of the latest books I have enjoyed.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: this list is just a set of resources I have gone through more or less &amp;ldquo;recently&amp;rdquo; about a few different topics I use to enjoy. It&amp;rsquo;s not my goal to create a &amp;ldquo;Best Talks/Papers/Whatever List&amp;rdquo;, just wanted to share with you all some of the things I have found interesting lately (all the resources are listed in no specific order).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Disclaimer 2&lt;/strong&gt;: by &amp;ldquo;lately&amp;rdquo; I mean the last ~1.5 years, so probably many of the contents linked below will be quite old for most of you (I have slowed down a lot on my work-related stuff, but this is a different story).&lt;/p&gt;
-&lt;p&gt;If you do like databases, systems engineering, cloud computing, runtimes and low-level programming, this list might contain some pointers to a book/talk you could enjoy.&lt;/p&gt;
-&lt;h2 id=&#34;talks&#34;&gt;Talks&lt;/h2&gt;
-&lt;h3 id=&#34;lets-talk-locks-by-kavya-joshi&#34;&gt;Let&amp;rsquo;s Talk Locks! by Kavya Joshi&lt;/h3&gt;
-&lt;p&gt;An amazing talk about how locks are used at different places (Linux syscalls, Go programming language) and its performance implications.&lt;/p&gt;
-&lt;p&gt;Actually, any talk coming from Kavya is usually wonderful.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.infoq.com/presentations/go-locks/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;ebtree--design-for-a-scheduler-and-use-almost-everywhere-by-andjelko-iharos&#34;&gt;EBtree — Design for a Scheduler and Use (Almost) Everywhere by Andjelko Iharos&lt;/h3&gt;
-&lt;p&gt;This talk goes into the evolution of HAProxy’s internals and how the created the EBTree data structure in order to manage active and suspended tasks within their scheduler (and how they ended up using it almost everywhere)&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.infoq.com/presentations/ebtree-design/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;performance-matters-by-emery-berger&#34;&gt;Performance Matters by Emery Berger&lt;/h3&gt;
-&lt;p&gt;I simply love this talk. Emery goes through many of the different factors that, potentially, can affect performance on modern hardware: memory layout, instruction prefetching, branch prediction, &amp;hellip; and some surprising ones like env variables.&lt;/p&gt;
-&lt;p&gt;During the talk, he presents the &lt;strong&gt;stabilizer&lt;/strong&gt; tool which randomizes programs layouts during runtime and introduced 
-&lt;a href=&#34;https://www.usenix.org/node/196222&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;coz&lt;/a&gt;
-, a causal profiler.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=r-TLSBdHe1A&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;pid-loops-and-the-art-of-keeping-systems-stable-by-colm-maccárthaigh&#34;&gt;PID Loops and the Art of Keeping Systems Stable by Colm MacCárthaigh&lt;/h3&gt;
-&lt;p&gt;I like Colm&amp;rsquo;s talks a lot. In this case, the talk goes through PID loops, control theory and how a bunch of AWS systems apply these design principles.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.infoq.com/presentations/pid-loops/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;structured-concurrency-by-roman-elizarov&#34;&gt;Structured Concurrency by Roman Elizarov&lt;/h3&gt;
-&lt;p&gt;Great talk about the evolution of asynchronous APIS in different programming languages and platforms and how they have applied the structured concurrency concepts to the design of the Kotlin&amp;rsquo;s concurrency libraries.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=Mj5P47F6nJg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;reduce-your-storage-costs-with-transient-replication-and-cheap-quorums-by-alex-petrov&#34;&gt;Reduce your storage costs with Transient Replication and Cheap Quorums by Alex Petrov&lt;/h3&gt;
-&lt;p&gt;Alex talks about 
-&lt;a href=&#34;http://www2.cs.uh.edu/~paris/MYPAPERS/Icdcs86.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Voting With Witnesses&lt;/a&gt;
- a replication schema which is used in Google Spanner and Megastore and has inspired Apache Cassandra&amp;rsquo;s Transient Replication and Cheap Quorums implementation&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=pEtRBid5oeA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;ftrace-where-modifying-a-running-kernel-all-started-by-steven-rostedt&#34;&gt;ftrace: Where modifying a running kernel all started by Steven Rostedt&lt;/h3&gt;
-&lt;p&gt;If you&amp;rsquo;ve ever wondered how tracing works in the Linux kernel you should probably watch it. A highly technical talk but really well executed even an stupid like myself could &lt;em&gt;understand&lt;/em&gt; it.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=93uE_kWWQjs&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;applicable-and-achievable-formal-verification-by-heidy-khlaaf&#34;&gt;Applicable and Achievable Formal Verification by Heidy Khlaaf&lt;/h3&gt;
-&lt;p&gt;Heidy provides a nice overview of a few verification tools and techniques deployed in the safety critical industry and shows how this could be adapted to your systems.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=GIYtzygBgA4&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;correctness-proofs-of-distributed-systems-with-isabellehol-by--martin-kleppmann&#34;&gt;Correctness proofs of distributed systems with Isabelle/HOL by  Martin Kleppmann&lt;/h3&gt;
-&lt;p&gt;An extended version of the talk that Martin did at 
-&lt;a href=&#34;https://www.youtube.com/watch?v=7w4KC6i9Yac&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Strange Loop 2019&lt;/a&gt;
-. He explores how Isabelle can be used to analyze algorithms used in distributed systems, and prove them correct.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=Uav5jWHNghY&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
-&lt;/p&gt;
-&lt;h2 id=&#34;books&#34;&gt;Books&lt;/h2&gt;
-&lt;h3 id=&#34;database-internals-by-alex-petrov&#34;&gt;Database internals by Alex Petrov&lt;/h3&gt;
-&lt;p&gt;Alex has done an amazing job writing this book. You will find different topics: storage engines like BTrees and LSMs, how data is physically stored and the different building blocks involved, distributed systems and database clustering among many others&lt;/p&gt;
-&lt;p&gt;If you like databases and its internals this book is going to be a fun read.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;http://shop.oreilly.com/product/0636920174462.do&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;O&amp;rsquo;Reilly&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;serious-cryptography-by-jean-philippe-aumasson&#34;&gt;Serious Cryptography by Jean-Philippe Aumasson&lt;/h3&gt;
-&lt;p&gt;Another wonderful book. A practical guide to modern encryption that goes through the fundamental mathematical concepts at the heart of cryptography: authenticated encryption, hash functions, block ciphers, and public-key techniques (RSA and elliptic curve cryptography).&lt;/p&gt;
-&lt;p&gt;Totally recommended if you want to learn a little bit more about cryptography, and, even if you&amp;rsquo;re a seasoned practitioner (not my case) I think you can learn a few things.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;http://shop.oreilly.com/product/9781593278267.do&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;O&amp;rsquo;Reilly&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;optimizing-java-by-benjamin-evans-james-gough-and-chris-newland&#34;&gt;Optimizing Java By Benjamin Evans, James Gough, and Chris Newland&lt;/h3&gt;
-&lt;p&gt;One more book I have enjoyed a lot. A practical approach to JVM performance tuning and how to identify and solve performance related issues. The book will help you to understand Java platform&amp;rsquo;s internals (if you&amp;rsquo;re willing to go through it :) )&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;http://shop.oreilly.com/product/0636920042983.do&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;O&amp;rsquo;Reilly&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;efficient-io-with-io_uring&#34;&gt;Efficient IO with io_uring&lt;/h3&gt;
-&lt;p&gt;I wasn&amp;rsquo;t sure where to put this resource; technically this is not a book, nor a paper either. Anyway, this is a gorgeous read about the newest Linux IO interface, io_uring and compare it to the current alternatives.&lt;/p&gt;
-&lt;p&gt;Why this work is being done, how this works, &amp;hellip; IO_URING is a huge step forward in the Linux kernel and this short introduction provides a gentle introduction&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://kernel.dk/io_uring.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IO_URING introduction&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;cloud-native-data-center-networking-by-dinesh-dutt&#34;&gt;Cloud Native Data Center Networking By Dinesh Dutt&lt;/h3&gt;
-&lt;p&gt;A really nice read about how modern cloud native data centers networks work and the steps required to design a datacenter that&amp;rsquo;s reliable and easy to manage. A mix of theory and practice which tries to guide the reader through everything which is needed to create and operate a network infrastructure in a modern datacenter.&lt;/p&gt;
-&lt;p&gt;The book covers many different topics: network disaggregation, routing protocols, network virtualization, &amp;hellip;&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;http://shop.oreilly.com/product/0636920217930.do&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;O&amp;rsquo;Reilly&lt;/a&gt;
-&lt;/p&gt;
-&lt;h3 id=&#34;bpf-performance-tools-linux-system-and-application-observability-by-brendan-gregg&#34;&gt;BPF Performance Tools: Linux System and Application Observability by Brendan Gregg&lt;/h3&gt;
-&lt;p&gt;I am still going through it, but I am enjoying it so much I thought I should include it in this list. A really comprehensive guide about BPF tools, performance engineering, and kernel internals. The book includes tons of examples,tools, &amp;hellip;&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.oreilly.com/library/view/bpf-performance-tools/9780136588870/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;O&amp;rsquo;Reilly&lt;/a&gt;
-&lt;/p&gt;
-&lt;p&gt;My original idea was to include a section with the papers I have recently enjoyed as well, but the post had become way too long that I decided to split it and do a follow-up including the academic papers.&lt;/p&gt;
 </description>
     </item>
     
