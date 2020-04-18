@@ -5,12 +5,126 @@
     <link>https://migue.github.io/authors/admin/</link>
       <atom:link href="https://migue.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>Just my thouhgts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 14 Apr 2020 15:14:30 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 14 Apr 2020 17:14:30 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Just my thouhgts</title>
       <link>https://migue.github.io/authors/admin/</link>
     </image>
+    
+    <item>
+      <title>InfluxDB storage subsystem: the TSM files</title>
+      <link>https://migue.github.io/post/influx-storage-tsm-component/</link>
+      <pubDate>Tue, 14 Apr 2020 17:14:30 +0100</pubDate>
+      <guid>https://migue.github.io/post/influx-storage-tsm-component/</guid>
+      <description>&lt;p&gt;During this entry, we are going through the TSM part of the InfluxDB storage engine: how the contents are organized in the disk, how they are compressed or how they are compacted. This is the second entry of the series about the InfluxDB storage engine started in 
+&lt;a href=&#34;https://migue.github.io/post/quick-tour-influx-storage/&#34;&gt;the previous post&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h1 id=&#34;tsm-files-structure&#34;&gt;TSM files structure&lt;/h1&gt;
+&lt;p&gt;The TSM files are where Influx stores the real data; these files are read-only files and are memory-mapped. If you’re familiar with any database using an LSM Tree variant this concept is very similar to the SSTable concept.&lt;/p&gt;
+&lt;p&gt;Let’s start with the structure of the files and how they are physically stored. At a high level, the structure is shown in the picture below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/influxdb-tsm-file-structure.png&#34; alt=&#34;TSM File Structure&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-header&#34;&gt;The header&lt;/h2&gt;
+&lt;p&gt;The header is a magic number which helps to identify the type of the file (4 bytes) and its version number (1 byte):&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/influx-tsm-file-structure-header.png&#34; alt=&#34;TSM File Structure Header Section&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-blocks&#34;&gt;The blocks&lt;/h2&gt;
+&lt;p&gt;Blocks are sequences of pairs where every pair is composed of a CRC32 checksum and the data that needs to be stored. The diagram below shows how this part is structured:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/influx-tsm-structure-data-blocks.png&#34; alt=&#34;TSM File Structure Blocks Section&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-index&#34;&gt;The index&lt;/h2&gt;
+&lt;p&gt;The index section serves, as its suggest, as the index to the set of blocks in the file and is composed of a sequence of entries lexicographically ordered by key first and then by time. The format of every entry in the previous sequence is shown in the next diagram:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/influx-tsm-structure-index.png&#34; alt=&#34;TSM File Structure Index Section&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;KeyLen&lt;/strong&gt;: represents the length of the key.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Key&lt;/strong&gt;: represents the key itself.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt;: represents the type of the field being stored (float, integer, string or bool).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Count&lt;/strong&gt;: represents the number of blocks in the file.
+For every block in the TSM file, there is a corresponding entry in the index with the following information:&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MinTime&lt;/strong&gt;: minimum time stored in the block&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MaxTime&lt;/strong&gt;: maximum time stored in the block&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Offset&lt;/strong&gt;: the offset into the file where the block is located&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Size&lt;/strong&gt;: the size of the block&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note how this index allows the database to efficiently access all the required blocks. When a key and a date are provided the database knows exactly which file contains the block and where this block is located and how much data needs to be read to retrieve the aforementioned block.&lt;/p&gt;
+&lt;h2 id=&#34;the-footer&#34;&gt;The footer&lt;/h2&gt;
+&lt;p&gt;The last section of the TMS file is the footer that stores the offset where the index starts.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/influx-tsm-structure-footer.png&#34; alt=&#34;TSM File Structure Footer Section&#34;&gt;&lt;/p&gt;
+&lt;p&gt;As we have already mentioned in the previous post, when the cache is full a snapshot is written to the corresponding TSM file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// WriteSnapshot will snapshot the cache and write a new TSM file with its contents, releasing the snapshot when done.
+func (e *Engine) WriteSnapshot() (err error) {
+    ...
+    
+    return e.writeSnapshotAndCommit(log, closedFiles, snapshot)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The previous snippet just highlights where the actual writing process is invoked; you can find more details 
+&lt;a href=&#34;https://github.com/influxdata/influxdb/blob/1.8/tsdb/engine/tsm1/engine.go#L1903&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h1 id=&#34;tsm-file-compression&#34;&gt;TSM File compression&lt;/h1&gt;
+&lt;p&gt;Every data block is actually compressed before being persisted into the disk in order to reduce both IO operations and disk space. The structure of a block is shown below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/influx-tsm-data-block-structure.png&#34; alt=&#34;TSM Data Block Structure&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If you look carefully at the previous picture you can see that timestamps and the actual values are encoded separately, allowing the engine to use timestamp encoding for all the timestamps and the more appropriate encoding for every one of the fields. I think this has been a great decision and the usual compression ratios seem to validate this decision (I’ve seen compression ratios of 1:23, 1:24 in a few differente scenarios).&lt;/p&gt;
+&lt;p&gt;Complementing the timestamps and values encodings every block starts with a 1-byte-header where the four higher bits define the compression type and the four lower bits are there for the encoder in case it needs them. Right after this header, using a variable byte encoding mechanism, the length of the timestamps block is stored.&lt;/p&gt;
+&lt;p&gt;The compression mechanisms for every type of data are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Timestamps&lt;/strong&gt;: an adaptive approach based on the structure of the timestamps to be encoded is used. It’s a combination of delta encoding, scaling and compression using 
+&lt;a href=&#34;https://github.com/jwilder/encoding/blob/master/simple8b/encoding.go&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Simple8b&lt;/a&gt;
+ run-length encoding (falling back to no compression in case it’s needed). You can find more details about this approach in the 
+&lt;a href=&#34;http://www.vldb.org/pvldb/vol8/p1816-teller.pdf?spm=a2c65.11461447.0.0.4a976b213iTmnM&amp;amp;file=p1816-teller.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gorrilla paper&lt;/a&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Floats&lt;/strong&gt;: I think, again, this encoding is based in the aforementioned Gorilla paper. If you’re interested to learn more about it, the paper has a nice explanation about its inner workings.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Integers&lt;/strong&gt;: Two different strategies are used to compress integers depending on the range values of the data that needs to be compressed. As a first step, the values are encoded using [Zig Zag encoding] (&lt;a href=&#34;https://developers.google.com/protocol-buffers/docs/encoding#signed-integers)&#34;&gt;https://developers.google.com/protocol-buffers/docs/encoding#signed-integers)&lt;/a&gt;. If the value is smaller than &lt;code&gt;(1 &amp;lt;&amp;lt; 60) - 1&lt;/code&gt; they are compressed the simple8b algorithm mentioned above and, if they are bigger, they are stored uncompressed. You can see where this decision is made in the next code snippet (extracted from 
+&lt;a href=&#34;https://github.com/influxdata/influxdb/blob/1.8/tsdb/engine/tsm1/batch_integer.go#L74&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;
+):&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;if max &amp;gt; simple8b.MaxValue { // There is an encoded value that&#39;s too big to simple8b encode.
+        // Encode uncompressed.
+        sz := 1 + len(deltas)*8
+        if len(b) &amp;lt; sz &amp;amp;&amp;amp; cap(b) &amp;gt;= sz {
+            b = b[:sz]
+        } else if len(b) &amp;lt; sz {
+            b = append(b, make([]byte, sz-len(b))...)
+        }
+ 
+        // 4 high bits of first byte store the encoding type for the block
+        b[0] = byte(intUncompressed) &amp;lt;&amp;lt; 4
+        for i, v := range deltas {
+            binary.BigEndian.PutUint64(b[1+i*8:1+i*8+8], uint64(v))
+        }
+        return b[:sz], nil
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Booleans&lt;/strong&gt;: they are encoded using a bit packing strategy (each boolean use 1 bit)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Strings&lt;/strong&gt;: they are encoded using 
+&lt;a href=&#34;http://google.github.io/snappy/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Snappy&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;compaction-process&#34;&gt;Compaction process&lt;/h1&gt;
+&lt;p&gt;So far we’ve seen how all our points are physically stored in the disk and the reasoning behind the decision to use such data layout.
+Aiming to optimize the storage of the previous data from the query perspective, Influx continuously runs a compaction process. There’re a few different levels of compaction types&lt;/p&gt;
+&lt;h2 id=&#34;snapshot&#34;&gt;Snapshot&lt;/h2&gt;
+&lt;p&gt;We’ve already talked briefly about this process; The values stored in the Cache and the WAL need to be stored in a TSM file in order to save both memory and disk space. If you remember for the previous post, we’ve already described this process in the previous post.&lt;/p&gt;
+&lt;h2 id=&#34;leveled-compactions&#34;&gt;Leveled compactions&lt;/h2&gt;
+&lt;p&gt;There are 4 different levels of compaction and they occur as the size of the TSM grows. Snapshots are compacted to level-1 files, level-1 files are compacted to level-2 files and so on. When level-4 is reached no further compaction is applied to these files.&lt;/p&gt;
+&lt;p&gt;Going deeper into the inner workings of the leveled compaction process would take a whole separate blog entry so I am going to stop here&lt;/p&gt;
+&lt;h2 id=&#34;index-optimization&#34;&gt;Index optimization&lt;/h2&gt;
+&lt;p&gt;In the scenario where many level-4 TSM files are created, the index becomes larger and the cost of accessing it increases. This optimization tries to split the series across different TSM files, sorting all points for a particular series into the same file.&lt;/p&gt;
+&lt;p&gt;Before this process, a TSM file stores points about most of the series and, after the optimization is executed, each of the new TSM files store a reduced number of series (with very little overlap among them).&lt;/p&gt;
+&lt;h2 id=&#34;full-compactions&#34;&gt;Full compactions&lt;/h2&gt;
+&lt;p&gt;This type of compaction process only runs when a shard has become cold for writes (no new writes are coming into it) or when a delete operation is executed on the shard. This compaction process applies all the techniques used in the leveled compactions and the index optimization process&lt;/p&gt;
+&lt;h1 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h1&gt;
+&lt;p&gt;In this post, I’ve covered a few details about the TSM part of the InfluxDB’s storage engine, going a little bit deeper into some of the concepts introduced in the first post of this series.&lt;/p&gt;
+&lt;p&gt;In the next post, I will try to provide a few details about the TSI files and how this part of the storage subsystem helps Influx to speed up more complex queries.&lt;/p&gt;
+&lt;p&gt;Again, we’ve used InfluxDB as the vehicle to show some of the concepts used for building a database: how the information is organized in the disk, compression, efficiently looking for information, … Of course, this will be dependent on the type of database being built.&lt;/p&gt;
+&lt;p&gt;Thanks a lot for reading! I hope you have enjoyed it as much as I have done writing it.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>InfluxDB storage subsystem: an introduction</title>
