@@ -669,7 +669,9 @@ func (e *Engine) WriteSnapshot() (err error) {
 <p><strong>Floats</strong>: I think, again, this encoding is based in the aforementioned Gorilla paper. If you’re interested to learn more about it, the paper has a nice explanation about its inner workings.</p>
 </li>
 <li>
-<p><strong>Integers</strong>: Two different strategies are used to compress integers depending on the range values of the data that needs to be compressed. As a first step, the values are encoded using [Zig Zag encoding] (<a href="https://developers.google.com/protocol-buffers/docs/encoding#signed-integers)">https://developers.google.com/protocol-buffers/docs/encoding#signed-integers)</a>. If the value is smaller than <code>(1 &lt;&lt; 60) - 1</code> they are compressed the simple8b algorithm mentioned above and, if they are bigger, they are stored uncompressed. You can see where this decision is made in the next code snippet (extracted from 
+<p><strong>Integers</strong>: Two different strategies are used to compress integers depending on the range values of the data that needs to be compressed. As a first step, the values are encoded using 
+<a href="https://developers.google.com/protocol-buffers/docs/encoding#signed-integers" target="_blank" rel="noopener">Zig Zag encoding</a>
+. If the value is smaller than <code>(1 &lt;&lt; 60) - 1</code> they are compressed the simple8b algorithm mentioned above and, if they are bigger, they are stored uncompressed. You can see where this decision is made in the next code snippet (extracted from 
 <a href="https://github.com/influxdata/influxdb/blob/1.8/tsdb/engine/tsm1/batch_integer.go#L74" target="_blank" rel="noopener">here</a>
 ):</p>
 </li>

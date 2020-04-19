@@ -77,7 +77,9 @@ func (e *Engine) WriteSnapshot() (err error) {
 &lt;p&gt;&lt;strong&gt;Floats&lt;/strong&gt;: I think, again, this encoding is based in the aforementioned Gorilla paper. If you’re interested to learn more about it, the paper has a nice explanation about its inner workings.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Integers&lt;/strong&gt;: Two different strategies are used to compress integers depending on the range values of the data that needs to be compressed. As a first step, the values are encoded using [Zig Zag encoding] (&lt;a href=&#34;https://developers.google.com/protocol-buffers/docs/encoding#signed-integers)&#34;&gt;https://developers.google.com/protocol-buffers/docs/encoding#signed-integers)&lt;/a&gt;. If the value is smaller than &lt;code&gt;(1 &amp;lt;&amp;lt; 60) - 1&lt;/code&gt; they are compressed the simple8b algorithm mentioned above and, if they are bigger, they are stored uncompressed. You can see where this decision is made in the next code snippet (extracted from 
+&lt;p&gt;&lt;strong&gt;Integers&lt;/strong&gt;: Two different strategies are used to compress integers depending on the range values of the data that needs to be compressed. As a first step, the values are encoded using 
+&lt;a href=&#34;https://developers.google.com/protocol-buffers/docs/encoding#signed-integers&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zig Zag encoding&lt;/a&gt;
+. If the value is smaller than &lt;code&gt;(1 &amp;lt;&amp;lt; 60) - 1&lt;/code&gt; they are compressed the simple8b algorithm mentioned above and, if they are bigger, they are stored uncompressed. You can see where this decision is made in the next code snippet (extracted from 
 &lt;a href=&#34;https://github.com/influxdata/influxdb/blob/1.8/tsdb/engine/tsm1/batch_integer.go#L74&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;
 ):&lt;/p&gt;
 &lt;/li&gt;
