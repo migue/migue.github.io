@@ -13,6 +13,150 @@
     </image>
     
     <item>
+      <title>InfluxDB storage subsystem: the TSI files</title>
+      <link>https://migue.github.io/post/influx-storage-tsi-component/</link>
+      <pubDate>Wed, 22 Apr 2020 07:35:33 +0200</pubDate>
+      <guid>https://migue.github.io/post/influx-storage-tsi-component/</guid>
+      <description>&lt;p&gt;Final entry on the InfluxDB storage subsystem series. This time I am going to focus on the, relatively new, indexing mechanism that the InfluxDB folks have built into their storage system.&lt;/p&gt;
+&lt;p&gt;If you just arrived here for the first time, you can find some more details about the other major components of the storage system in the previous blog posts of the series: 
+&lt;a href=&#34;https://migue.github.io/post/quick-tour-influx-storage/&#34;&gt;intro and WAL component&lt;/a&gt;
+ and 
+&lt;a href=&#34;https://migue.github.io/post/influx-storage-tsm-component/&#34;&gt;tsm component&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h1 id=&#34;the-origins&#34;&gt;The origins&lt;/h1&gt;
+&lt;p&gt;If you recall from the previous posts, the TSM files have an index that allows the database to determine where a certain time series is located when a seriesKey and a time range are provided.&lt;/p&gt;
+&lt;p&gt;However, what happens when a more complex query is executed? If instead of just providing a series key the user wants to perform a &lt;strong&gt;group by operation&lt;/strong&gt; using some of the tags, how does the database make sure that it can resolve the query with acceptable performance?&lt;/p&gt;
+&lt;p&gt;Seems like an inverted index could help the database to solve the problem, right? Previous to the TSI alternative, InfluxDB had an in-memory inverted index which was built at startup time from the data stored in the TSM files. This approach worked reasonably fine but, what happens when the number of different series starts to grow larger and larger? Is the database able to handle millions of different series in a single machine? The setups I’ve been dealing with are usually in between 10-12 million series and, in a single server with 64G of RAM, I have been struggling with the memory limitations of the in-memory inverted index approach.&lt;/p&gt;
+&lt;p&gt;With the previous limitations in mind and the goal to be able to support hundreds of millions of different series in a single machine, the InfluxDB folks decided to build the TSI index as a replacement for the aforementioned in-memory index. This new index aims to remove the upper bound limit set by the memory consumption and tries to enforce that, as the number of different series grow bigger, they have an imperceptible impact on the startup times of the database.&lt;/p&gt;
+&lt;p&gt;So, with the development of this new type of index, InfluxDB looks like two databases in one: the time series store we’ve already covered in the previous post and the new inverted index we are going to cover during the next sections.&lt;/p&gt;
+&lt;h1 id=&#34;the-tsi-index&#34;&gt;The TSI index&lt;/h1&gt;
+&lt;p&gt;This new data structure moves the index from memory to disk and then these files are memory-mapped, letting the underlying operating system to manage the cache for them. I am curious about the reasoning behind this decision, because, in general, you can have your own cache system and make your own caching decisions based on high-level access patterns that, combined with modern cache techniques like 
+&lt;a href=&#34;https://arxiv.org/abs/1512.00727&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TinyLFU&lt;/a&gt;
+ can get you far ahead. Of course, this second alternative is way more complicated than the memory-mapped one, and probably not worth to invest the required time from your development team (I am just guessing here).&lt;/p&gt;
+&lt;p&gt;This new index is very similar to the TSM engine described in the previous post: there’s a write-ahead log similar to the one we described during the first post of the series or a compaction process which is constantly running and merging index into larger files.&lt;/p&gt;
+&lt;h2 id=&#34;understanding-the-principal-components&#34;&gt;Understanding the principal components&lt;/h2&gt;
+&lt;p&gt;The principal parts of this new index are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Index&lt;/strong&gt;: contains the entire index for a single shard.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Partition&lt;/strong&gt;: contains a sharded partition for a shard&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LogFile&lt;/strong&gt;: contains newly written series as an in-memory index and is persisted as a WAL.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IndexFile&lt;/strong&gt;: contains an immutable, memory-mapped index built from a LogFile or merged from two contiguous index files.
+*&lt;strong&gt;SeriesFile&lt;/strong&gt;: contains a set of all the series in the whole database (this file is shared across all the different shards in the database)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-lifecycle-of-a-write-operation&#34;&gt;The lifecycle of a write operation&lt;/h2&gt;
+&lt;p&gt;When a new write comes into the system the next steps happen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The ids of the series are looked up or added to the &lt;strong&gt;SeriesFile&lt;/strong&gt; in case it doesn’t exist&lt;/li&gt;
+&lt;li&gt;The series is added to the index&lt;/li&gt;
+&lt;li&gt;The series is added to a WAL file and a few different in-memory indexes. Similar to the behavior described in the TSM entry (this process is similar to the process we already described in the first post).&lt;/li&gt;
+&lt;li&gt;The series and name sketches are updated with the series and name values respectively.&lt;/li&gt;
+&lt;li&gt;Once the previous log file grows above a certain threshold (the default is 1MB), a new active log file is created and the previous log file is compacted into an IndexFile.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: the previous sketches serve as an estimator of the series cardinality. They are implemented using a probabilistic data structure named 
+&lt;a href=&#34;https://research.google/pubs/pub40671/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;HyperLog++&lt;/a&gt;
+. The main goal of this data-structure is to estimate the number of different elements in very large sets of data using probabilistic algorithms (probabilistic data-structures are a really nice topic but it’s out of the scope of the post to go deeper on how this internally works).&lt;/p&gt;
+&lt;h2 id=&#34;the-structure-of-the-log-file&#34;&gt;The structure of the log file&lt;/h2&gt;
+&lt;p&gt;The log file is a list of 
+&lt;a href=&#34;https://github.com/influxdata/influxdb/blob/1.8/tsdb/index/tsi1/log_file.go&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LogEntry&lt;/a&gt;
+ objects persisted to disk in sequential order:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// LogFile represents an on-disk write-ahead log file.
+type LogFile struct {
+  mu         sync.RWMutex
+  wg         sync.WaitGroup // ref count
+  id         int            // file sequence identifier
+  data       []byte         // mmap
+  file       *os.File       // writer
+  w          *bufio.Writer  // buffered writer
+  bufferSize int            // The size of the buffer used by the buffered writer
+  nosync     bool           // Disables buffer flushing and file syncing. Useful for offline tooling.
+  buf        []byte         // marshaling buffer
+  keyBuf     []byte
+ 
+  sfile   *tsdb.SeriesFile // series lookup
+  size    int64            // tracks current file size
+  modTime time.Time        // tracks last time write occurred
+ 
+  // In-memory series existence/tombstone sets.
+  seriesIDSet, tombstoneSeriesIDSet *tsdb.SeriesIDSet
+ 
+  // In-memory index.
+  mms logMeasurements
+ 
+  // Filepath to the log file.
+  path string
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There’re a few different entry types that can be stored in the log: &lt;code&gt;AddSeries&lt;/code&gt;,&lt;code&gt;DeleteSeries&lt;/code&gt;,&lt;code&gt;DeleteMeasurement&lt;/code&gt;, &lt;code&gt;DeleteTagKey&lt;/code&gt;, &lt;code&gt;DeleteTagValue&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;the-structure-of-the-tsi-file&#34;&gt;The structure of the TSI file&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;.tsi&lt;/code&gt; files are inmutable files where the data is indexed and persisted to disk and memory mapped. From a high level perspective, the index file has the following sections:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TagBlocks&lt;/strong&gt;: Index of tag values for a single tag key.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MeasurementBlock&lt;/strong&gt;: Index of measurements and their tag keys.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Trailer&lt;/strong&gt;: Offset information for the file and HyperLogLog sketches.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following snippet shows how the different parts of the the &lt;code&gt;tsi&lt;/code&gt; index file are read from the data stored in the disk. I have removed a few lines I didn&amp;rsquo;t consider to be interesting, you can find all the details in the 
+&lt;a href=&#34;https://github.com/influxdata/influxdb/blob/1.8/tsdb/index/tsi1/index_file.go#L168&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;original file&lt;/a&gt;
+&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// UnmarshalBinary opens an index from data.
+// The byte slice is retained so it must be kept open.
+func (f *IndexFile) UnmarshalBinary(data []byte) error {
+	// Ensure magic number exists at the beginning.
+	if len(data) &amp;lt; len(FileSignature) {
+		return io.ErrShortBuffer
+	} else if !bytes.Equal(data[:len(FileSignature)], []byte(FileSignature)) {
+		return ErrInvalidIndexFile
+	}
+
+	// Read index file trailer.
+	t, err := ReadIndexFileTrailer(data)
+	
+
+	// Slice series sketch data.
+	f.sketchData = data[t.SeriesSketch.Offset : t.SeriesSketch.Offset+t.SeriesSketch.Size]
+	f.tSketchData = data[t.TombstoneSeriesSketch.Offset : t.TombstoneSeriesSketch.Offset+t.TombstoneSeriesSketch.Size]
+
+	// Slice series set data.
+	f.seriesIDSetData = data[t.SeriesIDSet.Offset : t.SeriesIDSet.Offset+t.SeriesIDSet.Size]
+	f.tombstoneSeriesIDSetData = data[t.TombstoneSeriesIDSet.Offset : t.TombstoneSeriesIDSet.Offset+t.TombstoneSeriesIDSet.Size]
+
+	// Unmarshal measurement block.
+    if err := f.mblk.UnmarshalBinary(data[t.MeasurementBlock.Offset:][:t.MeasurementBlock.Size]); 
+    
+	// Unmarshal each tag block.
+	f.tblks = make(map[string]*TagBlock)
+	itr := f.mblk.Iterator()
+
+	for m := itr.Next(); m != nil; m = itr.Next() {
+		e := m.(*MeasurementBlockElem)
+
+		// Slice measurement block data.
+		buf := data[e.tagBlock.offset:]
+		buf = buf[:e.tagBlock.size]
+
+		// Unmarshal measurement block.
+		var tblk TagBlock
+		if err := tblk.UnmarshalBinary(buf); err != nil {
+			return err
+		}
+		f.tblks[string(e.name)] = &amp;amp;tblk
+	}
+
+	// Save reference to entire data block.
+	f.data = data
+
+	return nil
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Remember that these files are created from the information stored in the &lt;code&gt;LogFiles&lt;/code&gt;, thanks to the compaction process.&lt;/p&gt;
+&lt;h1 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h1&gt;
+&lt;p&gt;In this post, I’ve covered a few details about the new TSI component of the InfluxDB’s storage engine, trying to explain how this new type of index is organized, how it works and what problems try to solve.&lt;/p&gt;
+&lt;p&gt;This is the last post of the InfluxDB storage series. My goal with this series has been to share with you some of the details of how a database internally works (using Influx as the main vehicle to explain the concepts) and some of the different elements that can be found at many different databases (storage formats, write-ahead logs, indexes, …)&lt;/p&gt;
+&lt;p&gt;I hope you have enjoyed the whole series (I would like to apologize for my poor English skills). It’s been fun to be back in the blog again and write about something I do enjoy a lot (databases) and, who knows, maybe I will be able to write about any other topic I do enjoy in the near future.&lt;/p&gt;
+&lt;p&gt;See you on the Internet!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>InfluxDB storage subsystem: the TSM files</title>
       <link>https://migue.github.io/post/influx-storage-tsm-component/</link>
       <pubDate>Tue, 14 Apr 2020 17:14:30 +0100</pubDate>
