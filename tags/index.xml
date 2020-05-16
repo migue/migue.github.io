@@ -5,7 +5,7 @@
     <link>https://migue.github.io/tags/</link>
       <atom:link href="https://migue.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 22 Apr 2020 07:35:33 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 16 May 2020 15:14:30 +0200</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Tags</title>
@@ -13,10 +13,34 @@
     </image>
     
     <item>
+      <title>concurrency</title>
+      <link>https://migue.github.io/tags/concurrency/</link>
+      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
+      <guid>https://migue.github.io/tags/concurrency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>databases</title>
       <link>https://migue.github.io/tags/databases/</link>
-      <pubDate>Wed, 22 Apr 2020 07:35:33 +0200</pubDate>
+      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
       <guid>https://migue.github.io/tags/databases/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>formal methods</title>
+      <link>https://migue.github.io/tags/formal-methods/</link>
+      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
+      <guid>https://migue.github.io/tags/formal-methods/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming languages</title>
+      <link>https://migue.github.io/tags/programming-languages/</link>
+      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
+      <guid>https://migue.github.io/tags/programming-languages/</guid>
       <description></description>
     </item>
     
