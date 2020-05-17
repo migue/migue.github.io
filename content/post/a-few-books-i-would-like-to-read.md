@@ -75,7 +75,7 @@ A few people have recommended it and I would like to give it a try at some point
 ## [Programming language pragmatics. 4th edition](https://www.elsevier.com/books/programming-language-pragmatics/unknown/978-0-12-410409-9)
 Compilers and managed runtimes are other topics that really fascinate me.
 
-I cannot remember how has recommended this book but seems to provide an extensive and detailed guide about the concepts and fundamentals behind the programming language design with an emphasis on the fundamental tradeoffs that continue to drive software development.
+I cannot remember who has recommended this book but seems to provide an extensive and detailed guide about the concepts and fundamentals behind the programming language design with an emphasis on the fundamental tradeoffs that continue to drive software development.
 
 ## [The realm of Racket](https://www.realmofracket.com/)
 
