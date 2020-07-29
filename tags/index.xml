@@ -5,92 +5,12 @@
     <link>https://migue.github.io/tags/</link>
       <atom:link href="https://migue.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 16 May 2020 15:14:30 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jul 2020 11:14:30 +0200</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Tags</title>
       <link>https://migue.github.io/tags/</link>
     </image>
-    
-    <item>
-      <title>concurrency</title>
-      <link>https://migue.github.io/tags/concurrency/</link>
-      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
-      <guid>https://migue.github.io/tags/concurrency/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>databases</title>
-      <link>https://migue.github.io/tags/databases/</link>
-      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
-      <guid>https://migue.github.io/tags/databases/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>formal methods</title>
-      <link>https://migue.github.io/tags/formal-methods/</link>
-      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
-      <guid>https://migue.github.io/tags/formal-methods/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming languages</title>
-      <link>https://migue.github.io/tags/programming-languages/</link>
-      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
-      <guid>https://migue.github.io/tags/programming-languages/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>books</title>
-      <link>https://migue.github.io/tags/books/</link>
-      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
-      <guid>https://migue.github.io/tags/books/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>talks</title>
-      <link>https://migue.github.io/tags/talks/</link>
-      <pubDate>Mon, 03 Feb 2020 15:14:30 +0100</pubDate>
-      <guid>https://migue.github.io/tags/talks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>news</title>
-      <link>https://migue.github.io/tags/news/</link>
-      <pubDate>Mon, 09 Sep 2019 22:31:01 +0100</pubDate>
-      <guid>https://migue.github.io/tags/news/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>compilers</title>
-      <link>https://migue.github.io/tags/compilers/</link>
-      <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
-      <guid>https://migue.github.io/tags/compilers/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>jvm</title>
-      <link>https://migue.github.io/tags/jvm/</link>
-      <pubDate>Mon, 21 Apr 2014 22:29:06 +0100</pubDate>
-      <guid>https://migue.github.io/tags/jvm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>jobs</title>
-      <link>https://migue.github.io/tags/jobs/</link>
-      <pubDate>Sun, 26 Jan 2014 10:36:10 +0100</pubDate>
-      <guid>https://migue.github.io/tags/jobs/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

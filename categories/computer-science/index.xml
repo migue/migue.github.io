@@ -5,12 +5,132 @@
     <link>https://migue.github.io/categories/computer-science/</link>
       <atom:link href="https://migue.github.io/categories/computer-science/index.xml" rel="self" type="application/rss+xml" />
     <description>Computer Science</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 16 May 2020 15:14:30 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jul 2020 11:14:30 +0200</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Computer Science</title>
       <link>https://migue.github.io/categories/computer-science/</link>
     </image>
+    
+    <item>
+      <title>InfluxDB: building your own clustering</title>
+      <link>https://migue.github.io/post/influx-clustering-kafka-based/</link>
+      <pubDate>Wed, 29 Jul 2020 11:14:30 +0200</pubDate>
+      <guid>https://migue.github.io/post/influx-clustering-kafka-based/</guid>
+      <description>&lt;p&gt;A while ago I published a short 
+&lt;a href=&#34;https://twitter.com/miguelinlas3/status/1158768734372278273&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Twitter thread&lt;/a&gt;
+ explaining a few of the problems I had run into while running their [enterprise] clustering solution; it&amp;rsquo;s been quite a painful process and I would like to write down the alternative architecture I ended up with while looking for improvements.&lt;/p&gt;
+&lt;h1 id=&#34;the-original-scenario&#34;&gt;The original scenario&lt;/h1&gt;
+&lt;p&gt;The original scenario I was working at was composed of a cluster of Go API servers backed by an InfluxDB database. Original service requirements demanded to deploy a fault-tolerant datastore so that&amp;rsquo;s the reason an InfluxDB cluster was put in place.&lt;/p&gt;
+&lt;p&gt;A general overview of our current deployment architecture is depicted below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/influxdb-clustering.webp&#34; alt=&#34;Influx current cluster architecture&#34;&gt;&lt;/p&gt;
+&lt;p&gt;This clustering solution has 2 different parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Control Plane&lt;/strong&gt;: This comprises 3 meta nodes that implement the 
+&lt;a href=&#34;https://raft.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Raft protocol&lt;/a&gt;
+ and make sure that all the cluster metadata information is consistent. This control plane provides the ability to add/remove nodes from the cluster, move shards around among many other different things.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Plane&lt;/strong&gt;: This part of the system comprises 2 data nodes and contains the data itself. These nodes are responsible for handling both write and read queries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-problems&#34;&gt;The problems&lt;/h1&gt;
+&lt;p&gt;The clustering solution described in the previous section is not included in the Influx OSS version so that&amp;rsquo;s the reason the client had purchased a commercial license which allowed us to deploy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;A three-node control plane&lt;/strong&gt;. This is not a real limitation of the license; we could deploy more meta nodes in case we needed it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A two-node data plane&lt;/strong&gt;. Here, with the existing licenses, we can &lt;strong&gt;only&lt;/strong&gt; deploy 2 data nodes where each of them had 8 cores.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The aforementioned licensing model imposed us a set of restrictions which, basically, didn&amp;rsquo;t allow us to &amp;ldquo;easily&amp;rdquo; scale [up or out] the existing cluster. I had to go through the whole license negotiation cycle at $client: get the budget, talk to a few different departments, make sure everyone was on the same page,&amp;hellip; Of course, this has nothing to do with the Influx database tech not even with InfluxData, the company selling the clustering capabilities, but I wanted to put on top of the table all the different factors that influenced the set of changes described later.&lt;/p&gt;
+&lt;p&gt;The previous reasons were not the only ones, of course; from a mere technical perspective a few different problems arose:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;At the very beginning, before the movement towards their TSI index approach, the database process was restarted twice-thrice a day due to the high memory pressure created by their in-memory inverted index implementation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The performance on the read side was annoying: +2 minutes for queries running through an hour of data grouping 2-3 different tags, long GC times while the previous queries were executed, &amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The Hinted Handoff mechanism could bring the whole cluster down in a few minutes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The anti-entropy service was a complete nightmare: it was enabled by default and it detected inconsistencies every time it was run, creating tons of pressure in the IO subsystem (and never correcting them).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The support service was unexpectedly bad: a long time to get a response back, a complete lack of knowledge about the systems they were supposed to be supporting. Sadly I had to go through the source code quite a few times, looking for explanations (for the commercial part the source wasn&amp;rsquo;t available so dealing with some of the aforementioned problems was even more complicated).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Taking into account all the previous considerations and the new set of changes (we&amp;rsquo;ll talk about them later on) that were about to be put in place into the whole system, I did consider that the price we were paying for this was not worth at all.&lt;/p&gt;
+&lt;p&gt;We were introducing Kafka as the backbone of our system so, why don&amp;rsquo;t take advantage of it and try to solve the clustering problem using a different approach?&lt;/p&gt;
+&lt;h1 id=&#34;a-different-approach-a-write-ahead-log-wal-based-on-kafka&#34;&gt;A different approach: a write-ahead log (WAL) based on Kafka&lt;/h1&gt;
+&lt;p&gt;A write-ahead log (WAL) is a very common practice used in many databases, including time-series databases. Very briefly, a WAL is an append-only file where the different actions that need to be performed in the database are persisted. Two of the most important advantages that a WAL provides are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Durability&lt;/strong&gt;. Persisting actions in a WAL ensures that those actions will be exected even if the database crashes. Logging the actions before making changes to the different in-memory data structures implies that actions could be recorded and reapplied.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Atomicity&lt;/strong&gt;. If a server crashes midway executing various actions, the database can look at the WAL to find where it left off and finish the job.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some drawbacks of the WAL approach are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Multitenancy&lt;/strong&gt;. Since the WAL is running in-process we are limited to the amount of memory available in the system, making it harder to build a proper multi-tenant solution.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Durability&lt;/strong&gt;. There is no replication, so, if a disk dies, we lose the data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Trying to solve the aforementioned shortcomings and to provide the right mechanisms to horizontally scale our existing cluster, the proposal was to use Kafka as a distributed WAL.&lt;/p&gt;
+&lt;h2 id=&#34;the-requirements&#34;&gt;The requirements&lt;/h2&gt;
+&lt;p&gt;The set of requirements we were trying to satisfy were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Multi-tenant&lt;/strong&gt;. Properly handling of multiple tenants.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Elasticity&lt;/strong&gt;. The storage tier is horizontally scalable.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integrity&lt;/strong&gt;. Data integrity should be preserved even in the presence of failures.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tolerant&lt;/strong&gt;. It should be easy to replace nodes within the storage tier when it was needed (failure, deployment, etc).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-architectural-basis&#34;&gt;The architectural basis&lt;/h2&gt;
+&lt;p&gt;The architecture is based on a fault-tolerant cluster built using Apache Kafka (because it was already a part of the overall system). A high-level overview of the new proposed architecture is depicted below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://migue.github.io/img/InfluxClusterKafkaBased.svg&#34; alt=&#34;Influx cluster architecture based on Kafka&#34;&gt;&lt;/p&gt;
+&lt;p&gt;In this new proposed architecture, Kafka performs the function of a highly reliable and highly efficient WAL buffer for persisting time-series records that will be finally persisted into an InfluxDB instance(s).&lt;/p&gt;
+&lt;p&gt;Points will be written to a Kafka topic and this topic will replicate the data 3 times. Therefore, the loss of one Kafka broker node does not result in the loss of the topic’s data.&lt;/p&gt;
+&lt;p&gt;The 
+&lt;a href=&#34;#influx-relay-implementation&#34;&gt;Influx Relay implementation&lt;/a&gt;
+ will read data from the aforementioned topic and will push the data into the InfluxDB nodes.&lt;/p&gt;
+&lt;p&gt;The load balancing layer is shown as a separate layer but it could be implemented in the consumer itself (in this case the previous Go endpoints are the only InfluxDB consumers) or just using an external load balancer (the current solution use an elastic load balancer provided by AWS).&lt;/p&gt;
+&lt;p&gt;The upcoming sections will go deeper into the details of the previous components.&lt;/p&gt;
+&lt;h2 id=&#34;influx-relay-implementation&#34;&gt;Influx Relay implementation&lt;/h2&gt;
+&lt;p&gt;The major responsibility of this new component is to read the data points from the Kafka topic and insert them into the InfluxDB node. It&amp;rsquo;s important to guarantee that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The data points are replicated across all the InfluxDB nodes in the cluster.&lt;/li&gt;
+&lt;li&gt;Data retrieved from the Kafka partition is batched before it&amp;rsquo;s inserted into an Influx node in order to maximize the write-throughput.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An &lt;code&gt;Influx-Relay&lt;/code&gt; instance needs to be deployed for every Influx node in the cluster. Every &lt;code&gt;Influx-Relay&lt;/code&gt; instance will use its own Kafka consumer group, so, for example, if we want to deploy a 2 nodes Influx cluster (&lt;code&gt;influx-node-0&lt;/code&gt; and &lt;code&gt;influx-node-1&lt;/code&gt;) we will need to deploy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;influx-relay-0&lt;/code&gt; process using the &lt;code&gt;influx-node-0-consumer-group&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;influx-relay-1&lt;/code&gt; process using the &lt;code&gt;influx-node-1-consumer-group&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This new solution ensures that the data will be &lt;strong&gt;eventually&lt;/strong&gt; stored in all the Influx nodes. This means that, at some point in time, different nodes will potentially return different results depending on how far behind the node&amp;rsquo;s &lt;code&gt;Influx-Relay&lt;/code&gt; counterpart is; this is totally acceptable due to the nature of the system we are building and it makes no difference with our current approach (our existing InfluxDB clustering approach would allow us to change this and provide stronger consistency at the expense of increasing the latency).&lt;/p&gt;
+&lt;h2 id=&#34;failure-scenarios&#34;&gt;Failure scenarios&lt;/h2&gt;
+&lt;p&gt;In the case of an Influx node failure, the other nodes will continue working independently and the data will continue to be delivered to them. Once the node is recovered, it will need to catch up in order to synchronize with the rest of the cluster nodes.&lt;/p&gt;
+&lt;p&gt;The synchronization protocol taking care of this process is something like the following one:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When a node goes down it’s removed (manually or automatically) from the load balancing layer, making it unavailable for the consumers.&lt;/li&gt;
+&lt;li&gt;Once the problem is fixed the &lt;code&gt;influx-relay&lt;/code&gt; process will, eventually, catch up with the rest of the members of the cluster&lt;/li&gt;
+&lt;li&gt;At the time the synchronization is done and the node is up to date we could add it back to the load balancing layer, and make it available to the query side of the system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In a catastrophic scenario were, for example, a complete InfluxDB node is lost we can rsync the contents from an existing node and, after it’s done, start replaying from Kafka.&lt;/p&gt;
+&lt;h2 id=&#34;sharding&#34;&gt;Sharding&lt;/h2&gt;
+&lt;p&gt;The solution proposed in the previous paragraphs described a single topic with all the metrics and a set of process (one per Influx node) storing the data.&lt;/p&gt;
+&lt;p&gt;One of the big benefits of the proposed architecture is that it allows us to scale based on data sharding, splitting our datasets into disjoint groups.&lt;/p&gt;
+&lt;p&gt;For example, one potential scenario would be to shard our data based on the accounts of the system, so, we would have:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A new topic for the account we want to split.&lt;/li&gt;
+&lt;li&gt;A new set of Influx nodes (at least two).&lt;/li&gt;
+&lt;li&gt;A new set of &lt;code&gt;Influx-Relay&lt;/code&gt; processes that will read from the new topic and will store the data of this namespace in the new Influx cluster.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the load balancing layer, we will need to make sure that the queries for this account are directed to the proper InfluxDB instances.&lt;/p&gt;
+&lt;p&gt;But using the accounts is non the only alternative we have; we could use different alternatives to split the data. As an example, let&amp;rsquo;s imagine we have a single account where the number of series is so huge that doesn&amp;rsquo;t fit into a single database (remember that all the nodes in the cluster are identical). We could use a hash function (whatever we consider) to map our data to different Kafka partitions and deploy a new pair of Influx data nodes an &lt;code&gt;Influx-Relay&lt;/code&gt; processes for every potential partition.&lt;/p&gt;
+&lt;p&gt;Now, in the load balancing layer, we would need to implement the same sharding logic we have implemented at write time, so we can redirect the queries to the corresponding Influx nodes.&lt;/p&gt;
+&lt;h2 id=&#34;limitations&#34;&gt;Limitations&lt;/h2&gt;
+&lt;p&gt;One of the main limitations of this proposed architecture could be at the read side, with queries that need to touch different shards. In these scenarios, the load balancing layer would need to be much smarter than the alternative proposed here and, for a single query, determine the set of shards which needs to be retrieved, execute all the required queries and compose the result that needs to be sent back to the consumer.&lt;/p&gt;
+&lt;p&gt;And not only that, if you want your writes to be highly consistent this is not probably a solution for you (it could be evolved but it was out of the initial scope since it wasn’t required at all).&lt;/p&gt;
+&lt;h1 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: I have already shared all the contents included in this post with a few of the Influx folks. This doesn’t pretend to be a rant about the InfluxDB company at all; just wanted to share with you, very briefly, my experience building and running this [alternative] clustering system in case it could be useful for anyone.&lt;/p&gt;
+&lt;p&gt;The proposed architecture solved the problem faced here from both a technical and non-technical perspective and it’s, by no means, a general solution. The fact that Kafka was already deployed into the overall system simplified this a lot, it’s not that we had to introduce and operate a new piece of software.&lt;/p&gt;
+&lt;p&gt;With this new alternative in place, the problem of scaling up or out has been simplified quite a bit and can be done in a few minutes (avoiding all the bureaucracy and related stuff at $company).&lt;/p&gt;
+&lt;p&gt;One extra benefit is the fact that this new solution reduces the number of elements we need to manage: there’s no need to set up and operate a separate control plane and there’s no need to worry about communications across the different data nodes.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A few books I would like to read</title>

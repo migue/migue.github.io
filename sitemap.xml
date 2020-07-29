@@ -4,26 +4,61 @@
   
   <url>
     <loc>https://migue.github.io/authors/admin/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/a-few-books-i-would-like-to-read/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://migue.github.io/authors/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://migue.github.io/categories/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://migue.github.io/categories/computer-science/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/tags/databases/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/categories/distributed-systems/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/post/influx-clustering-kafka-based/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/tags/kafka/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/categories/programming/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/tags/</loc>
+    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://migue.github.io/post/a-few-books-i-would-like-to-read/</loc>
     <lastmod>2020-05-16T15:14:30+02:00</lastmod>
   </url>
   
@@ -33,32 +68,12 @@
   </url>
   
   <url>
-    <loc>https://migue.github.io/tags/databases/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://migue.github.io/tags/formal-methods/</loc>
     <lastmod>2020-05-16T15:14:30+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://migue.github.io/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/categories/programming/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://migue.github.io/tags/programming-languages/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/</loc>
     <lastmod>2020-05-16T15:14:30+02:00</lastmod>
   </url>
   
