@@ -5,12 +5,71 @@
     <link>https://migue.github.io/authors/admin/</link>
       <atom:link href="https://migue.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>Just my thouhgts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jul 2020 11:14:30 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2020 22:53:30 +0200</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Just my thouhgts</title>
       <link>https://migue.github.io/authors/admin/</link>
     </image>
+    
+    <item>
+      <title>Formal methods introduction (I)</title>
+      <link>https://migue.github.io/post/formal-methods-intro/</link>
+      <pubDate>Wed, 12 Aug 2020 22:53:30 +0200</pubDate>
+      <guid>https://migue.github.io/post/formal-methods-intro/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply [some] of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho).&lt;/p&gt;
+&lt;p&gt;I would like to start with a question: &lt;strong&gt;how do we know that a program we are writing is correct or no?&lt;/strong&gt; I guess the most probable answer for many of us would be &lt;strong&gt;testing&lt;/strong&gt;. We think about many different input cases for our program as we can, write them down and execute our code hoping we can find as many bugs as possible. Of course, there could be a set of inputs we haven’t thought about which cause or program to fail and/or show unexpected behavior. Under this model, we could probably include some other techniques like peer-reviewing or doing source code static analysis.&lt;/p&gt;
+&lt;p&gt;Trying to extend the testing approach and make it more reliable we have the &lt;strong&gt;property based testing/fuzzing&lt;/strong&gt; approach. In this case, the general idea is to generate [tons] of random inputs according to a set of patterns and check that a concrete property holds against all the generated cases, broadening the scope of the set of inputs we are passing to the program under testing.&lt;/p&gt;
+&lt;p&gt;If we try to expand the previous concepts a little bit we get into the &lt;strong&gt;model checking&lt;/strong&gt; world. In this case, we need to define, in a formal and abstract way, what our program/design is doing and the model checker will try to explore all the potential states that our design might ever enter at the time it checks that certain correctness properties hold on every one of the previous states, providing a counterexample in the cases where this is not true. Under this category, we have tools like 
+&lt;a href=&#34;https://lamport.azurewebsites.net/tla/tla.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TLA+&lt;/a&gt;
+ and 
+&lt;a href=&#34;https://alloytools.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alloy&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;The next sections of this post will be devoted to the model-checking process.&lt;/p&gt;
+&lt;p&gt;One of the major drawbacks of the model checking approach is the state-explosion problem (the number of potential states our design might enter is way bigger than the available memory) but we would like to formally verify our design even if the set of the states is “infinite”. At this side of the spectrum, we have the formal proof approach, which, personally, I find a bit intimidating (we will talk about it in a future post). Under this category, we have tools like 
+&lt;a href=&#34;https://isabelle.in.tum.de/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Isabelle&lt;/a&gt;
+ or 
+&lt;a href=&#34;https://coq.inria.fr/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Coq&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h1 id=&#34;model-checking&#34;&gt;Model checking&lt;/h1&gt;
+&lt;p&gt;I like to think about formal methods like “the applied maths for modeling and analyzing software or hardware systems”: they aim to establish system correctness with mathematical rigor. Entities like IEC (International Electrotechnical Commission), ESA (European Space Agency) or the NASA (National Aeronautics and Space administration) highly recommend the use of formal verification techniques.&lt;/p&gt;
+&lt;p&gt;Model-based techniques are based on a formal, precise, and unambiguous definition of the system behavior. In the particular case of model checking, once the model is defined, and using a brute-force approach, the checker tries to explore all the possible system states.&lt;/p&gt;
+&lt;p&gt;One thing I have found particularly useful is that even before running any kind of verification, trying to accurately describe the model has helped me a lot to discover incompleteness and inconsistencies that are usually found at a much later stage of the design.&lt;/p&gt;
+&lt;h2 id=&#34;the-process&#34;&gt;The process&lt;/h2&gt;
+&lt;p&gt;Trying to apply a model checking technique to a particular design could be summarized in the next steps (of course, this is how it works for me):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Modeling the system&lt;/strong&gt;: in this phase, we define the model using the language of the model checker, perform a few simulations just to do a quick sanity check, and make sure we’re on the right track and formalize the set of properties that need to be validated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Running our model&lt;/strong&gt;: run the model checker in order to validate if the previous properties we have defined hold true in all the potential states our design might enter&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analysis&lt;/strong&gt;: Are the previous properties satisfied? Have they been violated? If the checker finds that a certain property has been violated it will provide a counterexample which will help us to refine our design, model definition, or property. It could be possible that we run out of memory because the set of potential states is humungous and, in this case, we would need to reduce them and try again.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;strengths-and-weakness&#34;&gt;Strengths and weakness&lt;/h2&gt;
+&lt;p&gt;As with any other tool we usually use, the model checking techniques present a set of strengths and weakness I would like to highlight:&lt;/p&gt;
+&lt;h3 id=&#34;the-main-strengths-of-model-checking-are&#34;&gt;The main strengths of model checking are:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;It provides a general verification approach we can apply to a wide range of domains.&lt;/li&gt;
+&lt;li&gt;Partial verification support: the properties can be checked individually.&lt;/li&gt;
+&lt;li&gt;Diagnosis information is provided in case a property is invalidated.&lt;/li&gt;
+&lt;li&gt;Sound mathematical underpinning: it’s based on graph algorithm theory, data structures, and logic.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;the-main-weakness-of-model-checking-are&#34;&gt;The main weakness of model checking are:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;It’s not really suitable for data-intensive applications because data usually range over infinite domains.&lt;/li&gt;
+&lt;li&gt;There’s no completeness guarantees; it only checks for stated requirements.&lt;/li&gt;
+&lt;li&gt;The verification is applied to the system model, and not the system itself.&lt;/li&gt;
+&lt;li&gt;It suffers from the state-space explosion problem (despite all the methods that have been developed lately)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;We usually spend way more time on verification than construction when we are building complex systems (hardware or software). I firmly believe than formal methods offer a huge potential to provide more effective verification mechanisms that provide more robust results and reduce the time spent on the process. In the particular case of model checking, in my experience, it provides an effective technique to expose potential errors in our designs.&lt;/p&gt;
+&lt;p&gt;I had originally planned to provide a short example explaining how to use Alloy to formally verify a design but I think the post has become long enough so I will write about it in a future entry.&lt;/p&gt;
+&lt;p&gt;Thanks a lot for reading!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>InfluxDB: building your own clustering</title>
