@@ -1,0 +1,890 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://migue.github.io/kube-intro/containers/running-docker-apps/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Runnig applications with Docker - Kubernetes introduction</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#running-a-container" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Kubernetes introduction" class="md-header__button md-logo" aria-label="Kubernetes introduction" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kubernetes introduction
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Runnig applications with Docker
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Kubernetes introduction" class="md-nav__button md-logo" aria-label="Kubernetes introduction" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Kubernetes introduction
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../intro/" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Containers" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Containers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../building-docker-apps/" class="md-nav__link">
+        Building applications with Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Runnig applications with Docker
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploying/" class="md-nav__link">
+        Deploying a Kubernetes cluster
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Deploying our application
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deploying our application" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying our application
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pods/" class="md-nav__link">
+        Pods
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/" class="md-nav__link">
+        Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../load-balancing/" class="md-nav__link">
+        Load balancing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../replication/" class="md-nav__link">
+        Replication
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="running-a-container">Running a container</h1>
+<p>Let's use the <code>Docker</code> command-line tool to get familar with how to run our containers. As we will learn later during the course, Kubernetes uses a daemon on each node (<code>kubelet</code>) to launch the containers, but using the command line will make our first steps simpler.</p>
+<h1 id="running-our-contacts-application">Running our contacts application</h1>
+<p>If you remember from our previous section, we created a Docker image that bundled our contacts application. Let's try to get a running version of our application.</p>
+<h2 id="running-a-mysql-dependency">Running a MySQL dependency</h2>
+<p>Our contacts application uses MySQL as the datastore to store the contacts, so we will need a running database if we want our contacts application to work as expected.</p>
+<p>If you recall from our previous section, we mentioned that one of the main benefits of Docker was the ability to share the images we build across all the Docker users, so, let's benefit from this ... Go to your console, to the contacts application folder, and type something similar to:</p>
+<div class="highlight"><pre><span></span><code><span class="go">&gt; docker run \</span>
+<span class="go">--rm \</span>
+<span class="go">--detach \</span>
+<span class="go">--name=mysql-contacts-database \</span>
+<span class="go">--env=&quot;MYSQL_ROOT_PASSWORD=test&quot; \</span>
+<span class="go">--publish 3306:3306 \</span>
+<span class="go">--volume=$(pwd)/database:/docker-entrypoint-initdb.d \</span>
+<span class="go">mysql:8 mysqld --default-authentication-plugin=mysql_native_password</span>
+</code></pre></div>
+<p>The previous command will run a MySQL container, and will execute all the SQL scripts present in the database folder (note we're mapping our local folder <code>database</code> to the <code>/docker-entrypoint-initdb.d</code> in the running container). Now, we can list the running containers:</p>
+<div class="highlight"><pre><span></span><code><span class="go">➜  contacts docker ps -a</span>
+<span class="go">CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                               NAMES</span>
+<span class="go">e7cad8beda4f   mysql:8   &quot;docker-entrypoint.s…&quot;   About a minute ago   Up About a minute   0.0.0.0:3306-&gt;3306/tcp, 33060/tcp   mysql-contacts-database</span>
+</code></pre></div>
+<p>And we can even run a terminal into the newly created container and check that the database is running and our database has been created:</p>
+<div class="highlight"><pre><span></span><code><span class="go">➜  contacts docker exec -it e7cad8beda4f /bin/bash</span>
+<span class="gp">root@e7cad8beda4f:/# </span>mysql -p
+<span class="go">Enter password: </span>
+<span class="go">Welcome to the MySQL monitor.  Commands end with ; or \g.</span>
+<span class="go">Your MySQL connection id is 9</span>
+<span class="go">Server version: 8.0.27 MySQL Community Server - GPL</span>
+
+<span class="go">Copyright (c) 2000, 2021, Oracle and/or its affiliates.</span>
+
+<span class="go">Oracle is a registered trademark of Oracle Corporation and/or its</span>
+<span class="go">affiliates. Other names may be trademarks of their respective</span>
+<span class="go">owners.</span>
+
+<span class="go">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span>
+
+<span class="go">mysql&gt; use contacts;</span>
+<span class="go">Reading table information for completion of table and column names</span>
+<span class="go">You can turn off this feature to get a quicker startup with -A</span>
+
+<span class="go">Database changed</span>
+<span class="go">mysql&gt; show tables;</span>
+<span class="go">+--------------------+</span>
+<span class="go">| Tables_in_contacts |</span>
+<span class="go">+--------------------+</span>
+<span class="go">| contacts           |</span>
+<span class="go">+--------------------+</span>
+<span class="go">1 row in set (0.00 sec)</span>
+
+<span class="go">mysql&gt; </span>
+</code></pre></div>
+<h2 id="running-the-contacts-application-itself">Running the contacts application itself</h2>
+<p>Now that we have our database up and running, we are going to run spawn a container with our Contacts application and get it connected to the previous database.</p>
+<p>If you recall from our previous section, we created an image with everything required to run our application. Go to your terminal and list your available images:</p>
+<div class="highlight"><pre><span></span><code>REPOSITORY             TAG       IMAGE ID       CREATED       SIZE
+contacts-application   latest    5493a72b86ed   4 hours ago   958MB
+mysql                  8         b05128b000dd   2 weeks ago   516MB
+</code></pre></div>
+<p>Let's use the <code>contacts-application</code> image to spawn a new container:</p>
+<div class="highlight"><pre><span></span><code><span class="go">docker run --rm \</span>
+<span class="go">    --name=contacts-service \</span>
+<span class="go">    --env=&quot;MYSQL_CONTACTS_DSN=root:test@tcp(172.17.0.2)/contacts&quot; \</span>
+<span class="go">    --publish 8080:8080 contacts-application</span>
+</code></pre></div>
+<p>In the previous command we're telling Docker to use the <code>contacts-application</code> image and pass it the <code>MYSQL_CONTACTS_DSN</code> environment variable. Additonally, we're making the 8080 port available so we can reach the service from our computer.</p>
+<p>If everything goes as expected, we should be able to reach our application at <code>localhost:8080</code>. Let's go back to the terminal and give it a try:</p>
+<p>List the contacts:</p>
+<div class="highlight"><pre><span></span><code>➜  ~ curl localhost:8080/contacts | jq .
+[]%
+</code></pre></div>
+<p>Insert a new contact:</p>
+<div class="highlight"><pre><span></span><code>➜  ~ curl -XPOST localhost:8080/contact/new -d &#39;                    {
+    &quot;Username&quot;: &quot;migue&quot;,
+    &quot;Email&quot;: &quot;migue@migue.io&quot;,
+    &quot;Phone&quot;: &quot;123456789&quot;
+  }&#39; | jq .
+{&quot;Username&quot;:&quot;migue&quot;,&quot;Email&quot;:&quot;migue@migue.io&quot;,&quot;Phone&quot;:&quot;123456789&quot;}%
+</code></pre></div>
+<p>List the contacts again:</p>
+<div class="highlight"><pre><span></span><code><span class="go">➜  ~ curl localhost:8080/contacts | jq .</span>
+<span class="go">[</span>
+<span class="go">  {</span>
+<span class="go">    &quot;Username&quot;: &quot;migue&quot;,</span>
+<span class="go">    &quot;Email&quot;: &quot;migue@migue.io&quot;,</span>
+<span class="go">    &quot;Phone&quot;: &quot;123456789&quot;</span>
+<span class="go">  }</span>
+<span class="go">]</span>
+</code></pre></div>
+<p>I guess you've already wondered: how the application connects to the database or where does the <code>172.17.0.2</code> come from? If you remember from our previous lessons, we've treat our backing services (MySQL in our case) as attached resources, and this is what we're doing:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">cfg</span> <span class="o">:=</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">Configuration</span><span class="p">{</span>
+    <span class="nx">ServerAddress</span><span class="p">:</span> <span class="s">&quot;:8080&quot;</span><span class="p">,</span>
+    <span class="nx">MySQLDSN</span><span class="p">:</span>      <span class="nx">os</span><span class="p">.</span><span class="nx">Getenv</span><span class="p">(</span><span class="s">&quot;MYSQL_CONTACTS_DSN&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="nx">application</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">cfg</span><span class="p">)</span>
+</code></pre></div>
+<p>You can see how we're reading the MySQL connection environment from the OS environment, allowing us to inject (using <code>--env</code>) the corresponding information depending on where we're running our application.</p>
+<p>And, what about the <code>172.17.0.2</code>? When we created the MySQL container the Docker engine created a network namespace and a bridge network which is reponsible for forwarding the traffic between network segments. This allows different containers connected to the same bridge network to communicate, and, at the same time, provide isolatoin from containers which are not connected to the aforementioned network. We are not going to cover all the details about how Docker networking works, but, for those interested, the <a href="https://docs.docker.com/network/">official docs</a> provide a really nice introduction.</p>
+<p>You can go to your terminal and run the <code>docker inspect</code> command and look for the bridge IP:</p>
+<div class="highlight"><pre><span></span><code><span class="go">docker inspect mysql-contacts-database | jq &#39;.[].NetworkSettings.Networks.bridge.IPAddress&#39;</span>
+<span class="go">&quot;172.17.0.2&quot;</span>
+</code></pre></div>
+<p>Of course, the <code>docker inspect</code> command provides way much more information:</p>
+<div class="highlight"><pre><span></span><code><span class="go">docker inspect mysql-contacts-database                                                     </span>
+<span class="go">[</span>
+<span class="go">    {</span>
+<span class="go">        &quot;Id&quot;: &quot;08ca14e9c794481c3a164e192720d09e426a6b7e4fe535561007ae9c285cba0f&quot;,</span>
+<span class="go">        &quot;Created&quot;: &quot;2021-12-03T10:44:43.546330197Z&quot;,</span>
+<span class="go">        &quot;Path&quot;: &quot;docker-entrypoint.sh&quot;,</span>
+<span class="go">        &quot;Args&quot;: [</span>
+<span class="go">            &quot;mysqld&quot;,</span>
+<span class="go">            &quot;--default-authentication-plugin=mysql_native_password&quot;</span>
+<span class="go">        ],</span>
+<span class="go">        &quot;State&quot;: {</span>
+<span class="go">            &quot;Status&quot;: &quot;running&quot;,</span>
+<span class="go">            &quot;Running&quot;: true,</span>
+<span class="go">            &quot;Paused&quot;: false,</span>
+<span class="go">            &quot;Restarting&quot;: false,</span>
+<span class="go">            &quot;OOMKilled&quot;: false,</span>
+<span class="go">            &quot;Dead&quot;: false,</span>
+<span class="go">            &quot;Pid&quot;: 2117,</span>
+<span class="go">            &quot;ExitCode&quot;: 0,</span>
+<span class="go">            &quot;Error&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;StartedAt&quot;: &quot;2021-12-03T10:44:43.853309044Z&quot;,</span>
+<span class="go">            &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;</span>
+<span class="go">        },</span>
+<span class="go">        &quot;Image&quot;: &quot;sha256:b05128b000ddbafb0a0d2713086c6a1cc23280dee3529d37f03c98c97c8cf1ed&quot;,</span>
+<span class="go">        &quot;ResolvConfPath&quot;: &quot;/var/lib/docker/containers/08ca14e9c794481c3a164e192720d09e426a6b7e4fe535561007ae9c285cba0f/resolv.conf&quot;,</span>
+<span class="go">        &quot;HostnamePath&quot;: &quot;/var/lib/docker/containers/08ca14e9c794481c3a164e192720d09e426a6b7e4fe535561007ae9c285cba0f/hostname&quot;,</span>
+<span class="go">        &quot;HostsPath&quot;: &quot;/var/lib/docker/containers/08ca14e9c794481c3a164e192720d09e426a6b7e4fe535561007ae9c285cba0f/hosts&quot;,</span>
+<span class="go">        &quot;LogPath&quot;: &quot;/var/lib/docker/containers/08ca14e9c794481c3a164e192720d09e426a6b7e4fe535561007ae9c285cba0f/08ca14e9c794481c3a164e192720d09e426a6b7e4fe535561007ae9c285cba0f-json.log&quot;,</span>
+<span class="go">        &quot;Name&quot;: &quot;/mysql-contacts-database&quot;,</span>
+<span class="go">        &quot;RestartCount&quot;: 0,</span>
+<span class="go">        &quot;Driver&quot;: &quot;overlay2&quot;,</span>
+<span class="go">        &quot;Platform&quot;: &quot;linux&quot;,</span>
+<span class="go">        &quot;MountLabel&quot;: &quot;&quot;,</span>
+<span class="go">        &quot;ProcessLabel&quot;: &quot;&quot;,</span>
+<span class="go">        &quot;AppArmorProfile&quot;: &quot;&quot;,</span>
+<span class="go">        &quot;ExecIDs&quot;: null,</span>
+<span class="go">        &quot;HostConfig&quot;: {</span>
+<span class="go">            &quot;Binds&quot;: [</span>
+<span class="go">                &quot;/Users/migue/development/sourcecode/migue/kubernetes-intro/apps/contacts/database:/docker-entrypoint-initdb.d&quot;</span>
+<span class="go">            ],</span>
+<span class="go">            &quot;ContainerIDFile&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;LogConfig&quot;: {</span>
+<span class="go">                &quot;Type&quot;: &quot;json-file&quot;,</span>
+<span class="go">                &quot;Config&quot;: {}</span>
+<span class="go">            },</span>
+<span class="go">            &quot;NetworkMode&quot;: &quot;default&quot;,</span>
+<span class="go">            &quot;PortBindings&quot;: {</span>
+<span class="go">                &quot;3306/tcp&quot;: [</span>
+<span class="go">                    {</span>
+<span class="go">                        &quot;HostIp&quot;: &quot;&quot;,</span>
+<span class="go">                        &quot;HostPort&quot;: &quot;3306&quot;</span>
+<span class="go">                    }</span>
+<span class="go">                ]</span>
+<span class="go">            },</span>
+<span class="go">            &quot;RestartPolicy&quot;: {</span>
+<span class="go">                &quot;Name&quot;: &quot;no&quot;,</span>
+<span class="go">                &quot;MaximumRetryCount&quot;: 0</span>
+<span class="go">            },</span>
+<span class="go">            &quot;AutoRemove&quot;: true,</span>
+<span class="go">            &quot;VolumeDriver&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;VolumesFrom&quot;: null,</span>
+<span class="go">            &quot;CapAdd&quot;: null,</span>
+<span class="go">            &quot;CapDrop&quot;: null,</span>
+<span class="go">            &quot;CgroupnsMode&quot;: &quot;host&quot;,</span>
+<span class="go">            &quot;Dns&quot;: [],</span>
+<span class="go">            &quot;DnsOptions&quot;: [],</span>
+<span class="go">            &quot;DnsSearch&quot;: [],</span>
+<span class="go">            &quot;ExtraHosts&quot;: null,</span>
+<span class="go">            &quot;GroupAdd&quot;: null,</span>
+<span class="go">            &quot;IpcMode&quot;: &quot;private&quot;,</span>
+<span class="go">            &quot;Cgroup&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;Links&quot;: null,</span>
+<span class="go">            &quot;OomScoreAdj&quot;: 0,</span>
+<span class="go">            &quot;PidMode&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;Privileged&quot;: false,</span>
+<span class="go">            &quot;PublishAllPorts&quot;: false,</span>
+<span class="go">            &quot;ReadonlyRootfs&quot;: false,</span>
+<span class="go">            &quot;SecurityOpt&quot;: null,</span>
+<span class="go">            &quot;UTSMode&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;UsernsMode&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;ShmSize&quot;: 67108864,</span>
+<span class="go">            &quot;Runtime&quot;: &quot;runc&quot;,</span>
+<span class="go">            &quot;ConsoleSize&quot;: [</span>
+<span class="go">                0,</span>
+<span class="go">                0</span>
+<span class="go">            ],</span>
+<span class="go">            &quot;Isolation&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;CpuShares&quot;: 0,</span>
+<span class="go">            &quot;Memory&quot;: 0,</span>
+<span class="go">            &quot;NanoCpus&quot;: 0,</span>
+<span class="go">            &quot;CgroupParent&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;BlkioWeight&quot;: 0,</span>
+<span class="go">            &quot;BlkioWeightDevice&quot;: [],</span>
+<span class="go">            &quot;BlkioDeviceReadBps&quot;: null,</span>
+<span class="go">            &quot;BlkioDeviceWriteBps&quot;: null,</span>
+<span class="go">            &quot;BlkioDeviceReadIOps&quot;: null,</span>
+<span class="go">            &quot;BlkioDeviceWriteIOps&quot;: null,</span>
+<span class="go">            &quot;CpuPeriod&quot;: 0,</span>
+<span class="go">            &quot;CpuQuota&quot;: 0,</span>
+<span class="go">            &quot;CpuRealtimePeriod&quot;: 0,</span>
+<span class="go">            &quot;CpuRealtimeRuntime&quot;: 0,</span>
+<span class="go">            &quot;CpusetCpus&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;CpusetMems&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;Devices&quot;: [],</span>
+<span class="go">            &quot;DeviceCgroupRules&quot;: null,</span>
+<span class="go">            &quot;DeviceRequests&quot;: null,</span>
+<span class="go">            &quot;KernelMemory&quot;: 0,</span>
+<span class="go">            &quot;KernelMemoryTCP&quot;: 0,</span>
+<span class="go">            &quot;MemoryReservation&quot;: 0,</span>
+<span class="go">            &quot;MemorySwap&quot;: 0,</span>
+<span class="go">            &quot;MemorySwappiness&quot;: null,</span>
+<span class="go">            &quot;OomKillDisable&quot;: false,</span>
+<span class="go">            &quot;PidsLimit&quot;: null,</span>
+<span class="go">            &quot;Ulimits&quot;: null,</span>
+<span class="go">            &quot;CpuCount&quot;: 0,</span>
+<span class="go">            &quot;CpuPercent&quot;: 0,</span>
+<span class="go">            &quot;IOMaximumIOps&quot;: 0,</span>
+<span class="go">            &quot;IOMaximumBandwidth&quot;: 0,</span>
+<span class="go">            &quot;MaskedPaths&quot;: [</span>
+<span class="go">                &quot;/proc/asound&quot;,</span>
+<span class="go">                &quot;/proc/acpi&quot;,</span>
+<span class="go">                &quot;/proc/kcore&quot;,</span>
+<span class="go">                &quot;/proc/keys&quot;,</span>
+<span class="go">                &quot;/proc/latency_stats&quot;,</span>
+<span class="go">                &quot;/proc/timer_list&quot;,</span>
+<span class="go">                &quot;/proc/timer_stats&quot;,</span>
+<span class="go">                &quot;/proc/sched_debug&quot;,</span>
+<span class="go">                &quot;/proc/scsi&quot;,</span>
+<span class="go">                &quot;/sys/firmware&quot;</span>
+<span class="go">            ],</span>
+<span class="go">            &quot;ReadonlyPaths&quot;: [</span>
+<span class="go">                &quot;/proc/bus&quot;,</span>
+<span class="go">                &quot;/proc/fs&quot;,</span>
+<span class="go">                &quot;/proc/irq&quot;,</span>
+<span class="go">                &quot;/proc/sys&quot;,</span>
+<span class="go">                &quot;/proc/sysrq-trigger&quot;</span>
+<span class="go">            ]</span>
+<span class="go">        },</span>
+<span class="go">        &quot;GraphDriver&quot;: {</span>
+<span class="go">            &quot;Data&quot;: {</span>
+<span class="go">                &quot;LowerDir&quot;: &quot;/var/lib/docker/overlay2/567e028d45ff25519ce3a4dc734ceacd52e08f9bb608782a5d2a3ece1b06b265-init/diff:/var/lib/docker/overlay2/2f9e6cb0fea4bad4f1fd0fee90e2a40bb53ce0d8b045f37b4f20686d941714bb/diff:/var/lib/docker/overlay2/b02899c859ada8bcbcd5748e03d837c39c901b5bfd739cb392f24c76ce6a5609/diff:/var/lib/docker/overlay2/38822ac0f87a0100177d35c5eb4c34b2a9a3e157c34d4c103d74cb6d8cca8c66/diff:/var/lib/docker/overlay2/43d32d57c87dfe795d4b65353d40f7fc8fb5fe446fb014284d5c1d3553b38913/diff:/var/lib/docker/overlay2/59579511fc9d13407ddbe7b22bf55349edf0382677bf702d6d80286eef838239/diff:/var/lib/docker/overlay2/2cd9935313fe6ce6af41d4eafc23337aea69247908849cbd8a25864020cabf6b/diff:/var/lib/docker/overlay2/16dc98f0f26241dce760f8f263bbc0e3e00348d237ccf01535c57ece7df7122a/diff:/var/lib/docker/overlay2/df849902859bbf36fa31cd5374b8481697beeb1f5529709098d2c7de113b021d/diff:/var/lib/docker/overlay2/43a477551fa630b377408a4c3efd29e70fe49c224815b13729cd41daee575cdf/diff:/var/lib/docker/overlay2/79d7bdac1944f40f67369eb568b25b5d9f3ba24afc82b7d7e72a25ac0a17ebcb/diff:/var/lib/docker/overlay2/cd638dbf1a11b548e3a667572d95511139ad0d31f2f0859a28aa8caef898e67a/diff:/var/lib/docker/overlay2/b1651b3a497595b3630c90bb2da5c49a53805d551553c54d95dc2f2867e82515/diff&quot;,</span>
+<span class="go">                &quot;MergedDir&quot;: &quot;/var/lib/docker/overlay2/567e028d45ff25519ce3a4dc734ceacd52e08f9bb608782a5d2a3ece1b06b265/merged&quot;,</span>
+<span class="go">                &quot;UpperDir&quot;: &quot;/var/lib/docker/overlay2/567e028d45ff25519ce3a4dc734ceacd52e08f9bb608782a5d2a3ece1b06b265/diff&quot;,</span>
+<span class="go">                &quot;WorkDir&quot;: &quot;/var/lib/docker/overlay2/567e028d45ff25519ce3a4dc734ceacd52e08f9bb608782a5d2a3ece1b06b265/work&quot;</span>
+<span class="go">            },</span>
+<span class="go">            &quot;Name&quot;: &quot;overlay2&quot;</span>
+<span class="go">        },</span>
+<span class="go">        &quot;Mounts&quot;: [</span>
+<span class="go">            {</span>
+<span class="go">                &quot;Type&quot;: &quot;bind&quot;,</span>
+<span class="go">                &quot;Source&quot;: &quot;/Users/migue/development/sourcecode/migue/kubernetes-intro/apps/contacts/database&quot;,</span>
+<span class="go">                &quot;Destination&quot;: &quot;/docker-entrypoint-initdb.d&quot;,</span>
+<span class="go">                &quot;Mode&quot;: &quot;&quot;,</span>
+<span class="go">                &quot;RW&quot;: true,</span>
+<span class="go">                &quot;Propagation&quot;: &quot;rprivate&quot;</span>
+<span class="go">            },</span>
+<span class="go">            {</span>
+<span class="go">                &quot;Type&quot;: &quot;volume&quot;,</span>
+<span class="go">                &quot;Name&quot;: &quot;03a39f42b334399359c29a2cee6445f5f79a8a4b61b819a15598d684d9d6eb14&quot;,</span>
+<span class="go">                &quot;Source&quot;: &quot;/var/lib/docker/volumes/03a39f42b334399359c29a2cee6445f5f79a8a4b61b819a15598d684d9d6eb14/_data&quot;,</span>
+<span class="go">                &quot;Destination&quot;: &quot;/var/lib/mysql&quot;,</span>
+<span class="go">                &quot;Driver&quot;: &quot;local&quot;,</span>
+<span class="go">                &quot;Mode&quot;: &quot;&quot;,</span>
+<span class="go">                &quot;RW&quot;: true,</span>
+<span class="go">                &quot;Propagation&quot;: &quot;&quot;</span>
+<span class="go">            }</span>
+<span class="go">        ],</span>
+<span class="go">        &quot;Config&quot;: {</span>
+<span class="go">            &quot;Hostname&quot;: &quot;08ca14e9c794&quot;,</span>
+<span class="go">            &quot;Domainname&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;User&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;AttachStdin&quot;: false,</span>
+<span class="go">            &quot;AttachStdout&quot;: false,</span>
+<span class="go">            &quot;AttachStderr&quot;: false,</span>
+<span class="go">            &quot;ExposedPorts&quot;: {</span>
+<span class="go">                &quot;3306/tcp&quot;: {},</span>
+<span class="go">                &quot;33060/tcp&quot;: {}</span>
+<span class="go">            },</span>
+<span class="go">            &quot;Tty&quot;: false,</span>
+<span class="go">            &quot;OpenStdin&quot;: false,</span>
+<span class="go">            &quot;StdinOnce&quot;: false,</span>
+<span class="go">            &quot;Env&quot;: [</span>
+<span class="go">                &quot;MYSQL_ROOT_PASSWORD=test&quot;,</span>
+<span class="go">                &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;,</span>
+<span class="go">                &quot;GOSU_VERSION=1.12&quot;,</span>
+<span class="go">                &quot;MYSQL_MAJOR=8.0&quot;,</span>
+<span class="go">                &quot;MYSQL_VERSION=8.0.27-1debian10&quot;</span>
+<span class="go">            ],</span>
+<span class="go">            &quot;Cmd&quot;: [</span>
+<span class="go">                &quot;mysqld&quot;,</span>
+<span class="go">                &quot;--default-authentication-plugin=mysql_native_password&quot;</span>
+<span class="go">            ],</span>
+<span class="go">            &quot;Image&quot;: &quot;mysql:8&quot;,</span>
+<span class="go">            &quot;Volumes&quot;: {</span>
+<span class="go">                &quot;/var/lib/mysql&quot;: {}</span>
+<span class="go">            },</span>
+<span class="go">            &quot;WorkingDir&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;Entrypoint&quot;: [</span>
+<span class="go">                &quot;docker-entrypoint.sh&quot;</span>
+<span class="go">            ],</span>
+<span class="go">            &quot;OnBuild&quot;: null,</span>
+<span class="go">            &quot;Labels&quot;: {}</span>
+<span class="go">        },</span>
+<span class="go">        &quot;NetworkSettings&quot;: {</span>
+<span class="go">            &quot;Bridge&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;SandboxID&quot;: &quot;77a394c1bf7f5bdbdde66960cd0e9cffa808d77f1bf2b72110a593856fd77c5d&quot;,</span>
+<span class="go">            &quot;HairpinMode&quot;: false,</span>
+<span class="go">            &quot;LinkLocalIPv6Address&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;LinkLocalIPv6PrefixLen&quot;: 0,</span>
+<span class="go">            &quot;Ports&quot;: {</span>
+<span class="go">                &quot;3306/tcp&quot;: [</span>
+<span class="go">                    {</span>
+<span class="go">                        &quot;HostIp&quot;: &quot;0.0.0.0&quot;,</span>
+<span class="go">                        &quot;HostPort&quot;: &quot;3306&quot;</span>
+<span class="go">                    }</span>
+<span class="go">                ],</span>
+<span class="go">                &quot;33060/tcp&quot;: null</span>
+<span class="go">            },</span>
+<span class="go">            &quot;SandboxKey&quot;: &quot;/var/run/docker/netns/77a394c1bf7f&quot;,</span>
+<span class="go">            &quot;SecondaryIPAddresses&quot;: null,</span>
+<span class="go">            &quot;SecondaryIPv6Addresses&quot;: null,</span>
+<span class="go">            &quot;EndpointID&quot;: &quot;068727a2228a07db6509da3e01360c521f55130bd163254f40cd45742ddb222a&quot;,</span>
+<span class="go">            &quot;Gateway&quot;: &quot;172.17.0.1&quot;,</span>
+<span class="go">            &quot;GlobalIPv6Address&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;GlobalIPv6PrefixLen&quot;: 0,</span>
+<span class="go">            &quot;IPAddress&quot;: &quot;172.17.0.2&quot;,</span>
+<span class="go">            &quot;IPPrefixLen&quot;: 16,</span>
+<span class="go">            &quot;IPv6Gateway&quot;: &quot;&quot;,</span>
+<span class="go">            &quot;MacAddress&quot;: &quot;02:42:ac:11:00:02&quot;,</span>
+<span class="go">            &quot;Networks&quot;: {</span>
+<span class="go">                &quot;bridge&quot;: {</span>
+<span class="go">                    &quot;IPAMConfig&quot;: null,</span>
+<span class="go">                    &quot;Links&quot;: null,</span>
+<span class="go">                    &quot;Aliases&quot;: null,</span>
+<span class="go">                    &quot;NetworkID&quot;: &quot;6781bedb6144d16b3a0e5c862a2724b68d12b8761de3ee73ed15e18c241be774&quot;,</span>
+<span class="go">                    &quot;EndpointID&quot;: &quot;068727a2228a07db6509da3e01360c521f55130bd163254f40cd45742ddb222a&quot;,</span>
+<span class="go">                    &quot;Gateway&quot;: &quot;172.17.0.1&quot;,</span>
+<span class="go">                    &quot;IPAddress&quot;: &quot;172.17.0.2&quot;,</span>
+<span class="go">                    &quot;IPPrefixLen&quot;: 16,</span>
+<span class="go">                    &quot;IPv6Gateway&quot;: &quot;&quot;,</span>
+<span class="go">                    &quot;GlobalIPv6Address&quot;: &quot;&quot;,</span>
+<span class="go">                    &quot;GlobalIPv6PrefixLen&quot;: 0,</span>
+<span class="go">                    &quot;MacAddress&quot;: &quot;02:42:ac:11:00:02&quot;,</span>
+<span class="go">                    &quot;DriverOpts&quot;: null</span>
+<span class="go">                }</span>
+<span class="go">            }</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">]</span>
+</code></pre></div>
+<h1 id="closing-thoughts">Closing thoughts</h1>
+<p>During this chapter we've been introduced to the container world and we've gone through the basics:</p>
+<ul>
+<li>Learn what containers and images are</li>
+<li>Learn how to build an image and package our own applicatoin</li>
+<li>Learn how to run an existing image (MySQL)</li>
+<li>Learn how to run our previously built image</li>
+<li>Learn how to connect the two previous containers so they can talk to each other</li>
+</ul>
+<p>With this (little) knowledge we are going to move forward and learn how we could deploy our application in a container orchestrator (Kubernetes) and learn the fundamentals about it.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../building-docker-apps/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Building applications with Docker" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Building applications with Docker
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../deploying/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploying a Kubernetes cluster" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Deploying a Kubernetes cluster
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -9,21 +9,21 @@
       
       
       
-        <link rel="canonical" href="https://migue.github.io/kube-intro/">
+        <link rel="canonical" href="https://migue.github.io/kube-intro/containers/building-docker-apps/">
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
-        <title>Kubernetes introduction</title>
+        <title>Building applications with Docker - Kubernetes introduction</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.a57b2b03.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -55,7 +55,7 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#kubernetes-an-intro-for-application-developers" class="md-skip">
+        <a href="#building-our-first-docker-application" class="md-skip">
           Skip to content
         </a>
       
@@ -76,7 +76,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Kubernetes introduction" class="md-header__button md-logo" aria-label="Kubernetes introduction" data-md-component="logo">
+    <a href="../.." title="Kubernetes introduction" class="md-header__button md-logo" aria-label="Kubernetes introduction" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Building applications with Docker
             
           </span>
         </div>
@@ -163,7 +163,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Kubernetes introduction" class="md-nav__button md-logo" aria-label="Kubernetes introduction" data-md-component="logo">
+    <a href="../.." title="Kubernetes introduction" class="md-nav__button md-logo" aria-label="Kubernetes introduction" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -180,21 +180,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
-      
     </li>
   
 
@@ -207,7 +197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="intro/" class="md-nav__link">
+      <a href="../../intro/" class="md-nav__link">
         Intro
       </a>
     </li>
@@ -220,12 +210,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
       
@@ -248,7 +240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="containers/intro/" class="md-nav__link">
+      <a href="../intro/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -260,11 +252,60 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="containers/building-docker-apps/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Building applications with Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Building applications with Docker
       </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-our-first-dockerfile" class="md-nav__link">
+    Creating our first Dockerfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-image" class="md-nav__link">
+    Creating the image
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -276,7 +317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="containers/running-docker-apps/" class="md-nav__link">
+      <a href="../running-docker-apps/" class="md-nav__link">
         Runnig applications with Docker
       </a>
     </li>
@@ -298,7 +339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="deploying/" class="md-nav__link">
+      <a href="../../deploying/" class="md-nav__link">
         Deploying a Kubernetes cluster
       </a>
     </li>
@@ -339,7 +380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="pods/" class="md-nav__link">
+      <a href="../../pods/" class="md-nav__link">
         Pods
       </a>
     </li>
@@ -353,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="services/" class="md-nav__link">
+      <a href="../../services/" class="md-nav__link">
         Services
       </a>
     </li>
@@ -367,7 +408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="load-balancing/" class="md-nav__link">
+      <a href="../../load-balancing/" class="md-nav__link">
         Load balancing
       </a>
     </li>
@@ -381,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="replication/" class="md-nav__link">
+      <a href="../../replication/" class="md-nav__link">
         Replication
       </a>
     </li>
@@ -403,7 +444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="about/" class="md-nav__link">
+      <a href="../../about/" class="md-nav__link">
         About
       </a>
     </li>
@@ -431,6 +472,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-our-first-dockerfile" class="md-nav__link">
+    Creating our first Dockerfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-image" class="md-nav__link">
+    Creating the image
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -442,8 +505,55 @@
               
                 
                 
-                <h1 id="kubernetes-an-intro-for-application-developers">Kubernetes: an intro for application developers</h1>
-<p>The goal of this course is to teach the students what Kubernetes is and how it can help them to easily deploy and operate their applications. We will learn how to leverage Kubernetes' capabilities to put into practice all the different Cloud Native concepts we've explored along the subject.</p>
+                <h1 id="building-our-first-docker-application">Building our first Docker application</h1>
+<p>As we've alredy mentioned during the chapter's intro, we are going to use the <a href="apps/contacts">contacts application</a> as the base of all our examples.</p>
+<p>The contacts application is a tiny Go service that connects to a MySQL database and allows you to handle your contacts list with a basic set of operations like adding a new contact, or deleting an existing one through an HTTP API.</p>
+<p><strong>NOTE</strong>: it's not required to be familiar with the Go programming language or with MySQL at all, so don't worry if you have never worked with any of these technologies, we will be focusing on the deployment/running aspects.</p>
+<h2 id="creating-our-first-dockerfile">Creating our first Dockerfile</h2>
+<p>The first thing we need to do is creating a <code>Dockerfile</code> file, where we can define the set of steps that Docker needs to perform in order to build the final image.</p>
+<p>Create an empty file and name it <code>Dockerfile</code> in the contacts folder: and type something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">golang:1.17</span>
+</code></pre></div>
+<p>As we've said before, Docker uses a layered approach so we're indicating here that we're building our image from the image <code>golang:1.17</code>. This image has already installed all the different things that we need to build our application</p>
+<p>Now that we have the base image, let's copy the source code of our application into our image:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">golang:1.17</span>
+
+<span class="k">WORKDIR</span><span class="s"> /code</span>
+<span class="k">COPY</span> . .
+</code></pre></div>
+<p>In the previous snippet we're defining the working dir (all the future commands we execute during the build process will be run in this directory) and copy all our files to the destination images.</p>
+<p>At this point, we are ready to build our application within the container, so let's run our build process:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">golang:1.17</span>
+
+<span class="k">WORKDIR</span><span class="s"> /code</span>
+<span class="k">COPY</span> . .
+
+<span class="k">RUN</span> make build
+</code></pre></div>
+<p>The RUN command allow us to define the commands that will be executed during the image build process. In our example, our build process consists in running the <code>build</code> target defined in our <code>Makefile</code>.</p>
+<p>We're almost done: we've copied everything over from our machine to the image container and built the final executable. Now, we need to define the command that will be run when this image is executed when a container is run:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">golang:1.17</span>
+
+<span class="k">WORKDIR</span><span class="s"> /code</span>
+<span class="k">COPY</span> . .
+
+<span class="k">RUN</span> make build
+
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;bin/contacts.linux&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="creating-the-image">Creating the image</h2>
+<p>In the previous section we defined all the steps required to build the image of our application, but we haven't created the image itself; let's go ahead and create the image.</p>
+<p>From your contacts application folder, run:</p>
+<div class="highlight"><pre><span></span><code><span class="go">docker build -t contacts-application .</span>
+</code></pre></div>
+<p>Once the previous command has successfully finished, the newly created image will live in our local Docker registry. As I am sure you've already guessed, this is not extremely useful because you cannot share this image with anyone else. The real power of Docker is allowing to share the images across the whole Docker community.</p>
+<p>If we go to a terminal and look for the images registered in our local registry we should see something similar to:</p>
+<div class="highlight"><pre><span></span><code><span class="go">&gt; docker images</span>
+<span class="go">REPOSITORY             TAG       IMAGE ID       CREATED          SIZE</span>
+<span class="go">contacts-application   latest    8aa2ee3076db   35 seconds ago   958MB</span>
+</code></pre></div>
+<p>Of course, this is just a quick intro to the image creation process and there're tons of differents things that can be done: multi-stage builds, publishing to a remote registry, optimizing the size of our images, ... sadly, we don't have time to go through all the details, but I encorauge you to take a look to the <a href="https://docs.docker.com/get-started/">Docker Getting Started</a> guide where you will find a really nice overview about how to get comfortable with Docker.</p>
+<p>Let's move to the next section and see how we can run our image using the Docker runtime.</p>
                 
               
               
@@ -462,15 +572,30 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
+        
+        <a href="../intro/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
       
         
-        <a href="intro/" class="md-footer__link md-footer__link--next" aria-label="Next: Intro" rel="next">
+        <a href="../running-docker-apps/" class="md-footer__link md-footer__link--next" aria-label="Next: Runnig applications with Docker" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Intro
+              Runnig applications with Docker
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -501,10 +626,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.b1047164.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

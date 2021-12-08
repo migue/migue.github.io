@@ -1,192 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://migue.github.io/authors/admin/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/authors/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/categories/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/categories/computer-science/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/formal-methods/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/formal-methods-intro/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/categories/programming/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/</loc>
-    <lastmod>2020-08-12T22:53:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/databases/</loc>
-    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/categories/distributed-systems/</loc>
-    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/influx-clustering-kafka-based/</loc>
-    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/kafka/</loc>
-    <lastmod>2020-07-29T11:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/a-few-books-i-would-like-to-read/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/concurrency/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/programming-languages/</loc>
-    <lastmod>2020-05-16T15:14:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/influx-storage-tsi-component/</loc>
-    <lastmod>2020-04-22T07:35:33+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/influx-storage-tsm-component/</loc>
-    <lastmod>2020-04-14T17:14:30+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/quick-tour-influx-storage/</loc>
-    <lastmod>2020-04-14T15:14:30+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/books/</loc>
-    <lastmod>2020-02-05T22:25:17+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/books-and-talks/</loc>
-    <lastmod>2020-02-05T22:25:17+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/talks/</loc>
-    <lastmod>2020-02-05T22:25:17+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/news/</loc>
-    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/categories/personal/</loc>
-    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/suerte/</loc>
-    <lastmod>2019-09-09T22:31:01+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/categories/papers-we-love/</loc>
-    <lastmod>2019-01-05T10:31:01+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</loc>
-    <lastmod>2019-01-05T10:31:01+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/</loc>
-    <lastmod>2017-01-01T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</loc>
-    <lastmod>2014-12-02T22:17:41+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/papers-we-love-madrid-edition/</loc>
-    <lastmod>2014-11-12T22:15:41+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/compilers/</loc>
-    <lastmod>2014-04-21T22:29:06+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/java-compiler-string-addition/</loc>
-    <lastmod>2014-04-21T22:29:06+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/jvm/</loc>
-    <lastmod>2014-04-21T22:29:06+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/tags/jobs/</loc>
-    <lastmod>2014-01-26T10:36:10+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/post/saying-no/</loc>
-    <lastmod>2014-01-26T10:36:10+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/publication_types/</loc>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/publication/</loc>
-  </url>
-  
-  <url>
-    <loc>https://migue.github.io/talk/</loc>
-  </url>
-  
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://migue.github.io/kube-intro/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/about/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/deploying/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/intro/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/load-balancing/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/pods/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/replication/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/services/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/containers/building-docker-apps/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/containers/intro/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://migue.github.io/kube-intro/containers/running-docker-apps/</loc>
+         <lastmod>2021-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>
