@@ -5,7 +5,7 @@
     <link>https://migue.github.io/categories/programming/</link>
       <atom:link href="https://migue.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     <description>Programming</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2020 22:53:30 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2020 21:14:30 +0200</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Programming</title>
@@ -14,13 +14,13 @@
     
     <item>
       <title>Formal methods introduction (I)</title>
-      <link>https://migue.github.io/post/formal-methods-intro/</link>
-      <pubDate>Wed, 12 Aug 2020 22:53:30 +0200</pubDate>
-      <guid>https://migue.github.io/post/formal-methods-intro/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply [some] of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho).&lt;/p&gt;
+      <link>https://migue.github.io/post/formal-methods-introduction/</link>
+      <pubDate>Wed, 12 Aug 2020 21:14:30 +0200</pubDate>
+      <guid>https://migue.github.io/post/formal-methods-introduction/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply some of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho).&lt;/p&gt;
 &lt;p&gt;I would like to start with a question: &lt;strong&gt;how do we know that a program we are writing is correct or no?&lt;/strong&gt; I guess the most probable answer for many of us would be &lt;strong&gt;testing&lt;/strong&gt;. We think about many different input cases for our program as we can, write them down and execute our code hoping we can find as many bugs as possible. Of course, there could be a set of inputs we haven’t thought about which cause or program to fail and/or show unexpected behavior. Under this model, we could probably include some other techniques like peer-reviewing or doing source code static analysis.&lt;/p&gt;
-&lt;p&gt;Trying to extend the testing approach and make it more reliable we have the &lt;strong&gt;property based testing/fuzzing&lt;/strong&gt; approach. In this case, the general idea is to generate [tons] of random inputs according to a set of patterns and check that a concrete property holds against all the generated cases, broadening the scope of the set of inputs we are passing to the program under testing.&lt;/p&gt;
-&lt;p&gt;If we try to expand the previous concepts a little bit we get into the &lt;strong&gt;model checking&lt;/strong&gt; world. In this case, we need to define, in a formal and abstract way, what our program/design is doing and the model checker will try to explore all the potential states that our design might ever enter at the time it checks that certain correctness properties hold on every one of the previous states, providing a counterexample in the cases where this is not true. Under this category, we have tools like 
+&lt;p&gt;Trying to extend the testing approach and make it more reliable we have the &lt;strong&gt;property based testing/fuzzing&lt;/strong&gt; approach. In this case, the general idea is to generate tons of random inputs according to a set of patterns and check that a concrete property holds against all the generated cases, broadening the scope of the set of inputs we are passing to the program under testing.&lt;/p&gt;
+&lt;p&gt;If we try to expand the previous concepts a little bit we get into the model checking world. In this case, we need to define, in a formal and abstract way, what our program/design is doing and the model checker will try to explore all the potential states that our design might ever enter at the time it checks that certain correctness properties hold on every one of the previous states, providing a counterexample in the cases where this is not true. Under this category, we have tools like 
 &lt;a href=&#34;https://lamport.azurewebsites.net/tla/tla.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TLA+&lt;/a&gt;
  and 
 &lt;a href=&#34;https://alloytools.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alloy&lt;/a&gt;
@@ -39,13 +39,13 @@
 &lt;p&gt;Trying to apply a model checking technique to a particular design could be summarized in the next steps (of course, this is how it works for me):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Modeling the system&lt;/strong&gt;: in this phase, we define the model using the language of the model checker, perform a few simulations just to do a quick sanity check, and make sure we’re on the right track and formalize the set of properties that need to be validated.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Modeling the system:&lt;/strong&gt; in this phase, we define the model using the language of the model checker, perform a few simulations just to do a quick sanity check, and make sure we’re on the right track and formalize the set of properties that need to be validated.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Running our model&lt;/strong&gt;: run the model checker in order to validate if the previous properties we have defined hold true in all the potential states our design might enter&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Running our model:&lt;/strong&gt; run the model checker in order to validate if the previous properties we have defined hold true in all the potential states our design might enter&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Analysis&lt;/strong&gt;: Are the previous properties satisfied? Have they been violated? If the checker finds that a certain property has been violated it will provide a counterexample which will help us to refine our design, model definition, or property. It could be possible that we run out of memory because the set of potential states is humungous and, in this case, we would need to reduce them and try again.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Analysis:&lt;/strong&gt; Are the previous properties satisfied? Have they been violated? If the checker finds that a certain property has been violated it will provide a counterexample which will help us to refine our design, model definition, or property. It could be possible that we run out of memory because the set of potential states is humungous and, in this case, we would need to reduce them and try again.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;strengths-and-weakness&#34;&gt;Strengths and weakness&lt;/h2&gt;
@@ -763,7 +763,7 @@ func (e *Engine) compactCache() {
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; I am focusing here in the bytecode generated by the Java compiler, regardless any optimization the runtime could apply.&lt;/p&gt;
 &lt;h3 id=&#34;concatenating-constant-strings&#34;&gt;Concatenating constant strings&lt;/h3&gt;
 &lt;p&gt;Imagine we are writing a new class where we have defined three final string fields and we want to add a new method which just returns the sum of the three:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;StringConcatenation&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;StringConcatenation&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 
         &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; String A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; B&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; C&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
 
@@ -772,7 +772,7 @@ func (e *Engine) compactCache() {
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Taking a look to the bytecode generated by the Java compiler we can see the following (I have included only the relevant parts of the command java -v for the sake of clarity):&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bytecode&#34; data-lang=&#34;bytecode&#34;&gt;Constant pool:
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bytecode&#34; data-lang=&#34;bytecode&#34;&gt;Constant pool:
    ...
    #9 = String             #49            //  ABC
    ...
@@ -790,7 +790,7 @@ func (e *Engine) compactCache() {
 &lt;p&gt;For the reader: remove the final modifier at the fields declaration and analyze the generated bytecode. Do you see any difference?&lt;/p&gt;
 &lt;h3 id=&#34;concatenating-non-constant-strings&#34;&gt;Concatenating non constant strings&lt;/h3&gt;
 &lt;p&gt;The example shown at the previous section could be very unrealistic for many of you so let&amp;rsquo;s see if we can get something more interesting in place. Now we are planning to add a new method which just invokes three other methods and links together the results , like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;StringConcatenation&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;StringConcatenation&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 
         &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;concatVariableStrings&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
                 &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; getA&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; getB&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; getC&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
@@ -801,7 +801,7 @@ func (e *Engine) compactCache() {
         &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getC&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Taking a closer look at the generated bytecode (again just included the most important sections):&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bytecode&#34; data-lang=&#34;bytecode&#34;&gt;  public java.lang.String concatVariableStrings();
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bytecode&#34; data-lang=&#34;bytecode&#34;&gt;  public java.lang.String concatVariableStrings();
     descriptor: ()Ljava/lang/String;
     flags: ACC_PUBLIC
     Code:

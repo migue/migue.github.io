@@ -28,11 +28,10 @@
   
     
   
-  <meta name="description" content="About two weeks ago I got a surprisingly email in my inbox. An old friend of mine is about to launch a new startup and he asked me to become the CTO of their new company. My first reaction was: Wow!
-Since this first email we have talked each other (a colleague of him was involved too) quite a few times. They have a good idea, an already working prototype of the product they want to create and enough money to be alive for a while if things don&rsquo;t go as expected.">
+  <meta name="description" content="Disclaimer: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply some of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho).">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/post/saying-no/">
+  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/post/formal-methods-introduction/">
 
   
 
@@ -254,7 +253,7 @@ Since this first email we have talked each other (a colleague of him was involve
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
 
-  <link rel="canonical" href="https://migue.github.io/post/saying-no/">
+  <link rel="canonical" href="https://migue.github.io/post/formal-methods-introduction/">
 
   
   
@@ -271,16 +270,15 @@ Since this first email we have talked each other (a colleague of him was involve
   <meta property="twitter:creator" content="@miguelinlas3">
   
   <meta property="og:site_name" content="Just my thouhgts">
-  <meta property="og:url" content="https://migue.github.io/post/saying-no/">
-  <meta property="og:title" content="Saying No | Just my thouhgts">
-  <meta property="og:description" content="About two weeks ago I got a surprisingly email in my inbox. An old friend of mine is about to launch a new startup and he asked me to become the CTO of their new company. My first reaction was: Wow!
-Since this first email we have talked each other (a colleague of him was involved too) quite a few times. They have a good idea, an already working prototype of the product they want to create and enough money to be alive for a while if things don&rsquo;t go as expected."><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
+  <meta property="og:url" content="https://migue.github.io/post/formal-methods-introduction/">
+  <meta property="og:title" content="Formal methods introduction (I) | Just my thouhgts">
+  <meta property="og:description" content="Disclaimer: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply some of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho)."><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
   <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2014-01-26T10:36:10&#43;01:00">
+      <meta property="article:published_time" content="2020-08-12T21:14:30&#43;02:00">
     
-    <meta property="article:modified_time" content="2014-01-26T10:36:10&#43;01:00">
+    <meta property="article:modified_time" content="2020-08-12T21:14:30&#43;02:00">
   
 
   
@@ -306,12 +304,12 @@ Since this first email we have talked each other (a colleague of him was involve
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://migue.github.io/post/saying-no/"
+    "@id": "https://migue.github.io/post/formal-methods-introduction/"
   },
-  "headline": "Saying No",
+  "headline": "Formal methods introduction (I)",
   
-  "datePublished": "2014-01-26T10:36:10+01:00",
-  "dateModified": "2014-01-26T10:36:10+01:00",
+  "datePublished": "2020-08-12T21:14:30+02:00",
+  "dateModified": "2020-08-12T21:14:30+02:00",
   
   "author": {
     "@type": "Person",
@@ -326,7 +324,7 @@ Since this first email we have talked each other (a colleague of him was involve
       "url": "img/https://migue.github.io/"
     }
   },
-  "description": "About two weeks ago I got a surprisingly email in my inbox. An old friend of mine is about to launch a new startup and he asked me to become the CTO of their new company. My first reaction was: Wow!\nSince this first email we have talked each other (a colleague of him was involved too) quite a few times. They have a good idea, an already working prototype of the product they want to create and enough money to be alive for a while if things don\u0026rsquo;t go as expected."
+  "description": "Disclaimer: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply some of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho)."
 }
 </script>
 
@@ -344,7 +342,7 @@ Since this first email we have talked each other (a colleague of him was involve
 
 
 
-  <title>Saying No | Just my thouhgts</title>
+  <title>Formal methods introduction (I) | Just my thouhgts</title>
 
 </head>
 
@@ -526,8 +524,10 @@ Since this first email we have talked each other (a colleague of him was involve
   
   
 <div class="article-container pt-3">
-  <h1>Saying No</h1>
+  <h1>Formal methods introduction (I)</h1>
 
+  
+  <p class="page-subtitle">A short introduction to formal methods</p>
   
 
   
@@ -538,6 +538,19 @@ Since this first email we have talked each other (a colleague of him was involve
 
   
   
+  
+  
+  <div>
+    
+
+
+
+  
+  <span><a href="/authors/admin/">Miguel Ángel Pastor Olivar</a></span>
+
+  </div>
+  
+  
 
   
   <span class="article-date">
@@ -545,7 +558,7 @@ Since this first email we have talked each other (a colleague of him was involve
     
       
     
-    Jan 26, 2014
+    Aug 12, 2020
   </span>
   
 
@@ -554,7 +567,7 @@ Since this first email we have talked each other (a colleague of him was involve
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    5 min read
   </span>
   
 
@@ -566,7 +579,7 @@ Since this first email we have talked each other (a colleague of him was involve
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/personal/">personal</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/categories/computer-science/">Computer Science</a>, <a href="/categories/programming/">Programming</a></span>
   
 
 </div>
@@ -594,14 +607,57 @@ Since this first email we have talked each other (a colleague of him was involve
   <div class="article-container">
 
     <div class="article-style">
-      <p>About two weeks ago I got a surprisingly email in my inbox. An old friend of mine is about to launch a new startup and he asked me to become the CTO of their new company. My first reaction was: Wow!</p>
-<p>Since this first email we have talked each other (a colleague of him was involved too) quite a few times. They have a good idea, an already working prototype of the product they want to create and enough money to be alive for a while if things don&rsquo;t go as expected. I have thinking a lot about the pros and cons of joining them on their new adventure and I have finally made a decision: I am not joining them.</p>
-<p>As I have already written at the beginning of the post, their new project has a bunch of attractive things: from a pure technology perspective their product will require some of the newest technologies in order to solve their problem; I would say it is a &ldquo;fun&rdquo; problem from a techical perspective. From a business perspective they already have quite a few good ideas, I am just curious on how they finally will set the main target audience of the product. So, I guess, your next question will be, why aren&rsquo;t you joining them? I have a really short and concise answer: my family.</p>
-<p>Creating a new startup is a really hard and time consuming task, even with the above-described attenuating. Tons of effort are required to get everything in the right place: finding new clients, traveling, developing the product, hiring people, compose a new team and so on. All of this stuff is really interesting, and, don&rsquo;t take me wrong , I am a pretty hard worker and love my job (all of those who already know me could corroborate that), but, right now, my top priority is to spend as much time as possible with my wife and my son (we are planning to increase the family in the near future (hopefully :)), and I think all this stuff isn&rsquo;t too much compatible with becoming a CTO of a new startup at this moment. Of course, all of this is just my personal opinions based on my own experiences (and my friends').</p>
-<p>I don&rsquo;t know if I am making the right decision, but I am being consistent with my priorities. I have been completely transparent with them, and I think they have understood my final choice; it has been a considered decision.</p>
-<p>Besides my personal reasons, to be honest, I am not sure if I would be able to successfully achieve all the things a CTO is supposed to undertake. I am just a mere technical guy who tries to learn as much as possible of all the people around him, and that, every single day, realize that he has no real idea of how computers work :).</p>
-<p>I&rsquo;m not entirely convinced I have expressed myself correctly because of the language (this is one of the main reasons I switched the blog&rsquo;s language, just to force me and try to improve my skills) but I wanted to write it down and share with all of you. I like to hear about this kind of stories: the reasons why people start a new company, decline a good job offer or cross the whole world looking for new challenges.</p>
-<p>I am sure my friends are going to succeed on their new adventure. I would wish them luck, but I&rsquo;m completely sure they don&rsquo;t need it.</p>
+      <p><strong>Disclaimer</strong>: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply some of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho).</p>
+<p>I would like to start with a question: <strong>how do we know that a program we are writing is correct or no?</strong> I guess the most probable answer for many of us would be <strong>testing</strong>. We think about many different input cases for our program as we can, write them down and execute our code hoping we can find as many bugs as possible. Of course, there could be a set of inputs we haven’t thought about which cause or program to fail and/or show unexpected behavior. Under this model, we could probably include some other techniques like peer-reviewing or doing source code static analysis.</p>
+<p>Trying to extend the testing approach and make it more reliable we have the <strong>property based testing/fuzzing</strong> approach. In this case, the general idea is to generate tons of random inputs according to a set of patterns and check that a concrete property holds against all the generated cases, broadening the scope of the set of inputs we are passing to the program under testing.</p>
+<p>If we try to expand the previous concepts a little bit we get into the model checking world. In this case, we need to define, in a formal and abstract way, what our program/design is doing and the model checker will try to explore all the potential states that our design might ever enter at the time it checks that certain correctness properties hold on every one of the previous states, providing a counterexample in the cases where this is not true. Under this category, we have tools like 
+<a href="https://lamport.azurewebsites.net/tla/tla.html" target="_blank" rel="noopener">TLA+</a>
+ and 
+<a href="https://alloytools.org/" target="_blank" rel="noopener">Alloy</a>
+.</p>
+<p>The next sections of this post will be devoted to the model-checking process.</p>
+<p>One of the major drawbacks of the model checking approach is the state-explosion problem (the number of potential states our design might enter is way bigger than the available memory) but we would like to formally verify our design even if the set of the states is “infinite”. At this side of the spectrum, we have the formal proof approach, which, personally, I find a bit intimidating (we will talk about it in a future post). Under this category, we have tools like 
+<a href="https://isabelle.in.tum.de/" target="_blank" rel="noopener">Isabelle</a>
+ or 
+<a href="https://coq.inria.fr/" target="_blank" rel="noopener">Coq</a>
+.</p>
+<h1 id="model-checking">Model checking</h1>
+<p>I like to think about formal methods like “the applied maths for modeling and analyzing software or hardware systems”: they aim to establish system correctness with mathematical rigor. Entities like IEC (International Electrotechnical Commission), ESA (European Space Agency) or the NASA (National Aeronautics and Space administration) highly recommend the use of formal verification techniques.</p>
+<p>Model-based techniques are based on a formal, precise, and unambiguous definition of the system behavior. In the particular case of model checking, once the model is defined, and using a brute-force approach, the checker tries to explore all the possible system states.</p>
+<p>One thing I have found particularly useful is that even before running any kind of verification, trying to accurately describe the model has helped me a lot to discover incompleteness and inconsistencies that are usually found at a much later stage of the design.</p>
+<h2 id="the-process">The process</h2>
+<p>Trying to apply a model checking technique to a particular design could be summarized in the next steps (of course, this is how it works for me):</p>
+<ul>
+<li>
+<p><strong>Modeling the system:</strong> in this phase, we define the model using the language of the model checker, perform a few simulations just to do a quick sanity check, and make sure we’re on the right track and formalize the set of properties that need to be validated.</p>
+</li>
+<li>
+<p><strong>Running our model:</strong> run the model checker in order to validate if the previous properties we have defined hold true in all the potential states our design might enter</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Are the previous properties satisfied? Have they been violated? If the checker finds that a certain property has been violated it will provide a counterexample which will help us to refine our design, model definition, or property. It could be possible that we run out of memory because the set of potential states is humungous and, in this case, we would need to reduce them and try again.</p>
+</li>
+</ul>
+<h2 id="strengths-and-weakness">Strengths and weakness</h2>
+<p>As with any other tool we usually use, the model checking techniques present a set of strengths and weakness I would like to highlight:</p>
+<h3 id="the-main-strengths-of-model-checking-are">The main strengths of model checking are:</h3>
+<ul>
+<li>It provides a general verification approach we can apply to a wide range of domains.</li>
+<li>Partial verification support: the properties can be checked individually.</li>
+<li>Diagnosis information is provided in case a property is invalidated.</li>
+<li>Sound mathematical underpinning: it’s based on graph algorithm theory, data structures, and logic.</li>
+</ul>
+<h3 id="the-main-weakness-of-model-checking-are">The main weakness of model checking are:</h3>
+<ul>
+<li>It’s not really suitable for data-intensive applications because data usually range over infinite domains.</li>
+<li>There’s no completeness guarantees; it only checks for stated requirements.</li>
+<li>The verification is applied to the system model, and not the system itself.</li>
+<li>It suffers from the state-space explosion problem (despite all the methods that have been developed lately)</li>
+</ul>
+<h1 id="conclusion">Conclusion</h1>
+<p>We usually spend way more time on verification than construction when we are building complex systems (hardware or software). I firmly believe than formal methods offer a huge potential to provide more effective verification mechanisms that provide more robust results and reduce the time spent on the process. In the particular case of model checking, in my experience, it provides an effective technique to expose potential errors in our designs.</p>
+<p>I had originally planned to provide a short example explaining how to use Alloy to formally verify a design but I think the post has become long enough so I will write about it in a future entry.</p>
+<p>Thanks a lot for reading!</p>
 
     </div>
 
@@ -613,9 +669,7 @@ Since this first email we have talked each other (a colleague of him was involve
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/jobs/">jobs</a>
-  
-  <a class="badge badge-light" href="/tags/"></a>
+  <a class="badge badge-light" href="/tags/formal-methods/">formal methods</a>
   
 </div>
 
@@ -632,7 +686,7 @@ Since this first email we have talked each other (a colleague of him was involve
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://migue.github.io/post/saying-no/&amp;text=Saying%20No" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://migue.github.io/post/formal-methods-introduction/&amp;text=Formal%20methods%20introduction%20%28I%29" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -645,7 +699,7 @@ Since this first email we have talked each other (a colleague of him was involve
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://migue.github.io/post/saying-no/&amp;t=Saying%20No" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://migue.github.io/post/formal-methods-introduction/&amp;t=Formal%20methods%20introduction%20%28I%29" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -658,7 +712,7 @@ Since this first email we have talked each other (a colleague of him was involve
       
       
       <li>
-        <a href="mailto:?subject=Saying%20No&amp;body=https://migue.github.io/post/saying-no/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Formal%20methods%20introduction%20%28I%29&amp;body=https://migue.github.io/post/formal-methods-introduction/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -671,7 +725,7 @@ Since this first email we have talked each other (a colleague of him was involve
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://migue.github.io/post/saying-no/&amp;title=Saying%20No" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://migue.github.io/post/formal-methods-introduction/&amp;title=Formal%20methods%20introduction%20%28I%29" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -684,7 +738,7 @@ Since this first email we have talked each other (a colleague of him was involve
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Saying%20No%20https://migue.github.io/post/saying-no/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Formal%20methods%20introduction%20%28I%29%20https://migue.github.io/post/formal-methods-introduction/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -697,7 +751,7 @@ Since this first email we have talked each other (a colleague of him was involve
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://migue.github.io/post/saying-no/&amp;title=Saying%20No" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://migue.github.io/post/formal-methods-introduction/&amp;title=Formal%20methods%20introduction%20%28I%29" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -716,6 +770,10 @@ Since this first email we have talked each other (a colleague of him was involve
 
 
 
+  
+  
+    
+  
   
 
 
@@ -805,6 +863,15 @@ Since this first email we have talked each other (a colleague of him was involve
 
 
   
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/a-few-books-i-would-like-to-read/">A few books I would like to read</a></li>
+      
+    </ul>
+  </div>
   
 
 
