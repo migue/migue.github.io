@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>formal methods | Just my thouhgts</title>
+    <link>https://migue.github.io/tags/formal-methods/</link>
+      <atom:link href="https://migue.github.io/tags/formal-methods/index.xml" rel="self" type="application/rss+xml" />
+    <description>formal methods</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2020 22:53:30 +0200</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>formal methods</title>
+      <link>https://migue.github.io/tags/formal-methods/</link>
+    </image>
+    
+    <item>
+      <title>Formal methods introduction (I)</title>
+      <link>https://migue.github.io/post/formal-methods-intro/</link>
+      <pubDate>Wed, 12 Aug 2020 22:53:30 +0200</pubDate>
+      <guid>https://migue.github.io/post/formal-methods-intro/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply [some] of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho).&lt;/p&gt;
+&lt;p&gt;I would like to start with a question: &lt;strong&gt;how do we know that a program we are writing is correct or no?&lt;/strong&gt; I guess the most probable answer for many of us would be &lt;strong&gt;testing&lt;/strong&gt;. We think about many different input cases for our program as we can, write them down and execute our code hoping we can find as many bugs as possible. Of course, there could be a set of inputs we haven’t thought about which cause or program to fail and/or show unexpected behavior. Under this model, we could probably include some other techniques like peer-reviewing or doing source code static analysis.&lt;/p&gt;
+&lt;p&gt;Trying to extend the testing approach and make it more reliable we have the &lt;strong&gt;property based testing/fuzzing&lt;/strong&gt; approach. In this case, the general idea is to generate [tons] of random inputs according to a set of patterns and check that a concrete property holds against all the generated cases, broadening the scope of the set of inputs we are passing to the program under testing.&lt;/p&gt;
+&lt;p&gt;If we try to expand the previous concepts a little bit we get into the &lt;strong&gt;model checking&lt;/strong&gt; world. In this case, we need to define, in a formal and abstract way, what our program/design is doing and the model checker will try to explore all the potential states that our design might ever enter at the time it checks that certain correctness properties hold on every one of the previous states, providing a counterexample in the cases where this is not true. Under this category, we have tools like 
+&lt;a href=&#34;https://lamport.azurewebsites.net/tla/tla.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TLA+&lt;/a&gt;
+ and 
+&lt;a href=&#34;https://alloytools.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alloy&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;The next sections of this post will be devoted to the model-checking process.&lt;/p&gt;
+&lt;p&gt;One of the major drawbacks of the model checking approach is the state-explosion problem (the number of potential states our design might enter is way bigger than the available memory) but we would like to formally verify our design even if the set of the states is “infinite”. At this side of the spectrum, we have the formal proof approach, which, personally, I find a bit intimidating (we will talk about it in a future post). Under this category, we have tools like 
+&lt;a href=&#34;https://isabelle.in.tum.de/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Isabelle&lt;/a&gt;
+ or 
+&lt;a href=&#34;https://coq.inria.fr/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Coq&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h1 id=&#34;model-checking&#34;&gt;Model checking&lt;/h1&gt;
+&lt;p&gt;I like to think about formal methods like “the applied maths for modeling and analyzing software or hardware systems”: they aim to establish system correctness with mathematical rigor. Entities like IEC (International Electrotechnical Commission), ESA (European Space Agency) or the NASA (National Aeronautics and Space administration) highly recommend the use of formal verification techniques.&lt;/p&gt;
+&lt;p&gt;Model-based techniques are based on a formal, precise, and unambiguous definition of the system behavior. In the particular case of model checking, once the model is defined, and using a brute-force approach, the checker tries to explore all the possible system states.&lt;/p&gt;
+&lt;p&gt;One thing I have found particularly useful is that even before running any kind of verification, trying to accurately describe the model has helped me a lot to discover incompleteness and inconsistencies that are usually found at a much later stage of the design.&lt;/p&gt;
+&lt;h2 id=&#34;the-process&#34;&gt;The process&lt;/h2&gt;
+&lt;p&gt;Trying to apply a model checking technique to a particular design could be summarized in the next steps (of course, this is how it works for me):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Modeling the system&lt;/strong&gt;: in this phase, we define the model using the language of the model checker, perform a few simulations just to do a quick sanity check, and make sure we’re on the right track and formalize the set of properties that need to be validated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Running our model&lt;/strong&gt;: run the model checker in order to validate if the previous properties we have defined hold true in all the potential states our design might enter&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analysis&lt;/strong&gt;: Are the previous properties satisfied? Have they been violated? If the checker finds that a certain property has been violated it will provide a counterexample which will help us to refine our design, model definition, or property. It could be possible that we run out of memory because the set of potential states is humungous and, in this case, we would need to reduce them and try again.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;strengths-and-weakness&#34;&gt;Strengths and weakness&lt;/h2&gt;
+&lt;p&gt;As with any other tool we usually use, the model checking techniques present a set of strengths and weakness I would like to highlight:&lt;/p&gt;
+&lt;h3 id=&#34;the-main-strengths-of-model-checking-are&#34;&gt;The main strengths of model checking are:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;It provides a general verification approach we can apply to a wide range of domains.&lt;/li&gt;
+&lt;li&gt;Partial verification support: the properties can be checked individually.&lt;/li&gt;
+&lt;li&gt;Diagnosis information is provided in case a property is invalidated.&lt;/li&gt;
+&lt;li&gt;Sound mathematical underpinning: it’s based on graph algorithm theory, data structures, and logic.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;the-main-weakness-of-model-checking-are&#34;&gt;The main weakness of model checking are:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;It’s not really suitable for data-intensive applications because data usually range over infinite domains.&lt;/li&gt;
+&lt;li&gt;There’s no completeness guarantees; it only checks for stated requirements.&lt;/li&gt;
+&lt;li&gt;The verification is applied to the system model, and not the system itself.&lt;/li&gt;
+&lt;li&gt;It suffers from the state-space explosion problem (despite all the methods that have been developed lately)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;We usually spend way more time on verification than construction when we are building complex systems (hardware or software). I firmly believe than formal methods offer a huge potential to provide more effective verification mechanisms that provide more robust results and reduce the time spent on the process. In the particular case of model checking, in my experience, it provides an effective technique to expose potential errors in our designs.&lt;/p&gt;
+&lt;p&gt;I had originally planned to provide a short example explaining how to use Alloy to formally verify a design but I think the post has become long enough so I will write about it in a future entry.&lt;/p&gt;
+&lt;p&gt;Thanks a lot for reading!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A few books I would like to read</title>
+      <link>https://migue.github.io/post/a-few-books-i-would-like-to-read/</link>
+      <pubDate>Sat, 16 May 2020 15:14:30 +0200</pubDate>
+      <guid>https://migue.github.io/post/a-few-books-i-would-like-to-read/</guid>
+      <description>&lt;p&gt;I like reading, a lot, but, sadly, I don’t read as much as I used to do a few years ago (for many different reasons). However, I keep growing the list of books I’d like to read, hoping I will be able to read them at some point in the future.&lt;/p&gt;
+&lt;p&gt;You’ll find a few different topics: databases, distributed systems, computer architecture, concurrency, or formal methods are some of them. Maybe you find something interesting to read.&lt;/p&gt;
+&lt;p&gt;As I’ve already said, I haven’t read any of them (well, some random chapters) so I don’t really know if they’re going to be a good read.&lt;/p&gt;
+&lt;p&gt;Here we go (in no particular order).&lt;/p&gt;
+&lt;h2 id=&#34;transactional-information-systems-theory-algorithms-and-the-practice-of-concurrency-control-and-recovery-httpsdlacmorgdoibook1055552821572&#34;&gt;
+&lt;a href=&#34;https://dl.acm.org/doi/book/10.5555/2821572&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Transactional Information Systems: Theory, Algorithms, and the Practice of Concurrency Control and Recovery &lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;I love everything related to databases and someday I would like to work for a living in a database company :D (building one).&lt;/p&gt;
+&lt;p&gt;The book tries to present the foundations of transactional systems as well as the practical aspects of the field what will help you meet today&amp;rsquo;s challenges&lt;/p&gt;
+&lt;p&gt;It has been setting in my queue for a while, but I have never gone really deep into it. A conversation on Twitter a few weeks ago brought it back, and maybe it’s time to deep dive into it.&lt;/p&gt;
+&lt;h2 id=&#34;concurrency-the-works-of-leslie-lamporthttpsdlacmorgdoibook1011453335772&#34;&gt;
+&lt;a href=&#34;https://dl.acm.org/doi/book/10.1145/3335772&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Concurrency: the works of Leslie Lamport&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;The book presents a retrospective on Lamport&amp;rsquo;s original ideas from experts in the field: Bakery algorithm, atomic shared registers, and sequential consistency; causality and logical time; Byzantine Agreement; state machine replication and Paxos; temporal logic of actions (TLA), …&lt;/p&gt;
+&lt;p&gt;I think this is going to a nice read, from a historical perspective, about the work of one of the most influential researchers in the concurrency and distributed systems worlds.&lt;/p&gt;
+&lt;h2 id=&#34;computer-architecture-a-quantitative-approach-6th-editionhttpswwwelseviercombookscomputer-architecturehennessy978-0-12-811905-1&#34;&gt;
+&lt;a href=&#34;https://www.elsevier.com/books/computer-architecture/hennessy/978-0-12-811905-1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Computer architecture: A Quantitative Approach. 6th edition&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;In this case,  I have already read a few chapters in a previous edition of the book, but I would like to read the whole of it.&lt;/p&gt;
+&lt;p&gt;The authors, Hennessy and Patterson, are the winners of the 2017 ACM A.M. Turing Award and this 6th edition is fully revised with the latest developments in processor and system architecture.&lt;/p&gt;
+&lt;h2 id=&#34;principles-of-distributed-database-systemshttpsdlacmorgdoibook1055551972515&#34;&gt;
+&lt;a href=&#34;https://dl.acm.org/doi/book/10.5555/1972515&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Principles of distributed database systems&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;Another classic, which brings me back quite a few memories from my Ph.D. days (this is a story for a different post). Similar to the previous one, I have read a few chapters from a previous edition but I would like to read this latest edition completely.&lt;/p&gt;
+&lt;p&gt;The book covers the fundamental principles of distributed data management and some other topics like parallel database systems, peer-to-peer data, data stream systems, or cloud computing among many others.&lt;/p&gt;
+&lt;h2 id=&#34;principles-of-model-checkinghttpsmitpressmitedubooksprinciples-model-checking&#34;&gt;
+&lt;a href=&#34;https://mitpress.mit.edu/books/principles-model-checking&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Principles of Model Checking&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;I have some little experience with formal methods and model checking, mainly from my research days; I have used Alloy and TLA+ for different purposes and I am really convinced that formal methods can play a huge role in the software development world.&lt;/p&gt;
+&lt;p&gt;However, I would like to be able to properly express myself when I talk to a potential audience about the benefits of using formal methods. All the time I have needed to do it I have done a really poor job, and I would like to do something about it.&lt;/p&gt;
+&lt;p&gt;The book offers an introduction to the foundations of model checking and an extensive set of examples (both practical and theoretical).&lt;/p&gt;
+&lt;h2 id=&#34;patterns-in-network-architecture-a-return-to-fundamentalshttpswwworeillycomlibraryviewpatterns-in-network9780132252423&#34;&gt;
+&lt;a href=&#34;https://www.oreilly.com/library/view/patterns-in-network/9780132252423/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Patterns in Network architecture. A return to fundamentals&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;I’ve always wanted to improve my knowledge about networking in general; not about any technology/protocol in particular but the fundamentals behind the decisions taken to build network technologies.&lt;/p&gt;
+&lt;p&gt;A few people have recommended it and I would like to give it a try at some point.&lt;/p&gt;
+&lt;h2 id=&#34;programming-language-pragmatics-4th-editionhttpswwwelseviercombooksprogramming-language-pragmaticsunknown978-0-12-410409-9&#34;&gt;
+&lt;a href=&#34;https://www.elsevier.com/books/programming-language-pragmatics/unknown/978-0-12-410409-9&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Programming language pragmatics. 4th edition&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;Compilers and managed runtimes are other topics that really fascinate me.&lt;/p&gt;
+&lt;p&gt;I cannot remember who has recommended this book but seems to provide an extensive and detailed guide about the concepts and fundamentals behind the programming language design with an emphasis on the fundamental tradeoffs that continue to drive software development.&lt;/p&gt;
+&lt;h2 id=&#34;the-realm-of-rackethttpswwwrealmofracketcom&#34;&gt;
+&lt;a href=&#34;https://www.realmofracket.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The realm of Racket&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;I am planning to teach my oldest some programming (we’ve already done some Lego WeDo and some scratch) and my plans are to use Racket as the main vehicle for teaching him the fundamentals. I plan to follow the ideas expressed in this book.&lt;/p&gt;
+&lt;p&gt;I will write about it someday.&lt;/p&gt;
+&lt;h2 id=&#34;-signals-and-boundaries-building-blocks-for-complex-adaptive-systemshttpsmitpressmitedubookssignals-and-boundaries&#34;&gt;
+&lt;a href=&#34;https://mitpress.mit.edu/books/signals-and-boundaries&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; Signals and Boundaries. Building Blocks for Complex Adaptive Systems&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;I think the software world needs to learn a lot from the complex adaptive systems out there: governments, ecosystems, or markets among many others. I am genuinely interested to learn more about the basic building blocks out there and learn about other complex systems behave and how we can learn from them.&lt;/p&gt;
+&lt;p&gt;To be honest, I don’t know if I will be able to read all of them, but I would like to try to at least :D.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

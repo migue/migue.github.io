@@ -31,7 +31,7 @@
   <meta name="description" content="Software Architect">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/404.html">
+  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/tags/databases/">
 
   
 
@@ -248,12 +248,14 @@
 
 
   
+  <link rel="alternate" href="/tags/databases/index.xml" type="application/rss+xml" title="Just my thouhgts">
+  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="https://migue.github.io/404.html">
+  <link rel="canonical" href="https://migue.github.io/tags/databases/">
 
   
   
@@ -270,12 +272,12 @@
   <meta property="twitter:creator" content="@miguelinlas3">
   
   <meta property="og:site_name" content="Just my thouhgts">
-  <meta property="og:url" content="https://migue.github.io/404.html">
-  <meta property="og:title" content="404 Page not found | Just my thouhgts">
+  <meta property="og:url" content="https://migue.github.io/tags/databases/">
+  <meta property="og:title" content="databases | Just my thouhgts">
   <meta property="og:description" content="Software Architect"><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
   <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
   
-    
+    <meta property="og:updated_time" content="2020-07-29T11:14:30&#43;02:00">
   
 
   
@@ -292,7 +294,7 @@
 
 
 
-  <title>404 Page not found | Just my thouhgts</title>
+  <title>databases | Just my thouhgts</title>
 
 </head>
 
@@ -453,48 +455,106 @@
 </nav>
 
 
-  <div class="universal-wrapper pt-3">
-
-  <h1>Page not found</h1>
-
-  
-  
-  <form class="d-flex align-items-center mb-3">
-    <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
-  </form>
   
 
+
+
+
+
+
+
+
+
+
+
+
   
 
-  <p>Perhaps you were looking for one of these?</p>
+  
+  
+  
+    
+  
+<div class="universal-wrapper pt-3">
+  <h1>databases</h1>
+
+  
+
+  
+</div>
+
+
+
+<div class="universal-wrapper">
+  
 
   
   
+    
+    
+    
+    <div>
+      <h2><a href="/post/influx-clustering-kafka-based/" >InfluxDB: building your own clustering</a></h2>
+      <div class="article-style">
+        
+          A while ago I published a short Twitter thread explaining a few of the problems I had run into while running their [enterprise] clustering solution; it&rsquo;s been quite a painful process and I would like to write down the alternative architecture I ended up with while looking for improvements.
+The original scenario The original scenario I was working at was composed of a cluster of Go API servers backed by an InfluxDB database.
+        
+      </div>
+    </div>
   
-  <h2>Latest</h2>
-  <ul>
     
-      <li><a href="/post/formal-methods-intro/">Formal methods introduction (I)</a></li>
     
-      <li><a href="/post/influx-clustering-kafka-based/">InfluxDB: building your own clustering</a></li>
     
-      <li><a href="/post/a-few-books-i-would-like-to-read/">A few books I would like to read</a></li>
+    <div>
+      <h2><a href="/post/a-few-books-i-would-like-to-read/" >A few books I would like to read</a></h2>
+      <div class="article-style">
+        
+          I like reading, a lot, but, sadly, I don’t read as much as I used to do a few years ago (for many different reasons). However, I keep growing the list of books I’d like to read, hoping I will be able to read them at some point in the future.
+You’ll find a few different topics: databases, distributed systems, computer architecture, concurrency, or formal methods are some of them. Maybe you find something interesting to read.
+        
+      </div>
+    </div>
+  
     
-      <li><a href="/post/influx-storage-tsi-component/">InfluxDB storage subsystem: the TSI files</a></li>
     
-      <li><a href="/post/influx-storage-tsm-component/">InfluxDB storage subsystem: the TSM files</a></li>
     
-      <li><a href="/post/quick-tour-influx-storage/">InfluxDB storage subsystem: an introduction</a></li>
+    <div>
+      <h2><a href="/post/influx-storage-tsi-component/" >InfluxDB storage subsystem: the TSI files</a></h2>
+      <div class="article-style">
+        
+          Final entry on the InfluxDB storage subsystem series. This time I am going to focus on the, relatively new, indexing mechanism that the InfluxDB folks have built into their storage system.
+If you just arrived here for the first time, you can find some more details about the other major components of the storage system in the previous blog posts of the series: intro and WAL component and tsm component .
+        
+      </div>
+    </div>
+  
     
-      <li><a href="/post/books-and-talks/">Books and Talks</a></li>
     
-      <li><a href="/post/suerte/">Suerte</a></li>
     
-      <li><a href="/post/papers-we-love-madrid-final-chapter/">Papers We Love Madrid: capítulo final</a></li>
+    <div>
+      <h2><a href="/post/influx-storage-tsm-component/" >InfluxDB storage subsystem: the TSM files</a></h2>
+      <div class="article-style">
+        
+          During this entry, we are going through the TSM part of the InfluxDB storage engine: how the contents are organized in the disk, how they are compressed or how they are compacted. This is the second entry of the series about the InfluxDB storage engine started in the previous post .
+TSM files structure The TSM files are where Influx stores the real data; these files are read-only files and are memory-mapped.
+        
+      </div>
+    </div>
+  
     
-      <li><a href="/post/papers-we-love-madrid-tomando-forma/">Papers We Love Madrid: Tomando Forma</a></li>
     
-  </ul>
+    
+    <div>
+      <h2><a href="/post/quick-tour-influx-storage/" >InfluxDB storage subsystem: an introduction</a></h2>
+      <div class="article-style">
+        
+          Writing on the blog about some of the technical stuff I usually enjoy and/or work with is something that’s always in my plans but I never find the right time do it. Due to all this quarantine related stuff, both my sleeping habits and the kid’s are being somehow affected and, well, here I am, staring at a blank page trying to start writing about databases. And, well, since I don’t longer work for an international company I thought it would be a good idea to somehow practice my poor English skills.
+        
+      </div>
+    </div>
+  
+
   
 
 </div>

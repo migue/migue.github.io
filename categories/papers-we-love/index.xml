@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Papers We Love | Just my thouhgts</title>
+    <link>https://migue.github.io/categories/papers-we-love/</link>
+      <atom:link href="https://migue.github.io/categories/papers-we-love/index.xml" rel="self" type="application/rss+xml" />
+    <description>Papers We Love</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 05 Jan 2019 10:31:01 +0100</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Papers We Love</title>
+      <link>https://migue.github.io/categories/papers-we-love/</link>
+    </image>
+    
+    <item>
+      <title>Papers We Love Madrid: capítulo final</title>
+      <link>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</link>
+      <pubDate>Sat, 05 Jan 2019 10:31:01 +0100</pubDate>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-final-chapter/</guid>
+      <description>&lt;p&gt;Parece imposible que hayan pasado cuatro años desde que iniciásemos la andadura del 
+&lt;a href=&#34;https://migue.github.io/post/papers-we-love-madrid-tomando-forma/&#34;&gt;Papers We Love Madrid&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;Han sido cuatro años con altibajos en los que nunca hemos llegado a tener la periodicidad y actividades que teníamos en la cabeza cuando se arrancó el grupo. Cuatro años en los que hemos &amp;ldquo;sufrido&amp;rdquo; mucho más de lo esperado en encontrar a gente que se animase a dar una charla, en los que hemos intentando generar los contenidos más diversos posibles aunque no siempre lo hayamos conseguido. Cuatro años en los que hemos sufrido, al igual que en otros muchos grupos, la falta de asistencia de las personas que inicialmente estaban inscritas.&lt;/p&gt;
+&lt;p&gt;El objetivo inicial era acercar los mundos académicos y empresariales y demostrar que ambos pueden beneficiarse el uno del otro. Lamentablemente, hemos fracasado.&lt;/p&gt;
+&lt;p&gt;Pero no todo son aspectos negativos; también nos hemos divertido mucho por el camino. Hemos tenido la suerte de contar con expertos internacionales en sus respectivas áreas: Carlos Baquero, Álvaro Videla o Christopher Meiklejohn entre otros muchos, hemos hablado de muchísimos temas interesantes: machine learning, sistemas distribuidos, protocolos, &amp;hellip; y hemos tenido la suerte de contar con miembros del grupo que son unos auténticos cracks, aunque nunca se hayan animado a dar una charla :)&lt;/p&gt;
+&lt;p&gt;En el aspecto más personal, me gustaría dar las gracias a mi compañero de batallas 
+&lt;a href=&#34;https://twitter.com/flopezluis&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Félix&lt;/a&gt;
+ sin el cual todo esto que hemos hecho, aunque sea poco, no hubiera sido posible.&lt;/p&gt;
+&lt;p&gt;Con todo esto, y como la mayor parte ya habréis deducido a partir del título del post, muy a nuestro pesar, damos por cerrada nuestra actividad como organizadores del Papers We Love Madrid. Todos los recursos que hemos generado a lo largo de este periplo están disponibles en el canal oficial de 
+&lt;a href=&#34;https://www.youtube.com/channel/UCoj4eQh_dZR37lL78ymC6XA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Papers We Love&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;¡Muchas gracias a todos por vuestro apoyo y colaboración!&lt;/p&gt;
+&lt;p&gt;¡Hasta pronto!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Papers We Love Madrid: Tomando Forma</title>
+      <link>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</link>
+      <pubDate>Tue, 02 Dec 2014 22:17:41 +0100</pubDate>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-tomando-forma/</guid>
+      <description>&lt;p&gt;Como seguramente alguno de vosotros recordais, hace unas semanas planteé por 
+&lt;a href=&#34;http://migue.github.io/2014/11/12/papers-we-love-madrid-edition/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;
+ la posibilidad de organizar un Papers We Love en Madrid. Unas cuantas personas mostraron su interés tanto en participar como en colaborar lo que me hizo seguir adelante con la iniciativa propuesta.&lt;/p&gt;
+&lt;h2 id=&#34;meetup&#34;&gt;Meetup&lt;/h2&gt;
+&lt;p&gt;Gracias a la inestimable participación del gran 
+&lt;a href=&#34;https://twitter.com/flopezluis&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Féliz López&lt;/a&gt;
+ hemos conseguido, bueno, realmente él ha conseguido que 
+&lt;a href=&#34;https://twitter.com/old_sound&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Álvaro Videla&lt;/a&gt;
+ sea el ponente que de el pistoletazo de salida al nuevo grupo.&lt;/p&gt;
+&lt;p&gt;Parece que Álvaro tiene previsto pasarse por aquí en Febrero, con lo que &amp;ldquo;retrasaríamos&amp;rdquo; hasta ese momento la primera reunión del grupo. En cuanto al paper, todavía no he hablado con Álvaro, pero en cuanto me lo concrete, lo actualizaré tanto aquí como en la futura página de Meetup del grupo (véase más abajo)&lt;/p&gt;
+&lt;h2 id=&#34;ubicación&#34;&gt;Ubicación&lt;/h2&gt;
+&lt;p&gt;Todavía no tenemos una ubicación definitiva aunque varias personas se han ofrecido a través de Twitter a conseguir espacios donde podamos celebrar la primera reunión. Por simplicidad de las gestiones, había hablado con mi jefe sobre la posibilidad de disponer de las oficinas de 
+&lt;a href=&#34;https://liferay.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Liferay España&lt;/a&gt;
+ y la respuesta ha sido positiva. Del mismo modo, Félix me ha comentado que la nueva oficina de 
+&lt;a href=&#34;http://shuttlecloud.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ShuttleCloud&lt;/a&gt;
+ también es una opción viable. Por último, 
+&lt;a href=&#34;https://twitter.com/fcofdezc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Francisco Fernández&lt;/a&gt;
+ me comentaba que podría conseguir las oficinas de 
+&lt;a href=&#34;https://tuenti.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tuenti&lt;/a&gt;
+.&lt;/p&gt;
+&lt;p&gt;Personalmente creo el abanico de opciones para esta primera charla es lo suficientemente amplio (y céntrico :D ). Cuando la ubicación sea definitiva, lo haré saber.&lt;/p&gt;
+&lt;h2 id=&#34;grupo-de-meetup&#34;&gt;Grupo de Meetup&lt;/h2&gt;
+&lt;p&gt;Dado que parece que todo esto va tomando forma, iré creando el grupo de Meetup además de revisar el resto de &amp;ldquo;requisitos&amp;rdquo; que establece la comunidad de Papers We Love&lt;/p&gt;
+&lt;p&gt;¡Muchas gracias por vuestra atención!&lt;/p&gt;
+&lt;p&gt;Migue&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Papers We Love Madrid Edition</title>
+      <link>https://migue.github.io/post/papers-we-love-madrid-edition/</link>
+      <pubDate>Wed, 12 Nov 2014 22:15:41 +0100</pubDate>
+      <guid>https://migue.github.io/post/papers-we-love-madrid-edition/</guid>
+      <description>&lt;p&gt;Hace unos días, a raíz de un tweet sobre 
+&lt;a href=&#34;http://julialang.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Julia&lt;/a&gt;
+, salió a la luz un tema al que hace tiempo le llevo dando bastantes vueltas: 
+&lt;a href=&#34;http://papers-we-love.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Papers we Love&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id=&#34;la-comunidad&#34;&gt;La comunidad&lt;/h2&gt;
+&lt;p&gt;Para todos aquellos que nunca han oído hablar de esta iniciativa, no es más que un repositorio de papers académicos en torno al cual se ha creado una comunidad que realizar charlas periódicas donde presentar y discutir sobre los mismos.&lt;/p&gt;
+&lt;h2 id=&#34;las-normas&#34;&gt;Las normas&lt;/h2&gt;
+&lt;p&gt;No tiene mucho sentido que replique aquí todas las normas: 
+&lt;a href=&#34;https://github.com/papers-we-love/papers-we-love/wiki/Creating-a-PWL-chapter&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;
+ están detalladas.&lt;/p&gt;
+&lt;p&gt;Los requisitos básicos son disponer de un grupo de 
+&lt;a href=&#34;http://www.meetup.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Meetup&lt;/a&gt;
+ y realizar reuniones razonablemente periódicas (para que ellos te mantengan en la lista de grupos activos).&lt;/p&gt;
+&lt;h2 id=&#34;la-propuesta&#34;&gt;La propuesta&lt;/h2&gt;
+&lt;p&gt;Seguro que muchos de vosotros os estaréis preguntando: ¿Por qué? ¿No existen suficientes grupos de usuarios en Madrid?&lt;/p&gt;
+&lt;p&gt;Siempre he pensado que el mundo de la investigación y el mundo empresarial deberían estar mucho más cerca el uno del otro, y me gustaría que este grupo permitiera a los integrantes ver cómo ambos mundos pueden beneficiarse mutuamente.&lt;/p&gt;
+&lt;p&gt;Me gustaría destacar que la temática de este grupo &lt;strong&gt;no&lt;/strong&gt; está focalizada en una tecnología, plataforma o lenguaje de programación concretos sino que gira en torno a papers que los integrantes del grupo consideren interesantes (y, por su puesto, de la visión que el speaker le quiera dar :) ). Si os dais una vuelta por los meetups de otras ciudades veréis que las temáticas son de lo más dispares.&lt;/p&gt;
+&lt;p&gt;Evidentemente esto no es más que una idea/propuesta, para ver si habría gente interesada en que se pudiera formar el grupo.&lt;/p&gt;
+&lt;p&gt;¡Muchas gracias por vuestra atención!&lt;/p&gt;
+&lt;p&gt;Migue&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Miguel Ángel Pastor Olivar">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="A while ago I published a short Twitter thread explaining a few of the problems I had run into while running their [enterprise] clustering solution; it&rsquo;s been quite a painful process and I would like to write down the alternative architecture I ended up with while looking for improvements.
+The original scenario The original scenario I was working at was composed of a cluster of Go API servers backed by an InfluxDB database.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/post/influx-clustering-kafka-based/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-30238603-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-30238603-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://migue.github.io/post/influx-clustering-kafka-based/">
+
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@miguelinlas3">
+  <meta property="twitter:creator" content="@miguelinlas3">
+  
+  <meta property="og:site_name" content="Just my thouhgts">
+  <meta property="og:url" content="https://migue.github.io/post/influx-clustering-kafka-based/">
+  <meta property="og:title" content="InfluxDB: building your own clustering | Just my thouhgts">
+  <meta property="og:description" content="A while ago I published a short Twitter thread explaining a few of the problems I had run into while running their [enterprise] clustering solution; it&rsquo;s been quite a painful process and I would like to write down the alternative architecture I ended up with while looking for improvements.
+The original scenario The original scenario I was working at was composed of a cluster of Go API servers backed by an InfluxDB database."><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
+  <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-07-29T11:14:30&#43;02:00">
+    
+    <meta property="article:modified_time" content="2020-07-29T11:14:30&#43;02:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://migue.github.io/post/influx-clustering-kafka-based/"
+  },
+  "headline": "InfluxDB: building your own clustering",
+  
+  "datePublished": "2020-07-29T11:14:30+02:00",
+  "dateModified": "2020-07-29T11:14:30+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Miguel Ángel Pastor Olivar"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Just my thouhgts",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img/https://migue.github.io/"
+    }
+  },
+  "description": "A while ago I published a short Twitter thread explaining a few of the problems I had run into while running their [enterprise] clustering solution; it\u0026rsquo;s been quite a painful process and I would like to write down the alternative architecture I ended up with while looking for improvements.\nThe original scenario The original scenario I was working at was composed of a cluster of Go API servers backed by an InfluxDB database."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>InfluxDB: building your own clustering | Just my thouhgts</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Just my thouhgts</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Just my thouhgts</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>InfluxDB: building your own clustering</h1>
+
+  
+  <p class="page-subtitle">How to build your own clustered InfluxDB using Kafka</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  
+  <span><a href="/authors/admin/">Miguel Ángel Pastor Olivar</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jul 29, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/computer-science/">Computer Science</a>, <a href="/categories/programming/">Programming</a>, <a href="/categories/distributed-systems/">Distributed Systems</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>A while ago I published a short 
+<a href="https://twitter.com/miguelinlas3/status/1158768734372278273" target="_blank" rel="noopener">Twitter thread</a>
+ explaining a few of the problems I had run into while running their [enterprise] clustering solution; it&rsquo;s been quite a painful process and I would like to write down the alternative architecture I ended up with while looking for improvements.</p>
+<h1 id="the-original-scenario">The original scenario</h1>
+<p>The original scenario I was working at was composed of a cluster of Go API servers backed by an InfluxDB database. Original service requirements demanded to deploy a fault-tolerant datastore so that&rsquo;s the reason an InfluxDB cluster was put in place.</p>
+<p>A general overview of our current deployment architecture is depicted below:</p>
+<p><img src="/img/influxdb-clustering.webp" alt="Influx current cluster architecture"></p>
+<p>This clustering solution has 2 different parts:</p>
+<ul>
+<li><strong>Control Plane</strong>: This comprises 3 meta nodes that implement the 
+<a href="https://raft.github.io/" target="_blank" rel="noopener">Raft protocol</a>
+ and make sure that all the cluster metadata information is consistent. This control plane provides the ability to add/remove nodes from the cluster, move shards around among many other different things.</li>
+<li><strong>Data Plane</strong>: This part of the system comprises 2 data nodes and contains the data itself. These nodes are responsible for handling both write and read queries.</li>
+</ul>
+<h1 id="the-problems">The problems</h1>
+<p>The clustering solution described in the previous section is not included in the Influx OSS version so that&rsquo;s the reason the client had purchased a commercial license which allowed us to deploy:</p>
+<ul>
+<li><strong>A three-node control plane</strong>. This is not a real limitation of the license; we could deploy more meta nodes in case we needed it.</li>
+<li><strong>A two-node data plane</strong>. Here, with the existing licenses, we can <strong>only</strong> deploy 2 data nodes where each of them had 8 cores.</li>
+</ul>
+<p>The aforementioned licensing model imposed us a set of restrictions which, basically, didn&rsquo;t allow us to &ldquo;easily&rdquo; scale [up or out] the existing cluster. I had to go through the whole license negotiation cycle at $client: get the budget, talk to a few different departments, make sure everyone was on the same page,&hellip; Of course, this has nothing to do with the Influx database tech not even with InfluxData, the company selling the clustering capabilities, but I wanted to put on top of the table all the different factors that influenced the set of changes described later.</p>
+<p>The previous reasons were not the only ones, of course; from a mere technical perspective a few different problems arose:</p>
+<ul>
+<li>
+<p>At the very beginning, before the movement towards their TSI index approach, the database process was restarted twice-thrice a day due to the high memory pressure created by their in-memory inverted index implementation.</p>
+</li>
+<li>
+<p>The performance on the read side was annoying: +2 minutes for queries running through an hour of data grouping 2-3 different tags, long GC times while the previous queries were executed, &hellip;</p>
+</li>
+<li>
+<p>The Hinted Handoff mechanism could bring the whole cluster down in a few minutes.</p>
+</li>
+<li>
+<p>The anti-entropy service was a complete nightmare: it was enabled by default and it detected inconsistencies every time it was run, creating tons of pressure in the IO subsystem (and never correcting them).</p>
+</li>
+<li>
+<p>The support service was unexpectedly bad: a long time to get a response back, a complete lack of knowledge about the systems they were supposed to be supporting. Sadly I had to go through the source code quite a few times, looking for explanations (for the commercial part the source wasn&rsquo;t available so dealing with some of the aforementioned problems was even more complicated).</p>
+</li>
+</ul>
+<p>Taking into account all the previous considerations and the new set of changes (we&rsquo;ll talk about them later on) that were about to be put in place into the whole system, I did consider that the price we were paying for this was not worth at all.</p>
+<p>We were introducing Kafka as the backbone of our system so, why don&rsquo;t take advantage of it and try to solve the clustering problem using a different approach?</p>
+<h1 id="a-different-approach-a-write-ahead-log-wal-based-on-kafka">A different approach: a write-ahead log (WAL) based on Kafka</h1>
+<p>A write-ahead log (WAL) is a very common practice used in many databases, including time-series databases. Very briefly, a WAL is an append-only file where the different actions that need to be performed in the database are persisted. Two of the most important advantages that a WAL provides are:</p>
+<ul>
+<li><strong>Durability</strong>. Persisting actions in a WAL ensures that those actions will be exected even if the database crashes. Logging the actions before making changes to the different in-memory data structures implies that actions could be recorded and reapplied.</li>
+<li><strong>Atomicity</strong>. If a server crashes midway executing various actions, the database can look at the WAL to find where it left off and finish the job.</li>
+</ul>
+<p>Some drawbacks of the WAL approach are:</p>
+<ul>
+<li><strong>Multitenancy</strong>. Since the WAL is running in-process we are limited to the amount of memory available in the system, making it harder to build a proper multi-tenant solution.</li>
+<li><strong>Durability</strong>. There is no replication, so, if a disk dies, we lose the data.</li>
+</ul>
+<p>Trying to solve the aforementioned shortcomings and to provide the right mechanisms to horizontally scale our existing cluster, the proposal was to use Kafka as a distributed WAL.</p>
+<h2 id="the-requirements">The requirements</h2>
+<p>The set of requirements we were trying to satisfy were:</p>
+<ul>
+<li><strong>Multi-tenant</strong>. Properly handling of multiple tenants.</li>
+<li><strong>Elasticity</strong>. The storage tier is horizontally scalable.</li>
+<li><strong>Integrity</strong>. Data integrity should be preserved even in the presence of failures.</li>
+<li><strong>Tolerant</strong>. It should be easy to replace nodes within the storage tier when it was needed (failure, deployment, etc).</li>
+</ul>
+<h2 id="the-architectural-basis">The architectural basis</h2>
+<p>The architecture is based on a fault-tolerant cluster built using Apache Kafka (because it was already a part of the overall system). A high-level overview of the new proposed architecture is depicted below:</p>
+<p><img src="/img/InfluxClusterKafkaBased.svg" alt="Influx cluster architecture based on Kafka"></p>
+<p>In this new proposed architecture, Kafka performs the function of a highly reliable and highly efficient WAL buffer for persisting time-series records that will be finally persisted into an InfluxDB instance(s).</p>
+<p>Points will be written to a Kafka topic and this topic will replicate the data 3 times. Therefore, the loss of one Kafka broker node does not result in the loss of the topic’s data.</p>
+<p>The 
+<a href="#influx-relay-implementation">Influx Relay implementation</a>
+ will read data from the aforementioned topic and will push the data into the InfluxDB nodes.</p>
+<p>The load balancing layer is shown as a separate layer but it could be implemented in the consumer itself (in this case the previous Go endpoints are the only InfluxDB consumers) or just using an external load balancer (the current solution use an elastic load balancer provided by AWS).</p>
+<p>The upcoming sections will go deeper into the details of the previous components.</p>
+<h2 id="influx-relay-implementation">Influx Relay implementation</h2>
+<p>The major responsibility of this new component is to read the data points from the Kafka topic and insert them into the InfluxDB node. It&rsquo;s important to guarantee that:</p>
+<ul>
+<li>The data points are replicated across all the InfluxDB nodes in the cluster.</li>
+<li>Data retrieved from the Kafka partition is batched before it&rsquo;s inserted into an Influx node in order to maximize the write-throughput.</li>
+</ul>
+<p>An <code>Influx-Relay</code> instance needs to be deployed for every Influx node in the cluster. Every <code>Influx-Relay</code> instance will use its own Kafka consumer group, so, for example, if we want to deploy a 2 nodes Influx cluster (<code>influx-node-0</code> and <code>influx-node-1</code>) we will need to deploy:</p>
+<ul>
+<li><code>influx-relay-0</code> process using the <code>influx-node-0-consumer-group</code>.</li>
+<li><code>influx-relay-1</code> process using the <code>influx-node-1-consumer-group</code>.</li>
+</ul>
+<p>This new solution ensures that the data will be <strong>eventually</strong> stored in all the Influx nodes. This means that, at some point in time, different nodes will potentially return different results depending on how far behind the node&rsquo;s <code>Influx-Relay</code> counterpart is; this is totally acceptable due to the nature of the system we are building and it makes no difference with our current approach (our existing InfluxDB clustering approach would allow us to change this and provide stronger consistency at the expense of increasing the latency).</p>
+<h2 id="failure-scenarios">Failure scenarios</h2>
+<p>In the case of an Influx node failure, the other nodes will continue working independently and the data will continue to be delivered to them. Once the node is recovered, it will need to catch up in order to synchronize with the rest of the cluster nodes.</p>
+<p>The synchronization protocol taking care of this process is something like the following one:</p>
+<ul>
+<li>When a node goes down it’s removed (manually or automatically) from the load balancing layer, making it unavailable for the consumers.</li>
+<li>Once the problem is fixed the <code>influx-relay</code> process will, eventually, catch up with the rest of the members of the cluster</li>
+<li>At the time the synchronization is done and the node is up to date we could add it back to the load balancing layer, and make it available to the query side of the system.</li>
+</ul>
+<p>In a catastrophic scenario were, for example, a complete InfluxDB node is lost we can rsync the contents from an existing node and, after it’s done, start replaying from Kafka.</p>
+<h2 id="sharding">Sharding</h2>
+<p>The solution proposed in the previous paragraphs described a single topic with all the metrics and a set of process (one per Influx node) storing the data.</p>
+<p>One of the big benefits of the proposed architecture is that it allows us to scale based on data sharding, splitting our datasets into disjoint groups.</p>
+<p>For example, one potential scenario would be to shard our data based on the accounts of the system, so, we would have:</p>
+<ul>
+<li>A new topic for the account we want to split.</li>
+<li>A new set of Influx nodes (at least two).</li>
+<li>A new set of <code>Influx-Relay</code> processes that will read from the new topic and will store the data of this namespace in the new Influx cluster.</li>
+</ul>
+<p>In the load balancing layer, we will need to make sure that the queries for this account are directed to the proper InfluxDB instances.</p>
+<p>But using the accounts is non the only alternative we have; we could use different alternatives to split the data. As an example, let&rsquo;s imagine we have a single account where the number of series is so huge that doesn&rsquo;t fit into a single database (remember that all the nodes in the cluster are identical). We could use a hash function (whatever we consider) to map our data to different Kafka partitions and deploy a new pair of Influx data nodes an <code>Influx-Relay</code> processes for every potential partition.</p>
+<p>Now, in the load balancing layer, we would need to implement the same sharding logic we have implemented at write time, so we can redirect the queries to the corresponding Influx nodes.</p>
+<h2 id="limitations">Limitations</h2>
+<p>One of the main limitations of this proposed architecture could be at the read side, with queries that need to touch different shards. In these scenarios, the load balancing layer would need to be much smarter than the alternative proposed here and, for a single query, determine the set of shards which needs to be retrieved, execute all the required queries and compose the result that needs to be sent back to the consumer.</p>
+<p>And not only that, if you want your writes to be highly consistent this is not probably a solution for you (it could be evolved but it was out of the initial scope since it wasn’t required at all).</p>
+<h1 id="conclusions">Conclusions</h1>
+<p><strong>Disclaimer</strong>: I have already shared all the contents included in this post with a few of the Influx folks. This doesn’t pretend to be a rant about the InfluxDB company at all; just wanted to share with you, very briefly, my experience building and running this [alternative] clustering system in case it could be useful for anyone.</p>
+<p>The proposed architecture solved the problem faced here from both a technical and non-technical perspective and it’s, by no means, a general solution. The fact that Kafka was already deployed into the overall system simplified this a lot, it’s not that we had to introduce and operate a new piece of software.</p>
+<p>With this new alternative in place, the problem of scaling up or out has been simplified quite a bit and can be done in a few minutes (avoiding all the bureaucracy and related stuff at $company).</p>
+<p>One extra benefit is the fact that this new solution reduces the number of elements we need to manage: there’s no need to set up and operate a separate control plane and there’s no need to worry about communications across the different data nodes.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/databases/">databases</a>
+  
+  <a class="badge badge-light" href="/tags/kafka/">kafka</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://migue.github.io/post/influx-clustering-kafka-based/&amp;text=InfluxDB:%20building%20your%20own%20clustering" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://migue.github.io/post/influx-clustering-kafka-based/&amp;t=InfluxDB:%20building%20your%20own%20clustering" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=InfluxDB:%20building%20your%20own%20clustering&amp;body=https://migue.github.io/post/influx-clustering-kafka-based/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://migue.github.io/post/influx-clustering-kafka-based/&amp;title=InfluxDB:%20building%20your%20own%20clustering" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=InfluxDB:%20building%20your%20own%20clustering%20https://migue.github.io/post/influx-clustering-kafka-based/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://migue.github.io/post/influx-clustering-kafka-based/&amp;title=InfluxDB:%20building%20your%20own%20clustering" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu3c4fe88a87c761e46dedca30a25b0fc2_333740_270x270_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://migue.github.io/">Miguel Ángel Pastor Olivar</a></h5>
+      <h6 class="card-subtitle">Software Architect</h6>
+      <p class="card-text">I am a proud dad and husband, software architect, speaker, and writer. Passionate reader, chef aficionado, former surf player and current cyclist and runner. I am unsuccessfully pursuing to move my Phd research forward.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:miguelinlas3@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/miguelinlas3" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/migue" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/a-few-books-i-would-like-to-read/">A few books I would like to read</a></li>
+      
+      <li><a href="/post/influx-storage-tsi-component/">InfluxDB storage subsystem: the TSI files</a></li>
+      
+      <li><a href="/post/influx-storage-tsm-component/">InfluxDB storage subsystem: the TSM files</a></li>
+      
+      <li><a href="/post/quick-tour-influx-storage/">InfluxDB storage subsystem: an introduction</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.0630fec5958cb075a5a38f042b3ddde6.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
