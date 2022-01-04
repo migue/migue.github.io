@@ -5,12 +5,67 @@
     <link>https://migue.github.io/categories/programming/</link>
       <atom:link href="https://migue.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     <description>Programming</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2020 21:14:30 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 04 Jan 2022 15:14:30 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Programming</title>
       <link>https://migue.github.io/categories/programming/</link>
     </image>
+    
+    <item>
+      <title>2021 in books, papers and talks</title>
+      <link>https://migue.github.io/post/tech-talks-tour-2021/</link>
+      <pubDate>Tue, 04 Jan 2022 15:14:30 +0100</pubDate>
+      <guid>https://migue.github.io/post/tech-talks-tour-2021/</guid>
+      <description>&lt;p&gt;This year I have read/watched very few tech-related things outside of $job but I would like to share with all of you a few of the ones I&amp;rsquo;ve enjoyed the most.&lt;/p&gt;
+&lt;p&gt;As usual, the contents revolve around databases, systems engineering, cloud computing, runtimes, programming languages and low-level programming, so, if you&amp;rsquo;re not interested in any of these topics you can save some good time and stop reading here.&lt;/p&gt;
+&lt;h2 id=&#34;tech-talks&#34;&gt;Tech Talks&lt;/h2&gt;
+&lt;h3 id=&#34;how-we-build-firebolt&#34;&gt;How we build Firebolt&lt;/h3&gt;
+&lt;p&gt;A really nice talk about how the Firebolt folks built their cloud analytical database; the talk covers different aspects of their architecture: how they used ClickHouse as their starting point, compute and storage separation, their metadata layer (based on 
+&lt;a href=&#34;https://github.com/apple/foundationdb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FoundationDB&lt;/a&gt;
+) among a few other interesting topics.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://www.youtube.com/watch?v=9rW9uEJ15tU&amp;amp;t=1s&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;whats-the-cost-of-a-millisecond&#34;&gt;What&amp;rsquo;s the cost of a millisecond?&lt;/h3&gt;
+&lt;p&gt;This talk goes deep in how a single millisecond can affect the behaviour of your service, covering the different aspects of latency amplification.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://www.youtube.com/watch?v=JgrcaK0WQCQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;hardwaresoftware-co-design-the-coming-golden-age&#34;&gt;Hardware/Software Co-design: The Coming Golden Age&lt;/h3&gt;
+&lt;p&gt;I usually enjoy Brian&amp;rsquo;s talks a lot, and this particular one is no exception. A wonderful talk about the past, present, and future of software and its hardware counterparts.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://www.youtube.com/watch?v=nY07zWzhyn4&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;distributed-systems-showdown&#34;&gt;Distributed systems showdown&lt;/h3&gt;
+&lt;p&gt;A wonderful talk about the practicalities of formal methods. During this talk the Apache Bookeeper protocol is modeled using TLA+ and Maelstron/Jepsen (in Java) while comparing both approaches.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://www.youtube.com/watch?v=sPSPEgz3o9U&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video&lt;/a&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;books&#34;&gt;Books&lt;/h2&gt;
+&lt;h3 id=&#34;probabilistic-data-structures-and-algorithms-for-big-data-applications&#34;&gt;Probabilistic Data Structures and Algorithms for Big Data Applications&lt;/h3&gt;
+&lt;p&gt;An introduction for technology practicioners to probabilistic data structures and algoritms. Different topics like hashing, membership, cardinality among many others are covered.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://www.amazon.com/Probabilistic-Data-Structures-Algorithms-Applications-ebook-dp-B07MYKTY8W/dp/B07MYKTY8W&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Book&lt;/a&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;handbook-of-model-checking&#34;&gt;Handbook of Model Checking&lt;/h3&gt;
+&lt;p&gt;A really comprehensive introduction of the key foundational topics powering formal methods and verification tools. I haven&amp;rsquo;t fully read it but just the chapters that interested me the most (at some point I would like to fully read it, tho).&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://link.springer.com/book/10.1007/978-3-319-10575-8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Book&lt;/a&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;papers&#34;&gt;Papers&lt;/h2&gt;
+&lt;h3 id=&#34;using-lightweight-formal-methods-to-validate-a-key-value-storage-node-in-amazon-s3&#34;&gt;Using lightweight formal methods to validate a key-value storage node in Amazon S3&lt;/h3&gt;
+&lt;p&gt;The paper describes how the S3 team applied formal methods to validate the correctness of ShardStore, the new key-value store that powers S3 under the hood.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://www.amazon.science/publications/using-lightweight-formal-methods-to-validate-a-key-value-storage-node-in-amazon-s3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Paper&lt;/a&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;foundationdb-a-distributed-unbundled-transactional-key-value-store&#34;&gt;FoundationDB: A Distributed Unbundled Transactional Key-Value Store&lt;/h3&gt;
+&lt;p&gt;This papers covers FoundationDB&amp;rsquo;s underlying architecture and introduces the framework used to model and test the system itself.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://dl.acm.org/doi/10.1145/3448016.3457559&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Paper&lt;/a&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Formal methods introduction (I)</title>

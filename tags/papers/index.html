@@ -31,7 +31,7 @@
   <meta name="description" content="Software Architect">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/categories/programming/">
+  <link rel="alternate" hreflang="en-us" href="https://migue.github.io/tags/papers/">
 
   
 
@@ -248,14 +248,14 @@
 
 
   
-  <link rel="alternate" href="/categories/programming/index.xml" type="application/rss+xml" title="Just my thouhgts">
+  <link rel="alternate" href="/tags/papers/index.xml" type="application/rss+xml" title="Just my thouhgts">
   
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
 
-  <link rel="canonical" href="https://migue.github.io/categories/programming/">
+  <link rel="canonical" href="https://migue.github.io/tags/papers/">
 
   
   
@@ -272,8 +272,8 @@
   <meta property="twitter:creator" content="@miguelinlas3">
   
   <meta property="og:site_name" content="Just my thouhgts">
-  <meta property="og:url" content="https://migue.github.io/categories/programming/">
-  <meta property="og:title" content="Programming | Just my thouhgts">
+  <meta property="og:url" content="https://migue.github.io/tags/papers/">
+  <meta property="og:title" content="papers | Just my thouhgts">
   <meta property="og:description" content="Software Architect"><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
   <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
   
@@ -294,7 +294,7 @@
 
 
 
-  <title>Programming | Just my thouhgts</title>
+  <title>papers | Just my thouhgts</title>
 
 </head>
 
@@ -476,7 +476,7 @@
     
   
 <div class="universal-wrapper pt-3">
-  <h1>Programming</h1>
+  <h1>papers</h1>
 
   
 
@@ -500,109 +500,6 @@
           This year I have read/watched very few tech-related things outside of $job but I would like to share with all of you a few of the ones I&rsquo;ve enjoyed the most.
 As usual, the contents revolve around databases, systems engineering, cloud computing, runtimes, programming languages and low-level programming, so, if you&rsquo;re not interested in any of these topics you can save some good time and stop reading here.
 Tech Talks How we build Firebolt A really nice talk about how the Firebolt folks built their cloud analytical database; the talk covers different aspects of their architecture: how they used ClickHouse as their starting point, compute and storage separation, their metadata layer (based on FoundationDB ) among a few other interesting topics.
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/formal-methods-introduction/" >Formal methods introduction (I)</a></h2>
-      <div class="article-style">
-        
-          Disclaimer: By no means, I am an expert on this topic; I would say I am a beginner on all this stuff. During my Ph.D. time (which I’ve never finished) I used some of the techniques/tools presented here trying to help me formally verify a few designs I was working on. A second attempt to take benefit of formal methods was when I tried to apply some of them during my time at one of the OSGi Alliance Experts Group, looking to formally validate the design of certain aspects in a couple of specs I was working on at that time (I never managed to make a formal proposal to the group, tho).
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/influx-clustering-kafka-based/" >InfluxDB: building your own clustering</a></h2>
-      <div class="article-style">
-        
-          A while ago I published a short Twitter thread explaining a few of the problems I had run into while running their [enterprise] clustering solution; it&rsquo;s been quite a painful process and I would like to write down the alternative architecture I ended up with while looking for improvements.
-The original scenario The original scenario I was working at was composed of a cluster of Go API servers backed by an InfluxDB database.
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/a-few-books-i-would-like-to-read/" >A few books I would like to read</a></h2>
-      <div class="article-style">
-        
-          I like reading, a lot, but, sadly, I don’t read as much as I used to do a few years ago (for many different reasons). However, I keep growing the list of books I’d like to read, hoping I will be able to read them at some point in the future.
-You’ll find a few different topics: databases, distributed systems, computer architecture, concurrency, or formal methods are some of them. Maybe you find something interesting to read.
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/influx-storage-tsi-component/" >InfluxDB storage subsystem: the TSI files</a></h2>
-      <div class="article-style">
-        
-          Final entry on the InfluxDB storage subsystem series. This time I am going to focus on the, relatively new, indexing mechanism that the InfluxDB folks have built into their storage system.
-If you just arrived here for the first time, you can find some more details about the other major components of the storage system in the previous blog posts of the series: intro and WAL component and tsm component .
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/influx-storage-tsm-component/" >InfluxDB storage subsystem: the TSM files</a></h2>
-      <div class="article-style">
-        
-          During this entry, we are going through the TSM part of the InfluxDB storage engine: how the contents are organized in the disk, how they are compressed or how they are compacted. This is the second entry of the series about the InfluxDB storage engine started in the previous post .
-TSM files structure The TSM files are where Influx stores the real data; these files are read-only files and are memory-mapped.
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/quick-tour-influx-storage/" >InfluxDB storage subsystem: an introduction</a></h2>
-      <div class="article-style">
-        
-          Writing on the blog about some of the technical stuff I usually enjoy and/or work with is something that’s always in my plans but I never find the right time do it. Due to all this quarantine related stuff, both my sleeping habits and the kid’s are being somehow affected and, well, here I am, staring at a blank page trying to start writing about databases. And, well, since I don’t longer work for an international company I thought it would be a good idea to somehow practice my poor English skills.
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/books-and-talks/" >Books and Talks</a></h2>
-      <div class="article-style">
-        
-          I would like to share with you a bunch of the tech talks I have recently watched or some of the latest books I have enjoyed.
-Disclaimer: this list is just a set of resources I have gone through more or less &ldquo;recently&rdquo; about a few different topics I use to enjoy. It&rsquo;s not my goal to create a &ldquo;Best Talks/Papers/Whatever List&rdquo;, just wanted to share with you all some of the things I have found interesting lately (all the resources are listed in no specific order).
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/java-compiler-string-addition/" >Java Compiler String Addition</a></h2>
-      <div class="article-style">
-        
-          Lately I have seen quite a few misconceptions regarding how string concatenation is handled in the Java world so I would like to write this short blog entry with a couple of stupid examples in order to show the basics of how it is done.
-Note: I am focusing here in the bytecode generated by the Java compiler, regardless any optimization the runtime could apply.
-Concatenating constant strings Imagine we are writing a new class where we have defined three final string fields and we want to add a new method which just returns the sum of the three:
         
       </div>
     </div>
