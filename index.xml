@@ -5,12 +5,110 @@
     <link>https://migue.github.io/</link>
       <atom:link href="https://migue.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Just my thouhgts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 04 Jan 2022 15:14:30 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 14 Jan 2022 10:49:41 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Just my thouhgts</title>
       <link>https://migue.github.io/</link>
     </image>
+    
+    <item>
+      <title>Are You Sure You Want to Use MMAP in Your Database Management System?</title>
+      <link>https://migue.github.io/post/mmap-paper/</link>
+      <pubDate>Fri, 14 Jan 2022 10:49:41 +0100</pubDate>
+      <guid>https://migue.github.io/post/mmap-paper/</guid>
+      <description>&lt;p&gt;This year I&amp;rsquo;ve decided to start writing a quick summary of some of the papers and books I read. I don&amp;rsquo;t know how long this will last, but I am going to give it a try (I haven&amp;rsquo;t been reading that much lately anyway).&lt;/p&gt;
+&lt;p&gt;So, to get myself started I am going to use the first paper I have read this year: 
+&lt;a href=&#34;http://cidrdb.org/cidr2022/papers/p13-crotty.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Are You Sure You Want to Use MMAP in Your Database Management System?&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;This paper doesn&amp;rsquo;t introduce any particular innovation but it does a really great job putting together many of the different problems that different database systems have found while using MMAP as an alternative to their buffer pool implementations.&lt;/p&gt;
+&lt;h2 id=&#34;mmap-overview&#34;&gt;MMAP Overview&lt;/h2&gt;
+&lt;p&gt;The paper starts providing a short introduction to 
+&lt;a href=&#34;https://man7.org/linux/man-pages/man2/mmap.2.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MMAP&lt;/a&gt;
+. MMAP is an abstraction provided by the underlying OS that maps the content of a file that&amp;rsquo;s residing on secondary storage into a program&amp;rsquo;s address space, transparently loading/unloading pages when the program references them. You can imagine how attractive and &amp;ldquo;simple&amp;rdquo; this looks like for developers &amp;hellip;&lt;/p&gt;
+&lt;p&gt;The general workflow to access a file using &lt;code&gt;mmap&lt;/code&gt; is as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Call &lt;code&gt;mmap&lt;/code&gt; and get a pointer to the memory-mapped file back.&lt;/li&gt;
+&lt;li&gt;The OS reserves a portion of the program&amp;rsquo;s virtual address but no contents are loaded so far.&lt;/li&gt;
+&lt;li&gt;Use the original pointer to accesss the contents of the file.&lt;/li&gt;
+&lt;li&gt;The OS looks for the corresponding page and, since no contents have been loaded, triggers a page fault in order to load into memory the referenced portion of the file&lt;/li&gt;
+&lt;li&gt;The page table is modified accordingly to point to the new physical address&lt;/li&gt;
+&lt;li&gt;The CPU where the call was initiated caches this entry in its translation lookaside buffer (TLB).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Most programming languages allows you to use the &lt;code&gt;mmap&lt;/code&gt; abstraction in your programs, so, for example, in &lt;code&gt;Rust&lt;/code&gt; you can do something like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;use memmap::MmapOptions;
+use std::fs::File;
+use std::io::Result;
+
+fn main() -&amp;gt; Result&amp;lt;()&amp;gt; {
+    let file = File::open(&amp;quot;/tmp/mmap-example.db&amp;quot;)?;
+    let mmap = unsafe { MmapOptions::new().map(&amp;amp;file)? };
+
+    println!(&amp;quot;{:?}&amp;quot;, &amp;amp;mmap[10..80]);
+
+    Ok(())
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You don&amp;rsquo;t need to worry about how big &lt;code&gt;/tmp/mmap-example.db&lt;/code&gt; is, the OS will &amp;ldquo;transparently&amp;rdquo; load/unload the pages as needed.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;re a few system calls the database writers can use to perform memory-mapped file I/O :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;mmap&lt;/strong&gt;: We&amp;rsquo;ve already covered this; the OS maps the file into a program&amp;rsquo;s virtual address space. We can choose to write any change back to the backing file or keep our change private to us.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;madvise&lt;/strong&gt;: We can provide different hints to the OS about our expected data access patterns. When a page fault happens, the OS will perform different actions depending on the provided hint (&lt;code&gt;MADV_NORMAL&lt;/code&gt;, &lt;code&gt;MADV_RANDOM&lt;/code&gt;, &lt;code&gt;MADV_SEQUENTIAL&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;mlock&lt;/strong&gt;: we can pin pages in memory, making sure that the OS will never evict them (dirty pages can be flushed at any time, tho)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;msync&lt;/strong&gt;: we can explicitly perform the flush of a memory range to the underlying storage.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-problems&#34;&gt;The problems&lt;/h2&gt;
+&lt;p&gt;The paper mentions a few databases that have tried to use mmap somehow: MongoDB, InfluxDB (here I have experienced the problems myself), SingleStore, LevelDB, &amp;hellip; and presents the most common problems people have run into while using this technique.&lt;/p&gt;
+&lt;h3 id=&#34;transactional-safety&#34;&gt;Transactional safety&lt;/h3&gt;
+&lt;p&gt;Since the OS is transparently handling the load/unload of the pages, a particular page can be flushed to the underlying storage at any point in time, no matter what the status of the current transaction is.&lt;/p&gt;
+&lt;p&gt;Different, and usually complicated, protocols are used to prevent the previous problem:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;OS Copy-On-Write&lt;/strong&gt;: This technique creates to different copies of the database file using &lt;code&gt;mmap&lt;/code&gt;. One of them is the primary copy while the other is used as a private workspace (open with the &lt;code&gt;MAP_PRIVATE&lt;/code&gt; flag). With this approach, the database needs to make sure that the updates produced by commited transactions have propagated to the primary copy before letting conflicting transaction to move forward and deal with the growth of the private workspace.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;User Space Copy-On-Write&lt;/strong&gt;: This technique involves a manual process where the modified pages are copied to a separate buffer residing in user space. SQLite, MonetDB, and RavenDB use some variant of this technique.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Shadow Paging&lt;/strong&gt;: This is used by LMDB, and it maintains separate copies for the primary and the shadowed databases, copying the modified pages from the primary to the shadowed, flushing the changes to the secondary storage and flipping the pointer so now the shadowed database becomes the primary and viceversa.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;io-stalls&#34;&gt;I/O Stalls&lt;/h3&gt;
+&lt;p&gt;Accesing any page could result in a unexpected I/O stall because the database cannot really know if the page is in memory or not (triggering a blocking page fault in case it isn&amp;rsquo;t).&lt;/p&gt;
+&lt;p&gt;Potential solutions can be used to deal with the problem described before:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pin pages (&lt;code&gt;mlock&lt;/code&gt;) which are going to be used in the near future. Sadly there&amp;rsquo;s a limit on the total memory that a process can pin.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;madvise&lt;/code&gt; to hint the OS about the potential access patterns. This is much simpler than the previous alternative, offers less control to the developer and the OS is free to ignore the hints and.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;error-handling&#34;&gt;Error handling&lt;/h3&gt;
+&lt;p&gt;Using mmap makes ensuring data integrity a complicated task: page-level checksums should be performed on every page, mmap writting corrupted pages by pointer errors in memory-unsafe managed languages, &amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;performance-issues&#34;&gt;Performance issues&lt;/h3&gt;
+&lt;p&gt;Last but no least, the paper introduces performance as the most significant drawback of mmap&amp;rsquo;s transparent paging management. All the previous issues described before could be overcomed through careful implementations, but &lt;code&gt;mmap&lt;/code&gt;&amp;rsquo;s bottlenecks cannot be avoided without an OS-level redesign.&lt;/p&gt;
+&lt;p&gt;In theory the benefits that &lt;code&gt;mmap&lt;/code&gt; brings on top of the table are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The removal of explicit &lt;code&gt;read/write&lt;/code&gt; system calls.&lt;/li&gt;
+&lt;li&gt;The ability to return pointers.&lt;/li&gt;
+&lt;li&gt;Lower memory consumption as the data does not need to be replicated in user space.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The three main bottlenecks the paper identifies are: &lt;strong&gt;page table contention&lt;/strong&gt;, &lt;strong&gt;single threaded page eviction&lt;/strong&gt;, and &lt;strong&gt;TLB shootdowns&lt;/strong&gt;, being the latter the trickiest problem&lt;/p&gt;
+&lt;h2 id=&#34;experimental-analysis&#34;&gt;Experimental analysis&lt;/h2&gt;
+&lt;p&gt;Trying to back the affirmations presented before, the paper presents an experimental analysis where they empirically try to demonstrate the aforementioned issues. They used 
+&lt;a href=&#34;https://fio.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;fio&lt;/a&gt;
+ with &lt;code&gt;IO_DIRECT&lt;/code&gt; (to bypass the OS page chage) as their baseline and focused in read-only scenarios with two common access patterns, random reads and sequential scans&lt;/p&gt;
+&lt;p&gt;I am just summarizing their results here but if you want to get deeper into the numbers, the paper includes a bunch of different charts.&lt;/p&gt;
+&lt;h3 id=&#34;random-reads&#34;&gt;Random reads&lt;/h3&gt;
+&lt;p&gt;In this scenario their baseline showed up that fio could fully saturate the NVMe SSD they were using. On the other hand, &lt;code&gt;mmap&lt;/code&gt; performed significantlly wrose even in those scenarios where the hint matched the workload&amp;rsquo;s access pattern&lt;/p&gt;
+&lt;h3 id=&#34;sequential-scans&#34;&gt;Sequential scans&lt;/h3&gt;
+&lt;p&gt;Again, in this scenario &lt;code&gt;fio&lt;/code&gt; showed up stable performance and &lt;code&gt;mmap&lt;/code&gt;&amp;rsquo;s started to drop once the page cache filled up. A slightly different scenario where they used 10 SSDs with RAID 0 showed up roughly 20x performance difference between &lt;code&gt;fio&lt;/code&gt; and &lt;code&gt;mmap&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The paper makes the case against the use of &lt;code&gt;mmap&lt;/code&gt; for file I/O in a DB and presents it in a really accesible way. Even if you don&amp;rsquo;t particularly enjoy reading papers, I think this one is really comprehensible and easy to read.&lt;/p&gt;
+&lt;p&gt;I personally think that the paper shows up a real and valid set of problems happening in &lt;code&gt;mmap&lt;/code&gt; based systems but I think that writing your own buffer pool is as easy as presented here&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://db.cs.cmu.edu/mmap-cidr2022/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Here&lt;/a&gt;
+ you can find a web page with the link to the paper, the corresponding video and the source code for the benchmarks.&lt;/p&gt;
+&lt;p&gt;I think this is the first time I do something like this after I dropped my Ph.D. studies and I am not sure how long this is going to last, but, in case I keep doing it, I hope I can get better at it. The idea is not only to review papers but anything I read and find interesting.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>2021 in books, papers and talks</title>
